@@ -1,0 +1,20 @@
+[33mb7a9dd5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: reset: moving to HEAD
+[33mb7a9dd5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: rebase (abort): returning to refs/heads/main
+[33mcfdb6bc[m HEAD@{2}: commit: initial final commit
+[33mb7a9dd5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m refs/remotes/origin/main@{0}: update by push
+[33m2b43240[m refs/remotes/origin/main@{1}: fetch origin: fast-forward
+[33mb7a9dd5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m refs/remotes/origin/main@{2}: update by push
+[33m631597b[m[33m ([m[1;31morigin/backup-main-before-force[m[33m)[m refs/remotes/origin/backup-main-before-force@{0}: update by push
+[33m631597b[m[33m ([m[1;31morigin/backup-main-before-force[m[33m)[m HEAD@{3}: pull --rebase origin main (start): checkout 631597b1b145aafb9ca5154b45404ba1426789a2
+[33mb7a9dd5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m refs/heads/main@{0}: commit: make changes in frontend and some functionalities
+[33mb7a9dd5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{4}: commit: make changes in frontend and some functionalities
+[33m631597b[m[33m ([m[1;31morigin/backup-main-before-force[m[33m)[m refs/remotes/origin/main@{3}: pull origin main: fast-forward
+[33m2c89a26[m refs/heads/main@{1}: commit: Merge remote changes with local main
+[33m2c89a26[m HEAD@{5}: commit: Merge remote changes with local main
+[33m145c094[m refs/heads/main@{2}: commit (merge): Make frontend more responsive and good looking
+[33m145c094[m HEAD@{6}: commit (merge): Make frontend more responsive and good looking
+[33mfb28c8c[m refs/remotes/origin/HEAD@{0}: fetch
+[33mfb28c8c[m refs/remotes/origin/main@{4}: fetch origin: storing head
+[33mcf311d5[m[33m ([m[1;32mbackup-before-sync[m[33m)[m refs/heads/backup-before-sync@{0}: branch: Created from main
+[33mcf311d5[m[33m ([m[1;32mbackup-before-sync[m[33m)[m refs/heads/main@{3}: commit: Make some changes in Frontend
+[33mcf311d5[m[33m ([m[1;32mbackup-before-sync[m[33m)[m HEAD@{7}: commit: Make some changes in Frontend
