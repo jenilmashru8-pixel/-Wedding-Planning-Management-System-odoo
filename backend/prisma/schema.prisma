@@ -1,0 +1,925 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  FOUNDER
+  PLANNER
+  FINANCE
+  FIELD_COORDINATOR
+  CLIENT
+  VENDOR
+}
+
+enum EnquirySource {
+  WEBSITE
+  INSTAGRAM
+  WHATSAPP
+  PHONE
+  REFERRAL
+  OTHER
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  MEETING_SCHEDULED
+  PROPOSAL_SENT
+  NEGOTIATION
+  CONVERTED
+  LOST
+}
+
+enum PackageType {
+  FULL_SERVICE
+  PARTIAL_DAY_OF
+}
+
+enum WeddingStatus {
+  DRAFT
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum AgreementStatus {
+  DRAFT
+  SENT
+  VIEWED
+  SIGNED
+  REJECTED
+  EXPIRED
+}
+
+enum QuotationStatus {
+  REQUESTED
+  SUBMITTED
+  RECOMMENDED
+  ACCEPTED
+  REJECTED
+  CLOSED
+}
+
+enum TaskCategory {
+  PRE_WEDDING
+  EVENT_DAY
+  POST_WEDDING
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TaskStatus {
+  TO_PLAN
+  IN_PROGRESS
+  BLOCKED
+  REVIEW
+  DONE
+}
+
+enum VendorCheckInStatus {
+  EXPECTED
+  ARRIVED
+  WORKING
+  COMPLETED
+  DELAYED
+  CANCELLED
+}
+
+enum IncidentSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum IncidentStatus {
+  OPEN
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum RsvpStatus {
+  PENDING
+  CONFIRMED
+  DECLINED
+}
+
+enum DietaryPreference {
+  VEG
+  JAIN
+  NON_VEG
+  VEGAN
+  OTHER
+}
+
+enum MilestoneType {
+  BOOKING
+  ADVANCE
+  FINAL
+  CUSTOM
+}
+
+enum PaymentStatus {
+  PENDING
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+}
+
+enum PaymentMethod {
+  BANK_TRANSFER
+  CHEQUE
+  UPI
+  CASH
+  CARD
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ClientBillingStatus {
+  PENDING_BILLING
+  BILLED
+  EXCLUDED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  ISSUED
+  PARTIALLY_PAID
+  PAID
+  VOID
+}
+
+enum VendorInvoiceStatus {
+  PENDING_VERIFICATION
+  VERIFIED
+  PARTIALLY_PAID
+  PAID
+  DISPUTED
+}
+
+enum ExpenseCategory {
+  VENDOR
+  TRANSPORTATION
+  ACCOMMODATION
+  FOOD
+  EQUIPMENT
+  STAFF
+  MARKETING
+  OTHER
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  firstName    String
+  lastName     String
+  phone        String?
+  role         Role      @default(PLANNER)
+  isActive     Boolean   @default(true)
+  avatarUrl    String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  employee             Employee?
+  client               Client?
+  vendor               Vendor?
+  assignedWeddings     Wedding[]         @relation("PlannerWeddings")
+  assignedTasks        WeddingTask[]     @relation("TaskAssignee")
+  recordedPayments     ClientPayment[]   @relation("RecordedPayments")
+  recordedVendorPayments VendorPayment[] @relation("RecordedVendorPayments")
+  reportedIncidents    Incident[]        @relation("IncidentReporter")
+  assignedIncidents    Incident[]        @relation("IncidentAssignee")
+  checkedInVendors     VendorCheckIn[]   @relation("CheckInUser")
+  consultations        Consultation[]    @relation("ConsultationPlanner")
+  approvedTimeLogs     EmployeeTimeLog[] @relation("TimeLogApprover")
+  timeLogs             EmployeeTimeLog[] @relation("EmployeeLogs")
+  notifications        Notification[]
+  activityLogs         ActivityLog[]
+  feedbacksGiven       VendorFeedback[]  @relation("FeedbackAuthor")
+
+  @@index([role])
+  @@index([email])
+}
+
+model Employee {
+  id               String    @id @default(uuid())
+  userId           String    @unique
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  designation      String
+  hourlyRate       Decimal   @db.Decimal(10, 2)
+  emergencyContact String?
+  joinedDate       DateTime  @default(now())
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model Client {
+  id           String    @id @default(uuid())
+  userId       String?   @unique
+  user         User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  partner1Name String
+  partner2Name String
+  email        String    @unique
+  phone        String
+  altPhone     String?
+  address      String?
+  city         String?
+  notes        String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  weddings     Wedding[]
+  enquiries    Enquiry[]
+  agreements   Agreement[]
+  invoices     ClientInvoice[]
+}
+
+model Enquiry {
+  id                   String        @id @default(uuid())
+  enquiryNumber        String        @unique
+  coupleName           String
+  partner1Name         String
+  partner2Name         String
+  email                String
+  phone                String
+  whatsapp             String?
+  source               EnquirySource @default(WEBSITE)
+  weddingLocation      String
+  preferredDate        DateTime
+  alternativeDate      DateTime?
+  weddingDurationDays  Int           @default(3)
+  guestCount           Int           @default(400)
+  maxBudget            Decimal       @db.Decimal(12, 2)
+  theme                String?
+  packageType          PackageType   @default(FULL_SERVICE)
+  specialRequirements  String?
+  notes                String?
+  assignedPlannerId    String?
+  followUpDate         DateTime?
+  status               EnquiryStatus @default(NEW)
+  clientId             String?
+  client               Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  convertedWeddingId   String?       @unique
+  convertedWedding     Wedding?      @relation("EnquiryWedding", fields: [convertedWeddingId], references: [id], onDelete: SetNull)
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  consultations        Consultation[]
+
+  @@index([status])
+  @@index([email])
+  @@index([phone])
+}
+
+model Consultation {
+  id           String    @id @default(uuid())
+  enquiryId    String
+  enquiry      Enquiry   @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  scheduledAt  DateTime
+  location     String
+  meetingNotes String?
+  plannerId    String?
+  planner      User?     @relation("ConsultationPlanner", fields: [plannerId], references: [id], onDelete: SetNull)
+  status       String    @default("SCHEDULED")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model WeddingPackage {
+  id            String      @id @default(uuid())
+  code          String      @unique
+  name          String
+  description   String
+  basePrice     Decimal     @db.Decimal(12, 2)
+  isFullService Boolean     @default(true)
+  features      Json
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  weddings      Wedding[]
+}
+
+model Wedding {
+  id                 String        @id @default(uuid())
+  weddingCode        String        @unique
+  name               String
+  clientId           String
+  client             Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  location           String
+  venueName          String?
+  startDate          DateTime
+  endDate            DateTime
+  guestCount         Int           @default(400)
+  packageType        PackageType   @default(FULL_SERVICE)
+  packageId          String?
+  package            WeddingPackage? @relation(fields: [packageId], references: [id], onDelete: SetNull)
+  contractAmount     Decimal       @db.Decimal(12, 2)
+  recognizedRevenue  Decimal       @default(0) @db.Decimal(12, 2)
+  budget             Decimal       @db.Decimal(12, 2)
+  assignedPlannerId  String?
+  assignedPlanner    User?         @relation("PlannerWeddings", fields: [assignedPlannerId], references: [id], onDelete: SetNull)
+  status             WeddingStatus @default(CONFIRMED)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  convertedFromEnquiry Enquiry?    @relation("EnquiryWedding")
+  agreements           Agreement[]
+  quotations           VendorQuotation[]
+  vendorBookings       VendorBooking[]
+  tasks                WeddingTask[]
+  events               WeddingEvent[]
+  vendorCheckIns       VendorCheckIn[]
+  incidents            Incident[]
+  guests               Guest[]
+  milestones           PaymentMilestone[]
+  clientPayments       ClientPayment[]
+  extraExpenses        ExtraExpense[]
+  clientInvoices       ClientInvoice[]
+  vendorInvoices       VendorInvoice[]
+  vendorPayments       VendorPayment[]
+  operationalExpenses  OperationalExpense[]
+  timeLogs             EmployeeTimeLog[]
+  documents            Document[]
+  feedbacks            VendorFeedback[]
+
+  @@index([status])
+  @@index([location])
+  @@index([startDate])
+}
+
+model Agreement {
+  id                 String          @id @default(uuid())
+  agreementNumber    String          @unique
+  weddingId          String
+  wedding            Wedding         @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  clientId           String
+  client             Client          @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  version            Int             @default(1)
+  title              String
+  status             AgreementStatus @default(DRAFT)
+  scopeOfServices    String
+  termsAndConditions String
+  totalAmount        Decimal         @db.Decimal(12, 2)
+  signedAt           DateTime?
+  signerName         String?
+  signerEmail        String?
+  signerIp           String?
+  signatureImage     String?
+  signedPdfUrl       String?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  versions           AgreementVersion[]
+}
+
+model AgreementVersion {
+  id             String    @id @default(uuid())
+  agreementId    String
+  agreement      Agreement @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  versionNumber  Int
+  terms          String
+  amount         Decimal   @db.Decimal(12, 2)
+  changesSummary String
+  createdAt      DateTime  @default(now())
+}
+
+model VendorCategory {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+
+  vendors     Vendor[]
+  quotations  VendorQuotation[]
+}
+
+model Vendor {
+  id                 String          @id @default(uuid())
+  companyName        String
+  contactPerson      String
+  phone              String
+  email              String          @unique
+  address            String?
+  categoryId         String
+  category           VendorCategory  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  services           String[]
+  location           String
+  gstNumber          String?
+  panNumber          String?
+  bankName           String?
+  bankAccount        String?
+  bankIfsc           String?
+  bankBranch         String?
+  availabilityStatus Boolean         @default(true)
+  rating             Float           @default(5.0)
+  notes              String?
+  isArchived         Boolean         @default(false)
+  userId             String?         @unique
+  user               User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  quotations         VendorQuotation[]
+  bookings           VendorBooking[]
+  checkIns           VendorCheckIn[]
+  incidents          Incident[]
+  invoices           VendorInvoice[]
+  payments           VendorPayment[]
+  feedbacks          VendorFeedback[]
+  extraExpenses      ExtraExpense[]
+
+  @@index([categoryId])
+  @@index([location])
+}
+
+model VendorQuotation {
+  id                  String          @id @default(uuid())
+  quoteNumber         String          @unique
+  weddingId           String
+  wedding             Wedding         @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  vendorId            String
+  vendor              Vendor          @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  categoryId          String
+  category            VendorCategory  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  guestCount          Int             @default(400)
+  eventDate           DateTime?
+  baseAmount          Decimal         @default(0) @db.Decimal(12, 2)
+  pricePerPlate       Decimal         @default(0) @db.Decimal(12, 2)
+  extraHourRate       Decimal         @default(0) @db.Decimal(12, 2)
+  menuDetails         Json?
+  includedServices    String[]
+  excludedServices    String[]
+  additionalStaffCost Decimal         @default(0) @db.Decimal(12, 2)
+  transportationCost  Decimal         @default(0) @db.Decimal(12, 2)
+  taxRate             Decimal         @default(18) @db.Decimal(5, 2)
+  taxAmount           Decimal         @default(0) @db.Decimal(12, 2)
+  discountAmount      Decimal         @default(0) @db.Decimal(12, 2)
+  totalAmount         Decimal         @db.Decimal(12, 2)
+  validityDate        DateTime?
+  terms               String?
+  pdfUrl              String?
+  status              QuotationStatus @default(REQUESTED)
+  coupleApproved      Boolean         @default(false)
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  booking             VendorBooking?
+
+  @@index([weddingId])
+  @@index([vendorId])
+  @@index([status])
+}
+
+model VendorBooking {
+  id             String          @id @default(uuid())
+  weddingId      String
+  wedding        Wedding         @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  vendorId       String
+  vendor         Vendor          @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  quotationId    String          @unique
+  quotation      VendorQuotation @relation(fields: [quotationId], references: [id], onDelete: Restrict)
+  agreedAmount   Decimal         @db.Decimal(12, 2)
+  status         String          @default("CONFIRMED")
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  payments       VendorPayment[]
+
+  @@unique([weddingId, vendorId])
+}
+
+model WeddingTask {
+  id                  String       @id @default(uuid())
+  weddingId           String
+  wedding             Wedding      @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  taskName            String
+  description         String?
+  category            TaskCategory @default(PRE_WEDDING)
+  assignedEmployeeId  String?
+  assignedEmployee    User?        @relation("TaskAssignee", fields: [assignedEmployeeId], references: [id], onDelete: SetNull)
+  priority            TaskPriority @default(MEDIUM)
+  startDate           DateTime?
+  dueDate             DateTime
+  status              TaskStatus   @default(TO_PLAN)
+  completionTimestamp DateTime?
+  notes               String?
+  sortOrder           Int          @default(0)
+  isTemplateGenerated Boolean      @default(true)
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  timeLogs            EmployeeTimeLog[]
+  dependencies        TaskDependency[] @relation("TaskRequires")
+  dependentTasks      TaskDependency[] @relation("RequiredForTask")
+
+  @@index([weddingId])
+  @@index([status])
+  @@index([dueDate])
+}
+
+model TaskDependency {
+  id              String      @id @default(uuid())
+  taskId          String
+  task            WeddingTask @relation("TaskRequires", fields: [taskId], references: [id], onDelete: Cascade)
+  dependsOnTaskId String
+  dependsOnTask   WeddingTask @relation("RequiredForTask", fields: [dependsOnTaskId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, dependsOnTaskId])
+}
+
+model WeddingEvent {
+  id                    String        @id @default(uuid())
+  weddingId             String
+  wedding               Wedding       @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  eventName             String
+  eventDate             DateTime
+  startTime             String
+  endTime               String
+  location              String
+  responsibleEmployeeId String?
+  vendorId              String?
+  priority              String        @default("MEDIUM")
+  status                String        @default("SCHEDULED")
+  notes                 String?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  checkIns              VendorCheckIn[]
+  incidents             Incident[]
+
+  @@index([weddingId])
+  @@index([eventDate])
+}
+
+model VendorCheckIn {
+  id                 String              @id @default(uuid())
+  weddingId          String
+  wedding            Wedding             @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  vendorId           String
+  vendor             Vendor              @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  eventId            String?
+  event              WeddingEvent?       @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  expectedArrivalTime DateTime
+  actualArrivalTime  DateTime?
+  status             VendorCheckInStatus @default(EXPECTED)
+  checkedInById      String?
+  checkedInBy        User?               @relation("CheckInUser", fields: [checkedInById], references: [id], onDelete: SetNull)
+  delayMinutes       Int                 @default(0)
+  delayReason        String?
+  notes              String?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  @@index([weddingId])
+  @@index([status])
+}
+
+model Incident {
+  id                 String           @id @default(uuid())
+  incidentNumber     String           @unique
+  weddingId          String
+  wedding            Wedding          @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  eventId            String?
+  event              WeddingEvent?    @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  vendorId           String?
+  vendor             Vendor?          @relation(fields: [vendorId], references: [id], onDelete: SetNull)
+  title              String
+  description        String
+  severity           IncidentSeverity @default(MEDIUM)
+  status             IncidentStatus   @default(OPEN)
+  reportedAt         DateTime         @default(now())
+  reportedById       String?
+  reportedBy         User?            @relation("IncidentReporter", fields: [reportedById], references: [id], onDelete: SetNull)
+  assignedEmployeeId String?
+  assignedEmployee   User?            @relation("IncidentAssignee", fields: [assignedEmployeeId], references: [id], onDelete: SetNull)
+  resolutionNotes    String?
+  resolvedAt         DateTime?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  @@index([weddingId])
+  @@index([status])
+  @@index([severity])
+}
+
+model Guest {
+  id                    String            @id @default(uuid())
+  weddingId             String
+  wedding               Wedding           @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  guestGroup            String            @default("General")
+  firstName             String
+  lastName              String
+  phone                 String?
+  email                 String?
+  invitationStatus      String            @default("NOT_SENT")
+  rsvpStatus            RsvpStatus        @default(PENDING)
+  dietaryPreference     DietaryPreference @default(VEG)
+  accommodationAssigned Boolean           @default(false)
+  roomNumber            String?
+  transportationNeeded  Boolean           @default(false)
+  arrivalStatus         String            @default("EXPECTED")
+  arrivalTime           DateTime?
+  plusGuests            Int               @default(0)
+  notes                 String?
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+
+  @@index([weddingId])
+  @@index([rsvpStatus])
+}
+
+model PaymentMilestone {
+  id          String        @id @default(uuid())
+  weddingId   String
+  wedding     Wedding       @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  milestoneType MilestoneType
+  title       String
+  percentage  Decimal       @db.Decimal(5, 2)
+  amountDue   Decimal       @db.Decimal(12, 2)
+  amountPaid  Decimal       @default(0) @db.Decimal(12, 2)
+  dueDate     DateTime
+  status      PaymentStatus @default(PENDING)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  payments    ClientPayment[]
+
+  @@index([weddingId])
+  @@index([status])
+}
+
+model ClientPayment {
+  id             String           @id @default(uuid())
+  paymentNumber  String           @unique
+  weddingId      String
+  wedding        Wedding          @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  milestoneId    String?
+  milestone      PaymentMilestone? @relation(fields: [milestoneId], references: [id], onDelete: SetNull)
+  amount         Decimal          @db.Decimal(12, 2)
+  paymentDate    DateTime         @default(now())
+  paymentMethod  PaymentMethod    @default(BANK_TRANSFER)
+  transactionRef String           @unique
+  receiptUrl     String?
+  notes          String?
+  recordedById   String?
+  recordedBy     User?            @relation("RecordedPayments", fields: [recordedById], references: [id], onDelete: SetNull)
+  createdAt      DateTime         @default(now())
+
+  @@index([weddingId])
+}
+
+model ExtraExpense {
+  id                 String              @id @default(uuid())
+  weddingId          String
+  wedding            Wedding             @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  category           String
+  description        String
+  quantity           Int                 @default(1)
+  unitPrice          Decimal             @db.Decimal(12, 2)
+  amount             Decimal             @db.Decimal(12, 2)
+  taxRate            Decimal             @default(18) @db.Decimal(5, 2)
+  taxAmount          Decimal             @default(0) @db.Decimal(12, 2)
+  totalAmount        Decimal             @db.Decimal(12, 2)
+  vendorId           String?
+  vendor             Vendor?             @relation(fields: [vendorId], references: [id], onDelete: SetNull)
+  receiptUrl         String?
+  approvalStatus     ApprovalStatus      @default(PENDING)
+  clientBillingStatus ClientBillingStatus @default(PENDING_BILLING)
+  requestedById      String?
+  approvedAt         DateTime?
+  approvedById       String?
+  clientComments     String?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  @@index([weddingId])
+  @@index([approvalStatus])
+}
+
+model ClientInvoice {
+  id               String        @id @default(uuid())
+  invoiceNumber    String        @unique
+  weddingId        String
+  wedding          Wedding       @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  clientId         String
+  client           Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  contractAmount   Decimal       @db.Decimal(12, 2)
+  approvedAdditions Decimal      @default(0) @db.Decimal(12, 2)
+  discountAmount   Decimal       @default(0) @db.Decimal(12, 2)
+  taxRate          Decimal       @default(18) @db.Decimal(5, 2)
+  taxAmount        Decimal       @default(0) @db.Decimal(12, 2)
+  totalAmount      Decimal       @db.Decimal(12, 2)
+  paidAmount       Decimal       @default(0) @db.Decimal(12, 2)
+  balanceDue       Decimal       @db.Decimal(12, 2)
+  dueDate          DateTime
+  status           InvoiceStatus @default(ISSUED)
+  pdfUrl           String?
+  issuedAt         DateTime      @default(now())
+  notes            String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  items            InvoiceItem[]
+
+  @@index([weddingId])
+  @@index([clientId])
+}
+
+model InvoiceItem {
+  id          String        @id @default(uuid())
+  invoiceId   String
+  invoice     ClientInvoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  description String
+  quantity    Int           @default(1)
+  unitPrice   Decimal       @db.Decimal(12, 2)
+  amount      Decimal       @db.Decimal(12, 2)
+}
+
+model VendorInvoice {
+  id                   String              @id @default(uuid())
+  invoiceNumber        String
+  weddingId            String
+  wedding              Wedding             @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  vendorId             String
+  vendor               Vendor              @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  originalQuotedAmount Decimal             @db.Decimal(12, 2)
+  approvedAdditions    Decimal             @default(0) @db.Decimal(12, 2)
+  discountAmount       Decimal             @default(0) @db.Decimal(12, 2)
+  taxAmount            Decimal             @default(0) @db.Decimal(12, 2)
+  finalAmount          Decimal             @db.Decimal(12, 2)
+  advancePaid          Decimal             @default(0) @db.Decimal(12, 2)
+  previousPayments     Decimal             @default(0) @db.Decimal(12, 2)
+  balanceDue           Decimal             @db.Decimal(12, 2)
+  dueDate              DateTime
+  status               VendorInvoiceStatus @default(PENDING_VERIFICATION)
+  invoicePdfUrl        String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+
+  payments             VendorPayment[]
+
+  @@unique([weddingId, vendorId, invoiceNumber])
+  @@index([weddingId])
+  @@index([vendorId])
+}
+
+model VendorPayment {
+  id              String         @id @default(uuid())
+  paymentNumber   String         @unique
+  vendorInvoiceId String?
+  vendorInvoice   VendorInvoice? @relation(fields: [vendorInvoiceId], references: [id], onDelete: SetNull)
+  vendorBookingId String?
+  vendorBooking   VendorBooking? @relation(fields: [vendorBookingId], references: [id], onDelete: SetNull)
+  weddingId       String
+  wedding         Wedding        @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  vendorId        String
+  vendor          Vendor         @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  amount          Decimal        @db.Decimal(12, 2)
+  paymentDate     DateTime       @default(now())
+  paymentMethod   PaymentMethod  @default(BANK_TRANSFER)
+  transactionRef  String         @unique
+  isAdvance       Boolean        @default(false)
+  receiptUrl      String?
+  notes           String?
+  recordedById    String?
+  recordedBy      User?          @relation("RecordedVendorPayments", fields: [recordedById], references: [id], onDelete: SetNull)
+  createdAt       DateTime       @default(now())
+
+  @@index([weddingId])
+  @@index([vendorId])
+}
+
+model OperationalExpense {
+  id          String          @id @default(uuid())
+  weddingId   String
+  wedding     Wedding         @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  category    ExpenseCategory @default(OTHER)
+  description String
+  amount      Decimal         @db.Decimal(12, 2)
+  date        DateTime        @default(now())
+  receiptUrl  String?
+  recordedById String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([weddingId])
+}
+
+model EmployeeTimeLog {
+  id                 String       @id @default(uuid())
+  weddingId          String
+  wedding            Wedding      @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  employeeId         String
+  employee           User         @relation("EmployeeLogs", fields: [employeeId], references: [id], onDelete: Cascade)
+  taskId             String?
+  task               WeddingTask? @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  startTime          DateTime
+  endTime            DateTime
+  hoursWorked        Decimal      @db.Decimal(6, 2)
+  hourlyRate         Decimal      @db.Decimal(10, 2)
+  calculatedLabourCost Decimal    @db.Decimal(12, 2)
+  isApproved         Boolean      @default(false)
+  approvedById       String?
+  approvedBy         User?        @relation("TimeLogApprover", fields: [approvedById], references: [id], onDelete: SetNull)
+  notes              String?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  @@index([weddingId])
+  @@index([employeeId])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("INFO")
+  linkUrl   String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([isRead])
+}
+
+model ActivityLog {
+  id            String   @id @default(uuid())
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action        String
+  entity        String
+  entityId      String
+  previousValue Json?
+  newValue      Json?
+  ipAddress     String?
+  createdAt     DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([userId])
+}
+
+model Document {
+  id           String   @id @default(uuid())
+  weddingId    String?
+  wedding      Wedding? @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  entityType   String
+  entityId     String
+  fileName     String
+  fileUrl      String
+  fileType     String
+  fileSize     Int
+  uploadedById String?
+  createdAt    DateTime @default(now())
+
+  @@index([weddingId])
+  @@index([entityType, entityId])
+}
+
+model VendorFeedback {
+  id                    String   @id @default(uuid())
+  weddingId             String
+  wedding               Wedding  @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  vendorId              String
+  vendor                Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  overallRating         Float
+  punctualityRating     Float
+  serviceQualityRating  Float
+  communicationRating   Float
+  reviewText            String?
+  submittedById         String?
+  submittedBy           User?    @relation("FeedbackAuthor", fields: [submittedById], references: [id], onDelete: SetNull)
+  createdAt             DateTime @default(now())
+
+  @@index([vendorId])
+  @@index([weddingId])
+}
+
+model SystemSetting {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       String
+  description String?
+  updatedAt   DateTime @updatedAt
+}
