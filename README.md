@@ -240,3 +240,5 @@ The backend test suite (`backend/tests/workflows.test.ts`) executes 17 automated
 ---
 
 *Architected & engineered with precision for The Royal Knot Luxury Weddings.*
+#   - W e d d i n g - P l a n n i n g - M a n a g e m e n t - S y s t e m - o d o o  
+ 
