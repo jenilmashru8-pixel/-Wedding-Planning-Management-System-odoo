@@ -220,6 +220,49 @@ export const Quotations: React.FC = () => {
         />
       </div>
 
+      {/* Visual Discipline Highlights */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="relative overflow-hidden rounded-2xl h-28 p-5 text-white flex items-center border border-gold-300/40 shadow-sm group">
+          <img
+            src="/images/royal_banquet_feast.jpg"
+            alt="Royal Catering"
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/90 via-burgundy-950/75 to-transparent" />
+          <div className="relative z-10 max-w-sm">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-gold-400 bg-gold-400/20 px-2 py-0.5 rounded">
+              Banqueting & Gastronomy
+            </span>
+            <h3 className="font-serif font-bold text-base text-gold-100 mt-1">
+              Plate-Cost & Inclusions Comparison
+            </h3>
+            <p className="text-[11px] text-gold-200/90 line-clamp-1">
+              Live Mewari chaat counters, silver cloche dining & bar packages
+            </p>
+          </div>
+        </div>
+
+        <div className="relative overflow-hidden rounded-2xl h-28 p-5 text-white flex items-center border border-gold-300/40 shadow-sm group">
+          <img
+            src="/images/royal_mandap_decor.jpg"
+            alt="Royal Floral Decor"
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/90 via-burgundy-950/75 to-transparent" />
+          <div className="relative z-10 max-w-sm">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-gold-400 bg-gold-400/20 px-2 py-0.5 rounded">
+              Decor & Floral Production
+            </span>
+            <h3 className="font-serif font-bold text-base text-gold-100 mt-1">
+              Mandap Architecture & Lighting
+            </h3>
+            <p className="text-[11px] text-gold-200/90 line-clamp-1">
+              Heritage carved structures, imported Dutch roses & crystal chandeliers
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Filter and View Toggle Bar */}
       <div className="bg-white p-4 rounded-2xl border border-gold-200/80 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">

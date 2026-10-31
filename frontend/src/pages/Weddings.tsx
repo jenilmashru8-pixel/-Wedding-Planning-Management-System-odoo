@@ -18,6 +18,18 @@ import { Modal } from '../components/Modal';
 import { EmptyState } from '../components/EmptyState';
 import { formatCurrency, formatLakhsCrores, formatDate } from '../utils/formatters';
 
+const getWeddingPhoto = (location?: string, name?: string) => {
+  const loc = (location || '').toLowerCase();
+  const n = (name || '').toLowerCase();
+  if (loc.includes('udaipur') || n.includes('udaipur') || n.includes('lake') || n.includes('jagmandir') || n.includes('aarav') || n.includes('leela')) {
+    return '/images/royal_couple_palace.jpg';
+  }
+  if (loc.includes('jaipur') || n.includes('jaipur') || n.includes('rambagh') || n.includes('city palace') || n.includes('rohit') || n.includes('ananya')) {
+    return '/images/royal_mandap_decor.jpg';
+  }
+  return '/images/royal_banquet_feast.jpg';
+};
+
 export const Weddings: React.FC = () => {
   const [weddings, setWeddings] = useState<Wedding[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -79,18 +91,34 @@ export const Weddings: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-serif text-2xl font-bold text-charcoal-900">Luxury Wedding Projects</h1>
-          <p className="text-xs text-charcoal-500">Destination wedding portfolios in Jaipur & Udaipur palaces.</p>
+      {/* Editorial Palace Showcase Banner */}
+      <div className="relative overflow-hidden rounded-3xl p-8 text-white border border-gold-400/40 shadow-xl group">
+        <img
+          src="/images/royal_mandap_decor.jpg"
+          alt="Royal Mandap Decor"
+          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/80 to-burgundy-950/40" />
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="max-w-2xl">
+            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-gold-400/20 text-gold-300 border border-gold-400/30 backdrop-blur-sm">
+              The Royal Knot Heritage Portfolios
+            </span>
+            <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-gold-100 mt-2">
+              Luxury Wedding Workspaces
+            </h1>
+            <p className="text-xs sm:text-sm text-gold-200/90 mt-1 max-w-xl leading-relaxed">
+              Active royal destination wedding productions across the heritage palaces of Jaipur, Udaipur, and the Aravalli hills.
+            </p>
+          </div>
+          <button
+            onClick={() => setIsAddOpen(true)}
+            className="px-5 py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 hover:brightness-105 font-bold rounded-xl text-xs shadow-lg transition-all flex items-center gap-2 self-start md:self-auto shrink-0"
+          >
+            <Plus className="w-4 h-4 text-burgundy-950" />
+            <span>New Wedding Project</span>
+          </button>
         </div>
-        <button
-          onClick={() => setIsAddOpen(true)}
-          className="px-4 py-2.5 bg-burgundy-700 hover:bg-burgundy-800 text-gold-200 hover:text-white rounded-xl text-xs font-semibold shadow-md transition-all flex items-center gap-2"
-        >
-          <Plus className="w-4 h-4" />
-          <span>New Wedding Project</span>
-        </button>
       </div>
 
       {/* Filter Bar */}
@@ -155,53 +183,77 @@ export const Weddings: React.FC = () => {
             <div
               key={w.id}
               onClick={() => navigate(`/weddings/${w.id}`)}
-              className="card-luxury p-6 rounded-2xl cursor-pointer hover:border-gold-400 group transition-all flex flex-col justify-between"
+              className="card-luxury rounded-2xl cursor-pointer hover:border-gold-400 group transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl"
             >
               <div>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono text-charcoal-400 font-bold uppercase">{w.weddingCode}</span>
-                    <h3 className="font-serif font-bold text-base text-charcoal-900 group-hover:text-burgundy-700 transition-colors mt-0.5">
-                      {w.name}
-                    </h3>
+                {/* Photo Cover Header */}
+                <div className="relative h-44 w-full overflow-hidden">
+                  <img
+                    src={getWeddingPhoto(w.location, w.name)}
+                    alt={w.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/85 via-charcoal-950/20 to-transparent" />
+
+                  {/* Floating Badges */}
+                  <div className="absolute top-3 left-3 flex items-center gap-1.5">
+                    <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase bg-charcoal-900/85 text-gold-300 border border-gold-400/30 backdrop-blur-sm">
+                      {w.weddingCode}
+                    </span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-white/20 text-white backdrop-blur-sm">
+                      {w.packageType?.replace('_', ' ')}
+                    </span>
                   </div>
-                  <StatusBadge status={w.status} />
+
+                  <div className="absolute top-3 right-3">
+                    <StatusBadge status={w.status} />
+                  </div>
+
+                  <div className="absolute bottom-3 left-4 right-4 text-white">
+                    <div className="flex items-center gap-1.5 text-gold-300 text-xs font-semibold">
+                      <MapPin className="w-3.5 h-3.5" />
+                      <span>{w.location} • {w.venueName || 'Heritage Palace'}</span>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="mt-4 space-y-2 text-xs text-charcoal-600">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5 text-gold-600" />
-                    <span>{w.location} • {w.venueName || 'Heritage Palace'}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5 text-gold-600" />
-                    <span>{formatDate(w.startDate)} to {formatDate(w.endDate)}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="w-3.5 h-3.5 text-gold-600" />
-                    <span>{w.guestCount} Guests • {w.assignedVendorsCount || 18} Vendors</span>
-                  </div>
-                </div>
+                {/* Content */}
+                <div className="p-5">
+                  <h3 className="font-serif font-bold text-lg text-charcoal-900 group-hover:text-burgundy-700 transition-colors line-clamp-1">
+                    {w.name}
+                  </h3>
 
-                {/* Progress Bar */}
-                <div className="mt-5">
-                  <div className="flex items-center justify-between text-xs mb-1">
-                    <span className="text-charcoal-500 font-medium">Planning Progress</span>
-                    <span className="font-bold text-burgundy-900">{w.completionPercentage || 0}%</span>
+                  <div className="mt-3 space-y-1.5 text-xs text-charcoal-600">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-3.5 h-3.5 text-gold-600" />
+                      <span>{formatDate(w.startDate)} to {formatDate(w.endDate)}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Users className="w-3.5 h-3.5 text-gold-600" />
+                      <span>{w.guestCount} Guests • {w.assignedVendorsCount || 18} Verified Vendors</span>
+                    </div>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-ivory-200 overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-gold-500 to-burgundy-700 rounded-full transition-all duration-500"
-                      style={{ width: `${w.completionPercentage || 0}%` }}
-                    />
+
+                  {/* Progress Bar */}
+                  <div className="mt-4 pt-3 border-t border-charcoal-100">
+                    <div className="flex items-center justify-between text-xs mb-1">
+                      <span className="text-charcoal-500 font-medium">Planning Progress</span>
+                      <span className="font-bold text-burgundy-900">{w.completionPercentage || 0}%</span>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-ivory-200 overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-gold-500 to-burgundy-700 rounded-full transition-all duration-500"
+                        style={{ width: `${w.completionPercentage || 0}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-charcoal-100 flex items-center justify-between">
+              <div className="px-5 pb-5 pt-2 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] text-charcoal-400 block uppercase">Contract Value</span>
-                  <span className="font-serif font-bold text-sm text-charcoal-900">{formatLakhsCrores(w.contractAmount)}</span>
+                  <span className="text-[10px] text-charcoal-400 block uppercase font-medium">Contract Value</span>
+                  <span className="font-serif font-bold text-base text-charcoal-900">{formatLakhsCrores(w.contractAmount)}</span>
                 </div>
                 <button className="px-3.5 py-1.5 rounded-xl bg-gold-50 text-burgundy-800 border border-gold-300 group-hover:bg-burgundy-700 group-hover:text-gold-200 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-xs">
                   <span>Open Workspace</span>

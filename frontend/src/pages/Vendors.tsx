@@ -20,6 +20,20 @@ import { Modal } from '../components/Modal';
 import { EmptyState } from '../components/EmptyState';
 import { useAuth } from '../contexts/AuthContext';
 
+const getVendorCategoryPhoto = (categoryName?: string) => {
+  const c = (categoryName || '').toLowerCase();
+  if (c.includes('catering') || c.includes('food') || c.includes('beverage') || c.includes('bar')) {
+    return '/images/royal_banquet_feast.jpg';
+  }
+  if (c.includes('decor') || c.includes('floral') || c.includes('production') || c.includes('mandap')) {
+    return '/images/royal_mandap_decor.jpg';
+  }
+  if (c.includes('photo') || c.includes('video') || c.includes('entertainment') || c.includes('music')) {
+    return '/images/royal_couple_palace.jpg';
+  }
+  return '/images/udaipur_palace_night.jpg';
+};
+
 export const Vendors: React.FC = () => {
   const { user } = useAuth();
   const [vendors, setVendors] = useState<Vendor[]>([]);
@@ -276,56 +290,66 @@ export const Vendors: React.FC = () => {
           {filtered.map((vendor) => (
             <div
               key={vendor.id}
-              className="bg-white rounded-2xl border border-gold-200/90 shadow-sm hover:shadow-md transition-all p-5 flex flex-col justify-between"
+              className="bg-white rounded-2xl border border-gold-200/90 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between overflow-hidden group"
             >
-              <div className="space-y-3">
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-gold-600 bg-gold-500/10 px-2 py-0.5 rounded-md border border-gold-400/20">
+              <div>
+                <div className="relative h-28 w-full overflow-hidden">
+                  <img
+                    src={getVendorCategoryPhoto(vendor.category?.name)}
+                    alt={vendor.companyName}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-charcoal-950/20 to-transparent" />
+                  <div className="absolute top-2.5 left-2.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-gold-300 bg-charcoal-900/80 px-2.5 py-0.5 rounded-md border border-gold-400/30 backdrop-blur-sm">
                       {vendor.category?.name || 'Partner'}
                     </span>
-                    <h3 className="font-serif text-base font-bold text-burgundy-950 mt-1">
+                  </div>
+                  <div className="absolute top-2.5 right-2.5 flex items-center gap-1 px-2 py-0.5 rounded-lg bg-charcoal-900/80 text-amber-300 font-bold text-xs border border-amber-300/30 backdrop-blur-sm">
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    <span>{Number(vendor.rating).toFixed(1)}</span>
+                  </div>
+                  <div className="absolute bottom-2 left-3 right-3 text-white">
+                    <h3 className="font-serif text-base font-bold text-gold-100 truncate">
                       {vendor.companyName}
                     </h3>
                   </div>
-                  <div className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-amber-50 text-amber-700 font-bold text-xs border border-amber-200 shrink-0">
-                    <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-                    <span>{Number(vendor.rating).toFixed(1)}</span>
-                  </div>
                 </div>
 
-                <div className="space-y-1.5 text-xs text-charcoal-600 pt-1">
-                  <div className="flex items-center gap-2">
-                    <Building className="w-3.5 h-3.5 text-charcoal-400 shrink-0" />
-                    <span className="font-medium">{vendor.contactPerson}</span>
+                <div className="p-5 space-y-3">
+                  <div className="space-y-1.5 text-xs text-charcoal-600">
+                    <div className="flex items-center gap-2">
+                      <Building className="w-3.5 h-3.5 text-charcoal-400 shrink-0" />
+                      <span className="font-medium">{vendor.contactPerson}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-3.5 h-3.5 text-charcoal-400 shrink-0" />
+                      <span>{vendor.phone}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-3.5 h-3.5 text-charcoal-400 shrink-0" />
+                      <span className="truncate">{vendor.email}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-3.5 h-3.5 text-charcoal-400 shrink-0" />
+                      <span>{vendor.location} {vendor.address ? `• ${vendor.address}` : ''}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5 text-charcoal-400 shrink-0" />
-                    <span>{vendor.phone}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-3.5 h-3.5 text-charcoal-400 shrink-0" />
-                    <span className="truncate">{vendor.email}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5 text-charcoal-400 shrink-0" />
-                    <span>{vendor.location} {vendor.address ? `• ${vendor.address}` : ''}</span>
-                  </div>
-                </div>
 
-                {/* Bank / Compliance Details */}
-                <div className="p-2.5 rounded-xl bg-ivory-50 border border-charcoal-100 text-[11px] text-charcoal-500 flex items-center justify-between">
-                  <div className="flex items-center gap-1.5">
-                    <CreditCard className="w-3.5 h-3.5 text-gold-600" />
-                    <span>Bank Account:</span>
+                  {/* Bank / Compliance Details */}
+                  <div className="p-2.5 rounded-xl bg-ivory-50 border border-charcoal-100 text-[11px] text-charcoal-500 flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <CreditCard className="w-3.5 h-3.5 text-gold-600" />
+                      <span>Bank Account:</span>
+                    </div>
+                    <span className="font-mono font-medium text-charcoal-700">
+                      {vendor.bankAccount || '•••• •••• •••• 5678'}
+                    </span>
                   </div>
-                  <span className="font-mono font-medium text-charcoal-700">
-                    {vendor.bankAccount || '•••• •••• •••• 5678'}
-                  </span>
                 </div>
               </div>
 
-              <div className="pt-4 mt-3 border-t border-charcoal-100 flex items-center justify-between text-xs">
+              <div className="px-5 pb-5 pt-2 border-t border-charcoal-100 flex items-center justify-between text-xs">
                 <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 font-medium">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span>Available for Bookings</span>

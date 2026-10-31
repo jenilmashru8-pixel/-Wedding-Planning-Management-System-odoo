@@ -164,19 +164,27 @@ export const PublicSignAgreement: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-ivory-100 via-ivory-50 to-ivory-200 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
-        {/* Ceremonial Header */}
-        <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-burgundy-900/10 border border-gold-500/30 text-burgundy-950 text-xs font-semibold">
-            <Crown className="w-4 h-4 text-gold-600" />
-            <span>THE ROYAL KNOT • JAIPUR & UDAIPUR</span>
+        {/* Ceremonial Header with Palace Backdrop */}
+        <div className="relative overflow-hidden rounded-3xl p-8 sm:p-10 text-center border border-gold-400/40 shadow-2xl group text-white">
+          <img
+            src="/images/udaipur_palace_night.jpg"
+            alt="Udaipur Palace Twilight"
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-burgundy-950/95 via-burgundy-950/85 to-burgundy-950/90" />
+          <div className="relative z-10 space-y-3 max-w-xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-400/20 border border-gold-400/30 text-gold-200 text-xs font-semibold backdrop-blur-sm">
+              <Crown className="w-4 h-4 text-gold-400" />
+              <span>THE ROYAL KNOT • JAIPUR & UDAIPUR</span>
+            </div>
+            <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-gold-100 tracking-tight">
+              Luxury Wedding Planning Agreement
+            </h1>
+            <p className="text-xs sm:text-sm text-gold-200/90 max-w-lg mx-auto leading-relaxed">
+              Official digital contract and scope of royal services for{' '}
+              <span className="font-semibold text-gold-300">{agreement.wedding?.name}</span>.
+            </p>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-burgundy-950 tracking-tight">
-            Luxury Wedding Planning Agreement
-          </h1>
-          <p className="text-xs sm:text-sm text-charcoal-600 max-w-xl mx-auto">
-            Official digital contract and scope of royal services for{' '}
-            <span className="font-semibold text-burgundy-900">{agreement.wedding?.name}</span>.
-          </p>
         </div>
 
         {/* Status Callout if already signed */}

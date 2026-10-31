@@ -252,31 +252,48 @@ export const WeddingWorkspace: React.FC = () => {
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* Workspace Banner */}
-      <div className="bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 p-6 sm:p-8 rounded-3xl text-white border border-gold-400/40 shadow-xl relative overflow-hidden">
+      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white border border-gold-400/40 shadow-2xl group">
+        <img
+          src={
+            wedding.location?.toLowerCase().includes('udaipur') || wedding.name?.toLowerCase().includes('udaipur')
+              ? '/images/royal_couple_palace.jpg'
+              : '/images/royal_mandap_decor.jpg'
+          }
+          alt={wedding.name}
+          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/85 to-burgundy-950/50" />
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-gold-400 font-bold bg-gold-400/10 px-2 py-0.5 rounded border border-gold-400/20">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-gold-400 font-bold bg-gold-400/20 px-2 py-0.5 rounded border border-gold-400/30 backdrop-blur-sm">
                 {wedding.weddingCode}
               </span>
-              <span className="text-[10px] uppercase font-bold tracking-wider text-gold-200 bg-white/10 px-2 py-0.5 rounded">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-gold-200 bg-white/10 px-2 py-0.5 rounded backdrop-blur-sm border border-white/10">
                 {wedding.packageType?.replace('_', ' ')}
               </span>
+              <span className="text-[10px] uppercase font-semibold text-gold-300/90 bg-burgundy-900/60 px-2 py-0.5 rounded backdrop-blur-sm border border-gold-400/20">
+                Royal Palace Edition
+              </span>
             </div>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-gold-100 mt-2">{wedding.name}</h1>
-            <p className="text-xs text-gold-200/80 mt-1 flex items-center gap-2">
-              <MapPin className="w-3.5 h-3.5 text-gold-400" />
-              <span>{wedding.location} • {wedding.venueName || 'Palace Heritage Resort'}</span>
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-gold-100 mt-2">{wedding.name}</h1>
+            <p className="text-xs sm:text-sm text-gold-200/90 mt-1 flex flex-wrap items-center gap-2">
+              <span className="flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-gold-400" />
+                <span>{wedding.location} • {wedding.venueName || 'Palace Heritage Resort'}</span>
+              </span>
               <span>•</span>
-              <Calendar className="w-3.5 h-3.5 text-gold-400" />
-              <span>{formatDate(wedding.startDate)} to {formatDate(wedding.endDate)}</span>
+              <span className="flex items-center gap-1">
+                <Calendar className="w-3.5 h-3.5 text-gold-400" />
+                <span>{formatDate(wedding.startDate)} to {formatDate(wedding.endDate)}</span>
+              </span>
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <StatusBadge status={wedding.status} />
             <button
               onClick={() => setActiveTab('operations')}
-              className="px-3.5 py-1.5 bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 font-bold rounded-xl text-xs flex items-center gap-1.5 shadow-md hover:brightness-105"
+              className="px-3.5 py-2 bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 font-bold rounded-xl text-xs flex items-center gap-1.5 shadow-md hover:brightness-105"
             >
               <Radio className="w-3.5 h-3.5 animate-pulse text-burgundy-900" />
               <span>Day-Of Live Mode</span>
@@ -391,6 +408,90 @@ export const WeddingWorkspace: React.FC = () => {
                   ))}
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* Palace Scenography & Visual Gallery */}
+          <div className="card-luxury p-6 rounded-2xl">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="font-serif text-lg font-bold text-charcoal-900 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-gold-600" />
+                  <span>Palace Architectural Scenography & Production Vision</span>
+                </h3>
+                <p className="text-xs text-charcoal-500">Curated royal staging, decor themes, and culinary design for this wedding project.</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {/* Card 1: Mandap Architecture */}
+              <div className="group rounded-2xl overflow-hidden border border-gold-300/40 bg-ivory shadow-sm hover:shadow-md transition-all">
+                <div className="relative h-44 w-full overflow-hidden">
+                  <img
+                    src="/images/royal_mandap_decor.jpg"
+                    alt="Royal Mandap Decor"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent" />
+                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-gold-500/90 text-burgundy-950">
+                    Mandap Staging
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-serif font-bold text-sm text-charcoal-900 group-hover:text-burgundy-700 transition-colors">
+                    Heritage Carved Gold Mandap
+                  </h4>
+                  <p className="text-xs text-charcoal-500 mt-1 leading-relaxed">
+                    Opulent carved golden pillars, cascading blush & burgundy roses, vintage crystal chandeliers, and traditional brass oil diyas.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2: Royal Feast Catering */}
+              <div className="group rounded-2xl overflow-hidden border border-gold-300/40 bg-ivory shadow-sm hover:shadow-md transition-all">
+                <div className="relative h-44 w-full overflow-hidden">
+                  <img
+                    src="/images/royal_banquet_feast.jpg"
+                    alt="Royal Rajasthani Banquet"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent" />
+                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-gold-500/90 text-burgundy-950">
+                    Culinary Production
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-serif font-bold text-sm text-charcoal-900 group-hover:text-burgundy-700 transition-colors">
+                    Royal Rajasthani Banquet Feast
+                  </h4>
+                  <p className="text-xs text-charcoal-500 mt-1 leading-relaxed">
+                    Traditional Mewari thalis, silver dinnerware, bespoke live culinary stations, fine desserts, and handcrafted royal hospitality.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 3: Lake Pichola Twilight Celebration */}
+              <div className="group rounded-2xl overflow-hidden border border-gold-300/40 bg-ivory shadow-sm hover:shadow-md transition-all">
+                <div className="relative h-44 w-full overflow-hidden">
+                  <img
+                    src="/images/udaipur_palace_night.jpg"
+                    alt="Udaipur Palace Lake Pichola"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent" />
+                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-gold-500/90 text-burgundy-950">
+                    Night Ambiance
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-serif font-bold text-sm text-charcoal-900 group-hover:text-burgundy-700 transition-colors">
+                    Twilight Lakefront Celebrations
+                  </h4>
+                  <p className="text-xs text-charcoal-500 mt-1 leading-relaxed">
+                    Heritage palace illuminated over Lake Pichola, floating water lanterns, fairy lights, and live classical sitar welcoming.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

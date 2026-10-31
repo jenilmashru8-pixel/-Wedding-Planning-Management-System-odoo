@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Crown, Sparkles, Lock, Mail, ArrowRight, ShieldCheck, HeartHandshake } from 'lucide-react';
+import { Crown, Sparkles, Lock, Mail, ArrowRight, ShieldCheck, HeartHandshake, MapPin, Star } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 export const Login: React.FC = () => {
@@ -27,12 +27,12 @@ export const Login: React.FC = () => {
   };
 
   const demoRoles = [
-    { role: 'Founder & Admin', email: 'founder@royalknot.com', desc: 'Full agency financials, all weddings, executive controls' },
-    { role: 'Wedding Planner', email: 'priya.sharma@royalknot.com', desc: 'Assigned weddings, quotations, tasks, guest lists' },
-    { role: 'Finance Manager', email: 'amit.verma@royalknot.com', desc: 'Client billing, vendor settlements, expense auditing' },
-    { role: 'Field Coordinator', email: 'vikram.singh@royalknot.com', desc: 'Day-of live timeline, vendor check-in, incident triage' },
-    { role: 'Client / Couple', email: 'aarav.kapoor@example.com', desc: 'Wedding workspace, sign agreements, approve extra expenses' },
-    { role: 'Vendor Partner', email: 'royal.caterers@example.com', desc: 'Quotation submissions, booking specs, arrival confirmation' },
+    { role: 'Founder & Admin', email: 'founder@royalknot.com', desc: 'Full agency financials & executive controls' },
+    { role: 'Wedding Planner', email: 'priya.sharma@royalknot.com', desc: 'Quotations, tasks, guest hospitality' },
+    { role: 'Finance Manager', email: 'amit.verma@royalknot.com', desc: 'Client billing & vendor settlements' },
+    { role: 'Field Coordinator', email: 'vikram.singh@royalknot.com', desc: 'Live timeline, check-in & incidents' },
+    { role: 'Client (Couple)', email: 'aarav.kapoor@example.com', desc: 'Wedding workspace & approvals' },
+    { role: 'Vendor Partner', email: 'royal.caterers@example.com', desc: 'Quotations & bookings' },
   ];
 
   const handleSelectDemo = (demoEmail: string) => {
@@ -41,97 +41,161 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-burgundy-950 via-burgundy-900 to-charcoal-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Decorative Luxury Background Glows */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-burgundy-600/20 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-charcoal-950 flex flex-col lg:flex-row relative overflow-hidden font-sans">
+      {/* Left Hero Showcase with Real Palace Photo */}
+      <div className="relative lg:w-7/12 min-h-[40vh] lg:min-h-screen flex flex-col justify-between p-8 sm:p-12 text-white overflow-hidden">
+        {/* Background Photo */}
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
+          style={{ backgroundImage: `url('/images/udaipur_palace_night.jpg')` }}
+        />
+        {/* Luxury Vignette & Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-burgundy-950/95 via-burgundy-950/60 to-charcoal-950/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(20,5,10,0.7)_100%)]" />
 
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center z-10">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-gold-600 via-gold-400 to-gold-200 p-0.5 shadow-gold-glow mb-4">
-          <div className="w-full h-full bg-burgundy-950 rounded-[14px] flex items-center justify-center text-gold-300">
-            <Crown className="w-8 h-8 text-gold-400" />
+        {/* Brand Header */}
+        <div className="relative z-10">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-burgundy-950/80 border border-gold-400/30 backdrop-blur-md shadow-2xl">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-gold-600 via-gold-400 to-gold-200 p-0.5 flex items-center justify-center">
+              <div className="w-full h-full bg-burgundy-950 rounded-[10px] flex items-center justify-center text-gold-300">
+                <Crown className="w-5 h-5 text-gold-400" />
+              </div>
+            </div>
+            <div>
+              <h1 className="font-serif text-lg font-bold tracking-wider text-gold-200 leading-none">THE ROYAL KNOT</h1>
+              <p className="text-[9px] uppercase tracking-widest text-gold-400/90 font-medium mt-0.5">Jaipur & Udaipur Palace Weddings</p>
+            </div>
           </div>
         </div>
-        <h2 className="font-serif text-3xl font-bold tracking-wider text-gold-200">THE ROYAL KNOT</h2>
-        <p className="mt-1 text-xs uppercase tracking-widest text-gold-400/80 font-medium">
-          Luxury Wedding Planning Management System • Jaipur & Udaipur
-        </p>
+
+        {/* Mid Hero Editorial Statement */}
+        <div className="relative z-10 max-w-xl my-auto py-8">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-gold-500/20 text-gold-300 border border-gold-400/30 mb-4 backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+            <span>Rajasthan Heritage Circuit • Enterprise ERP</span>
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ivory-50 tracking-tight leading-tight">
+            Curating Royal Legacies in Majestic Palaces
+          </h2>
+          <p className="mt-4 text-xs sm:text-sm text-ivory-200/90 leading-relaxed font-normal max-w-lg">
+            A unified management platform for elite destination weddings. From competitive vendor matrixes and minute-by-minute live coordination to accrual profitability accounting.
+          </p>
+
+          {/* Floating Luxury Stats */}
+          <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-gold-400/20">
+            <div className="p-3 rounded-xl bg-burgundy-950/60 border border-gold-400/20 backdrop-blur-md">
+              <div className="text-xl font-bold font-serif text-gold-300">400+</div>
+              <div className="text-[10px] text-ivory-300 uppercase tracking-wider mt-0.5">Royal Guests</div>
+            </div>
+            <div className="p-3 rounded-xl bg-burgundy-950/60 border border-gold-400/20 backdrop-blur-md">
+              <div className="text-xl font-bold font-serif text-gold-300">18 Partners</div>
+              <div className="text-[10px] text-ivory-300 uppercase tracking-wider mt-0.5">Heritage Vendors</div>
+            </div>
+            <div className="p-3 rounded-xl bg-burgundy-950/60 border border-gold-400/20 backdrop-blur-md">
+              <div className="text-xl font-bold font-serif text-emerald-400">₹8.50 Cr</div>
+              <div className="text-[10px] text-ivory-300 uppercase tracking-wider mt-0.5">Master Project</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Credit */}
+        <div className="relative z-10 text-[11px] text-ivory-300/60 flex items-center justify-between">
+          <span>City Palace • Jagmandir Island • Rambagh Palace</span>
+          <span className="flex items-center gap-1">
+            <MapPin className="w-3.5 h-3.5 text-gold-400" />
+            <span>Udaipur, Rajasthan</span>
+          </span>
+        </div>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10 px-4">
-        <div className="bg-white/95 backdrop-blur-md py-8 px-6 sm:px-10 shadow-2xl rounded-3xl border border-gold-300">
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            {error && (
-              <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl font-medium animate-in fade-in">
-                {error}
-              </div>
-            )}
+      {/* Right Login Form & 1-Click Demo Accounts */}
+      <div className="lg:w-5/12 bg-gradient-to-b from-burgundy-950 via-burgundy-900 to-charcoal-950 flex flex-col justify-center p-6 sm:p-10 lg:p-12 relative z-10">
+        <div className="max-w-md w-full mx-auto space-y-6">
+          <div className="text-left space-y-1">
+            <span className="text-[11px] uppercase font-bold tracking-widest text-gold-400">STAFF & CLIENT PORTAL</span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ivory-50 tracking-wide">
+              Sign In to Your Workspace
+            </h2>
+            <p className="text-xs text-ivory-300/80">
+              Select a quick 1-click role below or enter your credentials.
+            </p>
+          </div>
 
-            <div>
-              <label className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider mb-1">
-                Work Email Address
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-charcoal-400">
-                  <Mail className="w-4 h-4" />
+          {/* Form Card */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-gold-300/90">
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              {error && (
+                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl font-medium animate-fade-in">
+                  {error}
                 </div>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@royalknot.com"
-                  className="w-full pl-10 pr-4 py-2.5 bg-ivory-50 border border-gold-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gold-400/50 focus:border-gold-500 transition-all"
-                />
-              </div>
-            </div>
+              )}
 
-            <div>
-              <label className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider mb-1">
-                Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-charcoal-400">
-                  <Lock className="w-4 h-4" />
+              <div>
+                <label className="block text-xs font-semibold text-charcoal-700 mb-1">
+                  Email Address
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-charcoal-400">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="founder@royalknot.com"
+                    className="w-full pl-10 pr-4 py-2.5 bg-ivory-50 border border-gold-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-burgundy-800 focus:border-burgundy-900 transition-all font-medium"
+                  />
                 </div>
-                <input
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-ivory-50 border border-gold-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gold-400/50 focus:border-gold-500 transition-all"
-                />
               </div>
-            </div>
 
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-3 px-4 bg-gradient-to-r from-burgundy-900 via-burgundy-800 to-burgundy-900 hover:from-burgundy-800 hover:to-burgundy-700 text-gold-200 hover:text-white font-serif font-bold text-sm tracking-wide rounded-xl shadow-lg border border-gold-500/40 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
-            >
-              <span>{isLoading ? 'Signing In...' : 'Sign In to Management Portal'}</span>
-              <ArrowRight className="w-4 h-4 text-gold-400 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </form>
+              <div>
+                <label className="block text-xs font-semibold text-charcoal-700 mb-1">
+                  Password
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-charcoal-400">
+                    <Lock className="w-4 h-4" />
+                  </div>
+                  <input
+                    type="password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 bg-ivory-50 border border-gold-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-burgundy-800 focus:border-burgundy-900 transition-all font-medium"
+                  />
+                </div>
+              </div>
 
-          {/* 1-Click Role Access Buttons */}
-          <div className="mt-6 pt-6 border-t border-gold-200/80">
-            <div className="flex items-center gap-1.5 mb-3 text-xs font-bold text-burgundy-950 uppercase tracking-wider">
-              <ShieldCheck className="w-4 h-4 text-gold-600" />
-              <span>1-Click Demo Accounts</span>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              {demoRoles.map((demo) => (
-                <button
-                  key={demo.role}
-                  type="button"
-                  onClick={() => handleSelectDemo(demo.email)}
-                  className="p-2.5 text-left rounded-xl border border-gold-200/90 bg-gold-50/40 hover:bg-gold-100/70 hover:border-gold-400 transition-all"
-                >
-                  <p className="text-xs font-bold text-burgundy-900 truncate">{demo.role}</p>
-                  <p className="text-[10px] text-charcoal-500 truncate">{demo.email}</p>
-                </button>
-              ))}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full py-3.5 px-4 bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 hover:from-burgundy-900 hover:to-burgundy-800 text-gold-200 font-bold text-xs sm:text-sm tracking-wider uppercase rounded-xl shadow-xl border border-gold-500/40 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                <span>{isLoading ? 'Authenticating...' : 'Sign In to Workspace'}</span>
+                <ArrowRight className="w-4 h-4 text-gold-400" />
+              </button>
+            </form>
+
+            {/* 1-Click Role Accounts */}
+            <div className="mt-6 pt-5 border-t border-charcoal-100">
+              <div className="flex items-center gap-1.5 mb-2.5 text-xs font-bold text-burgundy-950 uppercase tracking-wider">
+                <ShieldCheck className="w-4 h-4 text-gold-600" />
+                <span>1-Click Demo Profiles</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {demoRoles.map((demo) => (
+                  <button
+                    key={demo.role}
+                    type="button"
+                    onClick={() => handleSelectDemo(demo.email)}
+                    className="p-2.5 text-left rounded-xl border border-gold-200 bg-ivory-50 hover:bg-gold-50 hover:border-gold-400 transition-all group"
+                  >
+                    <p className="text-xs font-bold text-burgundy-950 truncate group-hover:text-gold-700">{demo.role}</p>
+                    <p className="text-[10px] text-charcoal-500 truncate">{demo.email}</p>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -139,3 +203,4 @@ export const Login: React.FC = () => {
     </div>
   );
 };
+export default Login;

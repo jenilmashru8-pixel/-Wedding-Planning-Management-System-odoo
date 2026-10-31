@@ -36,6 +36,18 @@ import { MetricCard } from '../components/MetricCard';
 import { StatusBadge } from '../components/StatusBadge';
 import { formatCurrency, formatLakhsCrores, formatDate } from '../utils/formatters';
 
+const getWeddingPhoto = (location?: string, name?: string) => {
+  const loc = (location || '').toLowerCase();
+  const n = (name || '').toLowerCase();
+  if (loc.includes('udaipur') || n.includes('udaipur') || n.includes('lake') || n.includes('jagmandir') || n.includes('aarav') || n.includes('leela')) {
+    return '/images/royal_couple_palace.jpg';
+  }
+  if (loc.includes('jaipur') || n.includes('jaipur') || n.includes('rambagh') || n.includes('city palace') || n.includes('rohit') || n.includes('ananya')) {
+    return '/images/royal_mandap_decor.jpg';
+  }
+  return '/images/royal_banquet_feast.jpg';
+};
+
 export const Dashboard: React.FC = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -94,20 +106,28 @@ export const Dashboard: React.FC = () => {
     return (
       <div className="space-y-8 animate-in fade-in duration-300">
         {/* Welcome Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 p-8 text-white border border-gold-400/40 shadow-xl">
+        <div className="relative overflow-hidden rounded-3xl p-8 text-white border border-gold-400/40 shadow-2xl group min-h-[200px] flex items-center">
+          <img
+            src="/images/udaipur_palace_night.jpg"
+            alt="Udaipur Palace Night"
+            className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/85 to-burgundy-950/50" />
           <div className="relative z-10 max-w-2xl">
-            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-gold-400/20 text-gold-300 border border-gold-400/30">
-              Executive Season Overview
-            </span>
-            <h1 className="font-serif text-3xl font-bold tracking-tight text-gold-100 mt-2">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-gold-400/20 text-gold-300 border border-gold-400/30 backdrop-blur-sm">
+                Executive Season Overview
+              </span>
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-gold-200 border border-white/20 backdrop-blur-sm">
+                Rajasthan Royal Circuit
+              </span>
+            </div>
+            <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-gold-100">
               The Royal Knot Season Portfolio
             </h1>
-            <p className="text-sm text-gold-200/80 mt-1">
+            <p className="text-sm text-gold-200/90 mt-2 leading-relaxed max-w-xl">
               Real-time financial performance, luxury wedding milestones, client receivables, and vendor obligations across Jaipur & Udaipur.
             </p>
-          </div>
-          <div className="absolute right-6 -bottom-6 opacity-10 pointer-events-none">
-            <Building2 className="w-64 h-64 text-gold-200" />
           </div>
         </div>
 
@@ -270,8 +290,19 @@ export const Dashboard: React.FC = () => {
                 {weddingBreakdowns.map((w: any) => (
                   <tr key={w.weddingId} className="hover:bg-gold-50/30 transition-colors">
                     <td className="py-3 px-4 font-semibold text-charcoal-900">
-                      <div>{w.name}</div>
-                      <span className="text-[10px] text-charcoal-400 font-mono">{w.weddingCode}</span>
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={getWeddingPhoto(w.location, w.name)}
+                          alt={w.name}
+                          className="w-10 h-10 rounded-xl object-cover border border-gold-300/60 shadow-sm shrink-0"
+                        />
+                        <div>
+                          <div className="font-serif font-bold text-charcoal-900 text-sm hover:text-burgundy-700 transition-colors">
+                            {w.name}
+                          </div>
+                          <span className="text-[10px] text-charcoal-400 font-mono">{w.weddingCode}</span>
+                        </div>
+                      </div>
                     </td>
                     <td className="py-3 px-4">{w.location}</td>
                     <td className="py-3 px-4">
@@ -311,12 +342,22 @@ export const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-serif text-2xl font-bold text-charcoal-900">
+      {/* Banner */}
+      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white border border-gold-400/40 shadow-xl group">
+        <img
+          src="/images/royal_couple_palace.jpg"
+          alt="Palace Horizon"
+          className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-1000"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/80 to-burgundy-950/40" />
+        <div className="relative z-10 max-w-xl">
+          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-gold-400/20 text-gold-300 border border-gold-400/30 backdrop-blur-sm">
+            {user?.role?.replace('_', ' ')} PORTAL
+          </span>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-gold-100 mt-2">
             Welcome back, {user?.firstName}
           </h1>
-          <p className="text-xs text-charcoal-500">
+          <p className="text-xs sm:text-sm text-gold-200/90 mt-1 leading-relaxed">
             {user?.role === 'PLANNER' && 'Managing your assigned luxury weddings, vendors, and milestone schedules.'}
             {user?.role === 'FIELD_COORDINATOR' && 'Live wedding operations, vendor arrival check-in, and incident management.'}
             {user?.role === 'CLIENT' && 'Your dream wedding planning workspace and milestone tracker.'}
@@ -363,27 +404,42 @@ export const Dashboard: React.FC = () => {
             <div
               key={w.id}
               onClick={() => navigate(`/weddings/${w.id}`)}
-              className="card-luxury p-5 rounded-2xl cursor-pointer hover:border-gold-400 group"
+              className="card-luxury rounded-2xl cursor-pointer hover:border-gold-400 group overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-lg"
             >
-              <div className="flex items-start justify-between">
-                <div>
-                  <span className="text-[10px] font-mono font-semibold text-charcoal-400 uppercase">{w.weddingCode}</span>
-                  <h4 className="font-serif font-bold text-base text-charcoal-900 group-hover:text-burgundy-700 transition-colors">
+              <div>
+                <div className="relative h-40 w-full overflow-hidden">
+                  <img
+                    src={getWeddingPhoto(w.location, w.name)}
+                    alt={w.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent" />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase bg-charcoal-900/80 text-gold-300 border border-gold-400/30 backdrop-blur-sm">
+                      {w.weddingCode}
+                    </span>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <StatusBadge status={w.status} />
+                  </div>
+                  <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                    <p className="text-[11px] font-medium text-gold-200 truncate">{w.location} • {w.venueName || 'Heritage Resort'}</p>
+                  </div>
+                </div>
+
+                <div className="p-5">
+                  <h4 className="font-serif font-bold text-base text-charcoal-900 group-hover:text-burgundy-700 transition-colors line-clamp-1">
                     {w.name}
                   </h4>
-                  <p className="text-xs text-charcoal-500 mt-0.5">{w.location} • {w.venueName || 'Luxury Resort'}</p>
+                  <div className="mt-4 pt-3 border-t border-charcoal-100 flex items-center justify-between text-xs">
+                    <span className="text-charcoal-500">Dates: {formatDate(w.startDate)}</span>
+                    <span className="font-serif font-bold text-burgundy-900">{formatLakhsCrores(w.contractAmount)}</span>
+                  </div>
+                  <div className="mt-3 flex items-center justify-between text-xs text-gold-700 font-semibold group-hover:text-burgundy-700">
+                    <span>Open Workspace</span>
+                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
-                <StatusBadge status={w.status} />
-              </div>
-
-              <div className="mt-4 pt-4 border-t border-charcoal-100 flex items-center justify-between text-xs">
-                <span className="text-charcoal-500">Dates: {formatDate(w.startDate)}</span>
-                <span className="font-bold text-burgundy-900">{formatLakhsCrores(w.contractAmount)}</span>
-              </div>
-
-              <div className="mt-3 flex items-center justify-between text-xs text-gold-700 font-semibold group-hover:text-burgundy-700">
-                <span>Open Project Workspace</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
           ))}
