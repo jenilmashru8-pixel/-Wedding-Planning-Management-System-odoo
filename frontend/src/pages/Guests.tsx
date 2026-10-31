@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   UserCheck,
   Plus,
@@ -21,6 +21,8 @@ import { MetricCard } from '../components/MetricCard';
 import { Modal } from '../components/Modal';
 import { EmptyState } from '../components/EmptyState';
 import { useAuth } from '../contexts/AuthContext';
+import readXlsxFile from 'read-excel-file/browser';
+import { GuestImportRecord, parseGuestCsv, parseGuestImportRows } from '../utils/guestImport';
 
 export const Guests: React.FC = () => {
   const { user } = useAuth();
@@ -56,7 +58,10 @@ export const Guests: React.FC = () => {
   // CSV Import Modal
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [csvContent, setCsvContent] = useState('');
+  const [importRows, setImportRows] = useState<GuestImportRecord[] | null>(null);
+  const [selectedFileName, setSelectedFileName] = useState('');
   const [isImporting, setIsImporting] = useState(false);
+  const importFileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchWeddings();
@@ -99,8 +104,14 @@ export const Guests: React.FC = () => {
       const res = await api.get('/guests', { params });
       if (res.data.success) {
         setGuests(res.data.data.guests);
-        setTotalCount(res.data.data.total);
-        setStats(res.data.data.stats);
+        setTotalCount(res.data.data.pagination.total);
+        setStats({
+          total: res.data.data.stats.total,
+          confirmed: res.data.data.stats.confirmed,
+          pending: res.data.data.stats.pending,
+          declined: res.data.data.stats.declined,
+          attended: res.data.data.stats.actualAttendees,
+        });
       }
     } catch (err) {
       console.error('Failed to load guests:', err);
@@ -113,10 +124,13 @@ export const Guests: React.FC = () => {
     try {
       const res = await api.patch(`/guests/${guestId}/check-in`);
       if (res.data.success) {
+        const alreadyCheckedIn = guests.some((guest) => guest.id === guestId && guest.arrivalStatus === 'ARRIVED');
         setGuests((prev) =>
           prev.map((g) => (g.id === guestId ? { ...g, arrivalStatus: 'ARRIVED' } : g))
         );
-        setStats((prev) => ({ ...prev, attended: prev.attended + 1 }));
+        if (!alreadyCheckedIn) {
+          setStats((prev) => ({ ...prev, attended: prev.attended + 1 }));
+        }
       }
     } catch (err: any) {
       alert(err.response?.data?.message || 'Check-in failed');
@@ -156,42 +170,56 @@ export const Guests: React.FC = () => {
     }
   };
 
+  const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+
+    try {
+      if (file.size > 10 * 1024 * 1024) {
+        throw new Error('Choose a file smaller than 10 MB.');
+      }
+
+      const extension = file.name.split('.').pop()?.toLowerCase();
+      let rows: GuestImportRecord[];
+      if (extension === 'csv') {
+        rows = parseGuestCsv(await file.text());
+      } else if (extension === 'xlsx') {
+        const sheets = await readXlsxFile(file);
+        rows = parseGuestImportRows(sheets[0]?.data || []);
+      } else {
+        throw new Error('Choose a CSV or Excel .xlsx file.');
+      }
+
+      setImportRows(rows);
+      setSelectedFileName(file.name);
+      setCsvContent('');
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Unable to read this file.');
+    }
+  };
+
   const handleImportCsv = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!csvContent.trim() || !selectedWeddingId) return;
+    if ((!csvContent.trim() && !importRows?.length) || !selectedWeddingId) return;
 
     try {
       setIsImporting(true);
-      const lines = csvContent.trim().split('\n');
-      const parsed = lines.slice(1).map((line) => {
-        const parts = line.split(',').map((p) => p.trim().replace(/^"|"$/g, ''));
-        return {
-          guestGroup: parts[0] || 'General',
-          firstName: parts[1] || 'Guest',
-          lastName: parts[2] || 'Family',
-          phone: parts[3] || '',
-          email: parts[4] || '',
-          rsvpStatus: parts[5] || 'CONFIRMED',
-          dietaryPreference: parts[6] || 'VEG',
-          roomNumber: parts[7] || '',
-          accommodationAssigned: Boolean(parts[7]),
-          transportationNeeded: parts[8]?.toLowerCase() === 'yes',
-        };
-      });
-
       const res = await api.post('/guests/import', {
         weddingId: selectedWeddingId,
-        guests: parsed,
+        guests: importRows || parseGuestCsv(csvContent),
       });
 
       if (res.data.success) {
         alert(res.data.message || 'Guests imported successfully');
         setIsImportModalOpen(false);
         setCsvContent('');
+        setImportRows(null);
+        setSelectedFileName('');
         fetchGuests();
       }
     } catch (err: any) {
-      alert(err.response?.data?.message || 'CSV Import failed. Check formatting.');
+      alert(err.response?.data?.message || (err instanceof Error ? err.message : 'Guest import failed.'));
     } finally {
       setIsImporting(false);
     }
@@ -206,6 +234,21 @@ export const Guests: React.FC = () => {
     setAccommodationAssigned(false);
     setTransportationNeeded(false);
     setPlusGuests('0');
+  };
+
+  const handleExportCsv = async () => {
+    if (!selectedWeddingId) return;
+    try {
+      const response = await api.get(`/guests/export/${selectedWeddingId}`, { responseType: 'blob' });
+      const url = URL.createObjectURL(response.data);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `wedding_${selectedWeddingId}_guests.csv`;
+      link.click();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (err: any) {
+      alert(err.response?.data?.message || 'Guest export failed.');
+    }
   };
 
   const totalPages = Math.ceil(totalCount / limit) || 1;
@@ -230,21 +273,28 @@ export const Guests: React.FC = () => {
 
         <div className="flex flex-wrap items-center gap-2">
           {/* Export CSV */}
-          <a
-            href={`/api/guests/export/${selectedWeddingId}`}
+          <button
+            type="button"
+            onClick={handleExportCsv}
+            disabled={!selectedWeddingId}
             className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-ivory-100 text-charcoal-700 text-xs font-semibold hover:bg-ivory-200 border border-gold-300 transition-all shadow-sm"
           >
             <Download className="w-4 h-4 text-gold-600" />
             <span>Export CSV</span>
-          </a>
+          </button>
 
           {/* Import CSV */}
           <button
-            onClick={() => setIsImportModalOpen(true)}
+            onClick={() => {
+              setCsvContent('');
+              setImportRows(null);
+              setSelectedFileName('');
+              setIsImportModalOpen(true);
+            }}
             className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gold-500/10 text-gold-700 text-xs font-semibold hover:bg-gold-500/20 border border-gold-400/30 transition-all shadow-sm"
           >
             <Upload className="w-4 h-4 text-gold-600" />
-            <span>Import CSV</span>
+            <span>Import CSV / Excel</span>
           </button>
 
           {/* Add Guest */}
@@ -637,19 +687,37 @@ export const Guests: React.FC = () => {
       <Modal
         isOpen={isImportModalOpen}
         onClose={() => setIsImportModalOpen(false)}
-        title="Import Guests via CSV"
-        subtitle="Paste CSV text with column headers: Group, FirstName, LastName, Phone, Email, RSVP, Dietary, Room, Transportation"
+        title="Import Guests from CSV or Excel"
+        subtitle="Upload a .csv or .xlsx file, or paste CSV text. Include First Name and Last Name columns."
         maxWidth="2xl"
       >
         <form onSubmit={handleImportCsv} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-charcoal-700 mb-1">CSV Content *</label>
+            <label className="block text-xs font-semibold text-charcoal-700 mb-1">Upload guest list</label>
+            <input
+              ref={importFileRef}
+              type="file"
+              accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              onChange={handleImportFile}
+              className="block w-full text-xs text-charcoal-600 file:mr-3 file:rounded-lg file:border-0 file:bg-gold-500/10 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-gold-700 hover:file:bg-gold-500/20"
+            />
+            {selectedFileName && (
+              <p className="mt-2 text-xs text-emerald-700">
+                {selectedFileName} ready — {importRows?.length} guests found.
+              </p>
+            )}
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-charcoal-700 mb-1">Or paste CSV content</label>
             <textarea
               rows={8}
               value={csvContent}
-              onChange={(e) => setCsvContent(e.target.value)}
+              onChange={(e) => {
+                setCsvContent(e.target.value);
+                setImportRows(null);
+                setSelectedFileName('');
+              }}
               placeholder={`Group,First Name,Last Name,Phone,Email,RSVP,Dietary,Room,Transportation\nGroom's Family,Rohan,Kapoor,+91 98200 11223,rohan@example.com,CONFIRMED,VEG,Suite 201,Yes\nBride's Family,Ananya,Singhania,+91 98200 44556,ananya@example.com,CONFIRMED,JAIN,Suite 202,No`}
-              required
               className="w-full p-3 font-mono text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
             />
           </div>
@@ -664,7 +732,7 @@ export const Guests: React.FC = () => {
             </button>
             <button
               type="submit"
-              disabled={isImporting}
+              disabled={isImporting || (!csvContent.trim() && !importRows?.length)}
               className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isImporting ? 'Importing Guests...' : 'Import Guests'}

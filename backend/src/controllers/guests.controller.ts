@@ -158,21 +158,41 @@ export const importGuests = async (req: AuthRequest, res: Response): Promise<voi
     return;
   }
 
-  const validGuests = guestList.map((g: any) => ({
-    weddingId,
-    guestGroup: g.guestGroup || 'General',
-    firstName: g.firstName || 'Guest',
-    lastName: g.lastName || 'Guest',
-    phone: g.phone || null,
-    email: g.email || null,
-    rsvpStatus: (['CONFIRMED', 'DECLINED', 'PENDING'].includes(g.rsvpStatus) ? g.rsvpStatus : 'PENDING') as any,
-    dietaryPreference: (['VEG', 'JAIN', 'NON_VEG', 'VEGAN', 'OTHER'].includes(g.dietaryPreference) ? g.dietaryPreference : 'VEG') as any,
-    accommodationAssigned: Boolean(g.accommodationAssigned),
-    roomNumber: g.roomNumber || null,
-    transportationNeeded: Boolean(g.transportationNeeded),
-    plusGuests: parseInt(g.plusGuests, 10) || 0,
-    notes: g.notes || null,
-  }));
+  const validGuests = [];
+  for (const [index, guest] of guestList.entries()) {
+    const guestRecord =
+      guest && typeof guest === 'object' && !Array.isArray(guest)
+        ? (guest as Record<string, unknown>)
+        : {};
+    const parsed = guestSchema.safeParse({ ...guestRecord, weddingId });
+    if (!parsed.success) {
+      const issue = parsed.error.issues[0];
+      const field = issue.path.length ? `.${issue.path.join('.')}` : '';
+      res.status(400).json({
+        success: false,
+        message: `Invalid guest at row ${index + 2}${field}: ${issue.message}`,
+      });
+      return;
+    }
+
+    const data = parsed.data;
+    validGuests.push({
+      weddingId,
+      guestGroup: data.guestGroup,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone || null,
+      email: data.email || null,
+      invitationStatus: data.invitationStatus,
+      rsvpStatus: data.rsvpStatus,
+      dietaryPreference: data.dietaryPreference,
+      accommodationAssigned: data.accommodationAssigned,
+      roomNumber: data.roomNumber || null,
+      transportationNeeded: data.transportationNeeded,
+      plusGuests: data.plusGuests,
+      notes: data.notes || null,
+    });
+  }
 
   const created = await prisma.guest.createMany({
     data: validGuests,

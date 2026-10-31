@@ -295,6 +295,39 @@ describe('TEST 6: Guest Management & CSV', () => {
     expect(res.status).toBe(201);
     expect(res.body.count).toBe(3);
   });
+
+  it('should return guest pagination and arrival stats in the API response', async () => {
+    const res = await request(app)
+      .get('/api/guests')
+      .query({ weddingId: demoWeddingId, page: 1, limit: 10 })
+      .set('Authorization', 'Bearer ' + founderToken);
+
+    expect(res.status).toBe(200);
+    expect(typeof res.body.data.pagination.total).toBe('number');
+    expect(typeof res.body.data.stats.actualAttendees).toBe('number');
+  });
+
+  it('should reject imported rows without guest names instead of creating placeholders', async () => {
+    const res = await request(app)
+      .post('/api/guests/import')
+      .set('Authorization', 'Bearer ' + founderToken)
+      .send({
+        weddingId: demoWeddingId,
+        guests: [{ firstName: 'No Last Name' }],
+      });
+
+    expect(res.status).toBe(400);
+    expect(res.body.message).toContain('Last Name');
+  });
+
+  it('should allow authenticated guest CSV export', async () => {
+    const res = await request(app)
+      .get(`/api/guests/export/${demoWeddingId}`)
+      .set('Authorization', 'Bearer ' + founderToken);
+
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toContain('text/csv');
+  });
 });
 
 describe('TEST 7: Extra Billing & Client Invoice Calculation', () => {
