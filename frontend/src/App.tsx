@@ -7,6 +7,9 @@ import { MainLayout } from './layouts/MainLayout';
 
 // Pages
 import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { ForgotPassword } from './pages/ForgotPassword';
+import { ResetPassword } from './pages/ResetPassword';
 import { Dashboard } from './pages/Dashboard';
 import { Enquiries } from './pages/Enquiries';
 import { Clients } from './pages/Clients';
@@ -43,8 +46,8 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
     return (
       <div className="min-h-screen bg-ivory flex items-center justify-center">
         <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-4 border-gold-400 border-t-burgundy-900 rounded-full animate-spin mx-auto" />
-          <p className="font-serif text-xs font-semibold tracking-wider text-burgundy-900 uppercase">
+          <div className="w-10 h-10 border-4 border-gold-400 border-t-navy-900 rounded-full animate-spin mx-auto" />
+          <p className="font-serif text-xs font-semibold tracking-wider text-navy-900 uppercase">
             Loading The Royal Knot...
           </p>
         </div>
@@ -68,6 +71,9 @@ export const App: React.FC = () => {
             <Routes>
               {/* Public Routes */}
               <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/sign/:id" element={<PublicSignAgreement />} />
 
               {/* Protected Workspace Routes */}

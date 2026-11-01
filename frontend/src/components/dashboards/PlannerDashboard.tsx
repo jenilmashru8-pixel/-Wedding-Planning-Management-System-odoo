@@ -76,26 +76,26 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
           alt="Palace Mandap Decor"
           className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/80 to-burgundy-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/80 to-navy-950/40" />
         <div className="relative z-10 max-w-2xl">
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest bg-gold-400/20 text-gold-300 border border-gold-400/30 backdrop-blur-sm">
               🌸 Lead Wedding Architect Cockpit
             </span>
             <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-gold-200 border border-white/20 backdrop-blur-sm">
-              Priya Sharma • Senior Luxury Wedding Planner
+              Wedding planning & coordination
             </span>
           </div>
           <h1 className="font-serif text-2xl sm:text-3xl font-bold text-gold-100">
             Royal Architectural Command & Operations
           </h1>
           <p className="text-xs sm:text-sm text-gold-200/90 mt-1 leading-relaxed">
-            Manage HNW client enquiry conversions, staged digital agreements, standard 44-task production checklists, and side-by-side vendor quotation matrices.
+            Manage client enquiry conversions, digital agreements, production checklists, and vendor quotation comparisons.
           </p>
           <div className="mt-4 flex flex-wrap gap-2.5">
             <button
               onClick={() => navigate('/enquiries')}
-              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 text-xs font-bold shadow-xs hover:scale-102 transition-all flex items-center gap-1.5"
+              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-navy-950 text-xs font-bold shadow-xs hover:scale-102 transition-all flex items-center gap-1.5"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>+ New Client Enquiry</span>
@@ -105,7 +105,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
               className="px-3.5 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs font-semibold backdrop-blur-sm transition-all flex items-center gap-1.5"
             >
               <CalendarCheck className="w-3.5 h-3.5 text-gold-300" />
-              <span>44-Task Kanban Board</span>
+              <span>{tasks.length}-Task Kanban Board</span>
             </button>
             <button
               onClick={() => navigate('/quotations')}
@@ -132,19 +132,17 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
           value={enquiries.length}
           subtitle={`${enquiries.filter((e) => e.status === 'CONVERTED').length} converted to weddings`}
           icon={MessageSquareHeart}
-          trend="+2 New Today"
-          trendType="positive"
         />
         <MetricCard
           title="Task Completion Rate"
-          value={`${taskStats.completionRate || 68}%`}
-          subtitle={`${taskStats.done || 42} done of ${taskStats.total || 62} tasks`}
+          value={`${taskStats.completionRate ?? 0}%`}
+          subtitle={`${taskStats.done ?? 0} done of ${taskStats.total ?? 0} tasks`}
           icon={CalendarCheck}
           trendType="positive"
         />
         <MetricCard
           title="Urgent Actions Due"
-          value={urgentTasks.length || 3}
+          value={urgentTasks.length}
           subtitle="High-priority milestones"
           icon={AlertTriangle}
           trendType={urgentTasks.length > 0 ? 'negative' : 'positive'}
@@ -161,7 +159,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
           </div>
           <button
             onClick={() => navigate('/enquiries')}
-            className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1 self-start sm:self-center"
+            className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1 self-start sm:self-center"
           >
             <span>Open CRM Board</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -180,7 +178,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
                 onClick={() => setSelectedStage(isSelected ? null : stg.key)}
                 className={`p-3 rounded-xl border text-left transition-all ${
                   isSelected
-                    ? 'border-burgundy-700 bg-burgundy-50 shadow-xs ring-2 ring-burgundy-300'
+                    ? 'border-navy-700 bg-navy-50 shadow-xs ring-2 ring-navy-300'
                     : 'border-charcoal-100 bg-white hover:bg-gold-50/30'
                 }`}
               >
@@ -214,7 +212,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
             <tbody className="divide-y divide-charcoal-100 text-charcoal-800">
               {filteredEnquiries.slice(0, 5).map((e: any) => (
                 <tr key={e.id} className="hover:bg-gold-50/20 transition-colors">
-                  <td className="py-2.5 px-3 font-mono font-bold text-burgundy-900">{e.enquiryNumber}</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-navy-900">{e.enquiryNumber}</td>
                   <td className="py-2.5 px-3 font-semibold text-charcoal-900">
                     <div>{e.coupleName || `${e.partner1Name} & ${e.partner2Name}`}</div>
                     <div className="text-[10px] text-charcoal-400">{e.phone}</div>
@@ -233,7 +231,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
                   <td className="py-2.5 px-3 text-right">
                     <button
                       onClick={() => navigate('/enquiries')}
-                      className="px-2.5 py-1 rounded bg-burgundy-100 text-burgundy-900 hover:bg-burgundy-200 text-xs font-semibold"
+                      className="px-2.5 py-1 rounded bg-navy-100 text-navy-900 hover:bg-navy-200 text-xs font-semibold"
                     >
                       Process Lead
                     </button>
@@ -251,7 +249,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
           <h3 className="font-serif text-lg font-bold text-charcoal-900">Managed Wedding Projects & Checklists</h3>
           <button
             onClick={() => navigate('/weddings')}
-            className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1"
+            className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1"
           >
             <span>View All</span>
             <ChevronRight className="w-3.5 h-3.5" />
@@ -260,7 +258,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {activeWeddings.map((w: any) => {
-            const completion = w.completionPercentage || 68;
+            const completion = w.completionPercentage ?? 0;
 
             return (
               <div
@@ -290,7 +288,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
                   </div>
 
                   <div className="p-4 sm:p-5">
-                    <h4 className="font-serif font-bold text-base text-charcoal-900 group-hover:text-burgundy-700 transition-colors line-clamp-1">
+                    <h4 className="font-serif font-bold text-base text-charcoal-900 group-hover:text-navy-700 transition-colors line-clamp-1">
                       {w.name}
                     </h4>
 
@@ -298,11 +296,11 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
                     <div className="mt-3">
                       <div className="flex items-center justify-between text-xs mb-1">
                         <span className="text-charcoal-500 font-medium">Standard 44 Tasks Checklist</span>
-                        <span className="font-bold text-burgundy-900">{completion}% Done</span>
+                        <span className="font-bold text-navy-900">{completion}% Done</span>
                       </div>
                       <div className="w-full h-2 rounded-full bg-gold-100 overflow-hidden">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-gold-500 to-burgundy-700 transition-all duration-500"
+                          className="h-full rounded-full bg-gradient-to-r from-gold-500 to-navy-700 transition-all duration-500"
                           style={{ width: `${completion}%` }}
                         />
                       </div>
@@ -313,12 +311,12 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
                         <Calendar className="w-3.5 h-3.5 text-gold-600" />
                         {formatDate(w.startDate)}
                       </span>
-                      <span className="font-serif font-bold text-burgundy-900">{formatLakhsCrores(w.contractAmount)}</span>
+                      <span className="font-serif font-bold text-navy-900">{formatLakhsCrores(w.contractAmount)}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="px-5 py-2.5 bg-ivory/60 border-t border-charcoal-100 flex items-center justify-between text-xs text-burgundy-800 font-semibold group-hover:bg-gold-50/50 transition-colors">
+                <div className="px-5 py-2.5 bg-ivory/60 border-t border-charcoal-100 flex items-center justify-between text-xs text-navy-800 font-semibold group-hover:bg-gold-50/50 transition-colors">
                   <span>Open Architectural Workspace</span>
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -335,14 +333,14 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
           <div className="flex items-center justify-between mb-3 pb-2 border-b border-charcoal-100">
             <div>
               <h3 className="font-serif text-base font-bold text-charcoal-900 flex items-center gap-2">
-                <FileCheck2 className="w-4 h-4 text-burgundy-800" />
+                <FileCheck2 className="w-4 h-4 text-navy-800" />
                 Digital Planning Agreements
               </h3>
               <p className="text-xs text-charcoal-500">Staged payment milestones & client signatures</p>
             </div>
             <button
               onClick={() => navigate('/agreements')}
-              className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1"
+              className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1"
             >
               <span>Manage Agreements</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -372,7 +370,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
                   ) : (
                     <button
                       onClick={() => navigate(`/sign/${ag.id}`)}
-                      className="px-2.5 py-1 rounded bg-burgundy-700 text-gold-200 text-xs font-semibold hover:text-white"
+                      className="px-2.5 py-1 rounded bg-navy-700 text-gold-200 text-xs font-semibold hover:text-white"
                     >
                       Signing Link
                     </button>
@@ -395,7 +393,7 @@ export const PlannerDashboard: React.FC<PlannerDashboardProps> = ({
             </div>
             <button
               onClick={() => navigate('/quotations')}
-              className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1"
+              className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1"
             >
               <span>Compare Quotes</span>
               <ArrowUpRight className="w-3.5 h-3.5" />

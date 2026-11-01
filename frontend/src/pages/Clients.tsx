@@ -66,7 +66,7 @@ export const Clients: React.FC = () => {
         </div>
         <button
           onClick={() => setIsAddOpen(true)}
-          className="px-4 py-2.5 bg-burgundy-700 hover:bg-burgundy-800 text-gold-200 hover:text-white rounded-xl text-xs font-semibold shadow-md transition-all flex items-center gap-2"
+          className="px-4 py-2.5 bg-navy-700 hover:bg-navy-800 text-gold-200 hover:text-white rounded-xl text-xs font-semibold shadow-md transition-all flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
           <span>Add Client</span>
@@ -104,7 +104,7 @@ export const Clients: React.FC = () => {
                     </h4>
                     <p className="text-xs text-charcoal-500 mt-0.5">{c.city || 'Destination Client'}</p>
                   </div>
-                  <div className="p-2 rounded-xl bg-gold-50 text-burgundy-800 border border-gold-200">
+                  <div className="p-2 rounded-xl bg-gold-50 text-navy-800 border border-gold-200">
                     <Users className="w-4 h-4" />
                   </div>
                 </div>
@@ -141,14 +141,14 @@ export const Clients: React.FC = () => {
               <div className="mt-5 pt-3 border-t border-charcoal-100 flex items-center justify-between">
                 <button
                   onClick={() => setSelectedClient(c)}
-                  className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900"
+                  className="text-xs font-semibold text-navy-700 hover:text-navy-900"
                 >
                   View Profile
                 </button>
                 {c.weddings && c.weddings.length > 0 && (
                   <button
                     onClick={() => navigate(`/weddings/${c.weddings![0].id}`)}
-                    className="text-xs font-semibold text-gold-700 hover:text-burgundy-800 flex items-center gap-1"
+                    className="text-xs font-semibold text-gold-700 hover:text-navy-800 flex items-center gap-1"
                   >
                     <span>Workspace</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -300,7 +300,7 @@ export const Clients: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md"
+              className="px-4 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md"
             >
               Save Client
             </button>

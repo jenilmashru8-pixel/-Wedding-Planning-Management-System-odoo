@@ -62,7 +62,7 @@ export const Quotations: React.FC = () => {
       const [weddingsRes, vendorsRes, categoriesRes] = await Promise.all([
         api.get('/weddings'),
         api.get('/vendors'),
-        api.get('/vendors/categories/list'),
+        api.get('/vendors/categories'),
       ]);
 
       if (weddingsRes.data.success) {
@@ -165,7 +165,7 @@ export const Quotations: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <FileText className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Vendor Quotations & Comparison Matrix
             </h1>
           </div>
@@ -180,7 +180,7 @@ export const Quotations: React.FC = () => {
               setModalWeddingId(selectedWeddingId || (weddings[0]?.id ?? ''));
               setIsModalOpen(true);
             }}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-burgundy-900 to-burgundy-800 text-gold-200 text-xs font-semibold hover:from-burgundy-800 hover:to-burgundy-700 shadow-md transition-all border border-gold-400/30"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-navy-900 to-navy-800 text-gold-200 text-xs font-semibold hover:from-navy-800 hover:to-navy-700 shadow-md transition-all border border-gold-400/30"
           >
             <Plus className="w-4 h-4 text-gold-400" />
             <span>Add Vendor Quotation</span>
@@ -209,7 +209,7 @@ export const Quotations: React.FC = () => {
           value={pendingCount}
           icon={TrendingDown}
           description="Awaiting selection"
-          variant="burgundy"
+          variant="navy"
         />
         <MetricCard
           title="Auto-Closed Competitors"
@@ -228,7 +228,7 @@ export const Quotations: React.FC = () => {
             alt="Royal Catering"
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/90 via-burgundy-950/75 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-950/90 via-navy-950/75 to-transparent" />
           <div className="relative z-10 max-w-sm">
             <span className="text-[10px] uppercase font-bold tracking-widest text-gold-400 bg-gold-400/20 px-2 py-0.5 rounded">
               Banqueting & Gastronomy
@@ -248,7 +248,7 @@ export const Quotations: React.FC = () => {
             alt="Royal Floral Decor"
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/90 via-burgundy-950/75 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-950/90 via-navy-950/75 to-transparent" />
           <div className="relative z-10 max-w-sm">
             <span className="text-[10px] uppercase font-bold tracking-widest text-gold-400 bg-gold-400/20 px-2 py-0.5 rounded">
               Decor & Floral Production
@@ -271,7 +271,7 @@ export const Quotations: React.FC = () => {
             <select
               value={selectedWeddingId}
               onChange={(e) => setSelectedWeddingId(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             >
               {weddings.map((w) => (
                 <option key={w.id} value={w.id}>
@@ -286,7 +286,7 @@ export const Quotations: React.FC = () => {
             <select
               value={selectedCategoryId}
               onChange={(e) => setSelectedCategoryId(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             >
               <option value="ALL">All Disciplines</option>
               {categories.map((c) => (
@@ -303,7 +303,7 @@ export const Quotations: React.FC = () => {
           <button
             onClick={() => setViewMode('matrix')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              viewMode === 'matrix' ? 'bg-burgundy-900 text-gold-200 shadow-sm' : 'text-charcoal-600 hover:text-charcoal-900'
+              viewMode === 'matrix' ? 'bg-navy-900 text-gold-200 shadow-sm' : 'text-charcoal-600 hover:text-charcoal-900'
             }`}
           >
             <Columns className="w-3.5 h-3.5" />
@@ -312,7 +312,7 @@ export const Quotations: React.FC = () => {
           <button
             onClick={() => setViewMode('list')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              viewMode === 'list' ? 'bg-burgundy-900 text-gold-200 shadow-sm' : 'text-charcoal-600 hover:text-charcoal-900'
+              viewMode === 'list' ? 'bg-navy-900 text-gold-200 shadow-sm' : 'text-charcoal-600 hover:text-charcoal-900'
             }`}
           >
             <List className="w-3.5 h-3.5" />
@@ -340,7 +340,7 @@ export const Quotations: React.FC = () => {
               <div className="flex items-center justify-between pb-2 border-b border-gold-300">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-gold-500" />
-                  <h2 className="font-serif text-lg font-bold text-burgundy-950">{categoryName} Proposals</h2>
+                  <h2 className="font-serif text-lg font-bold text-navy-950">{categoryName} Proposals</h2>
                   <span className="text-xs px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-700 font-semibold border border-gold-400/20">
                     {quoteList.length} competing {quoteList.length === 1 ? 'quote' : 'quotes'}
                   </span>
@@ -376,7 +376,7 @@ export const Quotations: React.FC = () => {
                         <div className="flex items-start justify-between gap-2">
                           <div>
                             <div className="text-[11px] font-mono text-gold-600 font-bold">{q.quoteNumber}</div>
-                            <h3 className="font-serif text-base font-bold text-burgundy-950 mt-0.5">
+                            <h3 className="font-serif text-base font-bold text-navy-950 mt-0.5">
                               {q.vendor?.companyName || 'Vendor'}
                             </h3>
                             <div className="text-xs text-charcoal-500">Contact: {q.vendor?.contactPerson}</div>
@@ -389,7 +389,7 @@ export const Quotations: React.FC = () => {
                           {Number(q.pricePerPlate) > 0 && (
                             <div className="flex justify-between items-center">
                               <span className="text-charcoal-600">Rate Per Plate:</span>
-                              <span className="font-bold text-burgundy-900 font-mono text-sm">
+                              <span className="font-bold text-navy-900 font-mono text-sm">
                                 {formatCurrency(q.pricePerPlate)}
                               </span>
                             </div>
@@ -413,7 +413,7 @@ export const Quotations: React.FC = () => {
 
                           <div className="pt-2 border-t border-charcoal-200 flex justify-between items-center">
                             <span className="font-bold text-charcoal-900">Total Quoted:</span>
-                            <span className="font-bold text-burgundy-950 font-serif text-base">
+                            <span className="font-bold text-navy-950 font-serif text-base">
                               {formatCurrency(q.totalAmount)}
                             </span>
                           </div>
@@ -455,7 +455,7 @@ export const Quotations: React.FC = () => {
                         ) : canManageQuotations ? (
                           <button
                             onClick={() => handleSelectWinningQuotation(q.id, q.vendor?.companyName || 'Vendor')}
-                            className="w-full py-2.5 rounded-xl bg-burgundy-900 hover:bg-burgundy-800 text-gold-200 text-xs font-bold shadow-md transition-all flex items-center justify-center gap-1.5 border border-gold-400/30"
+                            className="w-full py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-gold-200 text-xs font-bold shadow-md transition-all flex items-center justify-center gap-1.5 border border-gold-400/30"
                           >
                             <span>Award & Auto-Close Competitors</span>
                             <ArrowRight className="w-3.5 h-3.5" />
@@ -490,7 +490,7 @@ export const Quotations: React.FC = () => {
               <tbody className="divide-y divide-charcoal-100 text-xs">
                 {quotations.map((q) => (
                   <tr key={q.id} className="hover:bg-ivory-50/80 transition-colors">
-                    <td className="py-3.5 px-4 font-mono font-bold text-burgundy-900">{q.quoteNumber}</td>
+                    <td className="py-3.5 px-4 font-mono font-bold text-navy-900">{q.quoteNumber}</td>
                     <td className="py-3.5 px-4">
                       <div className="font-semibold text-charcoal-900">{q.vendor?.companyName}</div>
                       <div className="text-[10px] text-charcoal-500">{q.vendor?.contactPerson}</div>
@@ -507,7 +507,7 @@ export const Quotations: React.FC = () => {
                         <span>{formatCurrency(q.baseAmount)} base</span>
                       )}
                     </td>
-                    <td className="py-3.5 px-4 font-bold text-burgundy-950 font-serif text-sm">
+                    <td className="py-3.5 px-4 font-bold text-navy-950 font-serif text-sm">
                       {formatCurrency(q.totalAmount)}
                     </td>
                     <td className="py-3.5 px-4">
@@ -521,7 +521,7 @@ export const Quotations: React.FC = () => {
                       ) : canManageQuotations ? (
                         <button
                           onClick={() => handleSelectWinningQuotation(q.id, q.vendor?.companyName || 'Vendor')}
-                          className="px-3 py-1 rounded-lg bg-burgundy-900 text-gold-200 text-[11px] font-bold hover:bg-burgundy-800"
+                          className="px-3 py-1 rounded-lg bg-navy-900 text-gold-200 text-[11px] font-bold hover:bg-navy-800"
                         >
                           Select Winner
                         </button>
@@ -551,7 +551,7 @@ export const Quotations: React.FC = () => {
                 value={modalWeddingId}
                 onChange={(e) => setModalWeddingId(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="">Select Wedding...</option>
                 {weddings.map((w) => (
@@ -572,7 +572,7 @@ export const Quotations: React.FC = () => {
                   if (v) setModalCategoryId(v.categoryId);
                 }}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="">Select Vendor...</option>
                 {vendors.map((v) => (
@@ -592,7 +592,7 @@ export const Quotations: React.FC = () => {
                 value={pricePerPlate}
                 onChange={(e) => setPricePerPlate(e.target.value)}
                 placeholder="2200"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -602,7 +602,7 @@ export const Quotations: React.FC = () => {
                 value={guestCount}
                 onChange={(e) => setGuestCount(e.target.value)}
                 placeholder="400"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -612,7 +612,7 @@ export const Quotations: React.FC = () => {
                 value={extraHourRate}
                 onChange={(e) => setExtraHourRate(e.target.value)}
                 placeholder="25000"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -625,7 +625,7 @@ export const Quotations: React.FC = () => {
               rows={2}
               value={servicesIncluded}
               onChange={(e) => setServicesIncluded(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -640,7 +640,7 @@ export const Quotations: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Recording...' : 'Record Quotation'}
             </button>

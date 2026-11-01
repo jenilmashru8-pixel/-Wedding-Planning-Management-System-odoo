@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { Role } from '@prisma/client';
 import prisma from '../config/prisma.js';
+import { getJwtSecret } from '../utils/jwtSecret.js';
 
 export interface AuthRequest extends Request {
   user?: {
@@ -30,15 +31,14 @@ export const authenticateToken = async (
   }
 
   try {
-    const secret = process.env.JWT_SECRET || 'super_secret_royal_knot_jwt_key_2026_luxury_weddings';
-    const decoded = jwt.verify(token, secret) as { id: string; email: string; role: Role };
+    const decoded = jwt.verify(token, getJwtSecret()) as { id: string; email: string; role: Role; tokenVersion?: number };
 
     const user = await prisma.user.findUnique({
       where: { id: decoded.id },
-      select: { id: true, email: true, role: true, firstName: true, lastName: true, isActive: true },
+      select: { id: true, email: true, role: true, firstName: true, lastName: true, isActive: true, tokenVersion: true },
     });
 
-    if (!user || !user.isActive) {
+    if (!user || !user.isActive || (decoded.tokenVersion ?? 0) !== user.tokenVersion) {
       res.status(401).json({
         success: false,
         message: 'User account is inactive or not found',

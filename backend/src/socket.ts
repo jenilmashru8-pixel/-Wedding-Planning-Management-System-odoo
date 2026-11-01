@@ -1,25 +1,33 @@
 import { Server as HttpServer } from 'http';
 import { Server as SocketIOServer, Socket } from 'socket.io';
 import jwt from 'jsonwebtoken';
+import prisma from './config/prisma.js';
+import { getJwtSecret } from './utils/jwtSecret.js';
 
 let io: SocketIOServer | null = null;
 
 export const initSocket = (server: HttpServer) => {
   io = new SocketIOServer(server, {
     cors: {
-      origin: '*',
+      origin: process.env.FRONTEND_URL?.trim() || '*',
       methods: ['GET', 'POST'],
     },
   });
 
-  io.use((socket: Socket, next) => {
+  io.use(async (socket: Socket, next) => {
     const token = socket.handshake.auth?.token || socket.handshake.headers?.authorization?.replace('Bearer ', '');
     if (!token) {
       return next(new Error('Authentication error'));
     }
     try {
-      const secret = process.env.JWT_SECRET || 'super_secret_royal_knot_jwt_key_2026_luxury_weddings';
-      const decoded = jwt.verify(token, secret) as { id: string; role: string };
+      const decoded = jwt.verify(token, getJwtSecret()) as { id: string; role: string; tokenVersion?: number };
+      const user = await prisma.user.findUnique({
+        where: { id: decoded.id },
+        select: { isActive: true, tokenVersion: true },
+      });
+      if (!user?.isActive || (decoded.tokenVersion ?? 0) !== user.tokenVersion) {
+        return next(new Error('Authentication error'));
+      }
       (socket as any).user = decoded;
       next();
     } catch (err) {
@@ -62,4 +70,8 @@ export const emitToUser = (userId: string, event: string, data: any) => {
   if (io) {
     io.to(`user:${userId}`).emit(event, data);
   }
+};
+
+export const disconnectUserSockets = (userId: string): void => {
+  io?.in(`user:${userId}`).disconnectSockets(true);
 };

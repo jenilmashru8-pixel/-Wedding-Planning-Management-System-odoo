@@ -262,7 +262,7 @@ export const Guests: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <UserCheck className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Royal Guest List & Concierge
             </h1>
           </div>
@@ -300,7 +300,7 @@ export const Guests: React.FC = () => {
           {/* Add Guest */}
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-burgundy-900 to-burgundy-800 text-gold-200 text-xs font-semibold hover:from-burgundy-800 hover:to-burgundy-700 shadow-md border border-gold-400/30 transition-all"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-navy-900 to-navy-800 text-gold-200 text-xs font-semibold hover:from-navy-800 hover:to-navy-700 shadow-md border border-gold-400/30 transition-all"
           >
             <Plus className="w-4 h-4 text-gold-400" />
             <span>Add Guest</span>
@@ -329,7 +329,7 @@ export const Guests: React.FC = () => {
           value={stats.attended}
           icon={Hotel}
           description="Checked in at palace concierge"
-          variant="burgundy"
+          variant="navy"
         />
         <MetricCard
           title="Awaiting RSVP"
@@ -351,7 +351,7 @@ export const Guests: React.FC = () => {
                 setSelectedWeddingId(e.target.value);
                 setPage(1);
               }}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             >
               {weddings.map((w) => (
                 <option key={w.id} value={w.id}>
@@ -368,7 +368,7 @@ export const Guests: React.FC = () => {
               setRsvpFilter(e.target.value);
               setPage(1);
             }}
-            className="px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           >
             <option value="ALL">All RSVPs</option>
             <option value="CONFIRMED">Confirmed</option>
@@ -383,7 +383,7 @@ export const Guests: React.FC = () => {
               setDietaryFilter(e.target.value);
               setPage(1);
             }}
-            className="px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           >
             <option value="ALL">All Diets</option>
             <option value="VEG">Pure Veg</option>
@@ -404,7 +404,7 @@ export const Guests: React.FC = () => {
               setPage(1);
             }}
             placeholder="Search by name, group, or phone..."
-            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           />
         </div>
       </div>
@@ -481,7 +481,7 @@ export const Guests: React.FC = () => {
 
                     <td className="py-3.5 px-4">
                       {g.roomNumber ? (
-                        <div className="flex items-center gap-1.5 text-burgundy-900 font-semibold font-mono text-[11px]">
+                        <div className="flex items-center gap-1.5 text-navy-900 font-semibold font-mono text-[11px]">
                           <Hotel className="w-3.5 h-3.5 text-gold-600" />
                           <span>{g.roomNumber}</span>
                         </div>
@@ -505,7 +505,7 @@ export const Guests: React.FC = () => {
                       {g.arrivalStatus !== 'ARRIVED' ? (
                         <button
                           onClick={() => handleCheckIn(g.id)}
-                          className="px-3 py-1 rounded-lg bg-burgundy-900 text-gold-200 text-[11px] font-bold hover:bg-burgundy-800 transition-colors shadow-sm"
+                          className="px-3 py-1 rounded-lg bg-navy-900 text-gold-200 text-[11px] font-bold hover:bg-navy-800 transition-colors shadow-sm"
                         >
                           Check In
                         </button>
@@ -566,7 +566,7 @@ export const Guests: React.FC = () => {
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="e.g. Vikram"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -577,7 +577,7 @@ export const Guests: React.FC = () => {
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="e.g. Singhania"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -588,7 +588,7 @@ export const Guests: React.FC = () => {
               <select
                 value={guestGroup}
                 onChange={(e) => setGuestGroup(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="Groom's Family">Groom's Family</option>
                 <option value="Bride's Family">Bride's Family</option>
@@ -603,7 +603,7 @@ export const Guests: React.FC = () => {
               <select
                 value={dietaryPreference}
                 onChange={(e) => setDietaryPreference(e.target.value as DietaryPreference)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="VEG">Vegetarian</option>
                 <option value="JAIN">Jain Strict</option>
@@ -621,7 +621,7 @@ export const Guests: React.FC = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+91 98200 11223"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -631,7 +631,7 @@ export const Guests: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="guest@example.com"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -647,7 +647,7 @@ export const Guests: React.FC = () => {
                   setAccommodationAssigned(Boolean(e.target.value));
                 }}
                 placeholder="e.g. Suite 304 - Peacock Wing"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -655,7 +655,7 @@ export const Guests: React.FC = () => {
               <select
                 value={rsvpStatus}
                 onChange={(e) => setRsvpStatus(e.target.value as RsvpStatus)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="CONFIRMED">Confirmed</option>
                 <option value="PENDING">Pending</option>
@@ -675,7 +675,7 @@ export const Guests: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Registering...' : 'Add Guest'}
             </button>
@@ -718,7 +718,7 @@ export const Guests: React.FC = () => {
                 setSelectedFileName('');
               }}
               placeholder={`Group,First Name,Last Name,Phone,Email,RSVP,Dietary,Room,Transportation\nGroom's Family,Rohan,Kapoor,+91 98200 11223,rohan@example.com,CONFIRMED,VEG,Suite 201,Yes\nBride's Family,Ananya,Singhania,+91 98200 44556,ananya@example.com,CONFIRMED,JAIN,Suite 202,No`}
-              className="w-full p-3 font-mono text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full p-3 font-mono text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -733,7 +733,7 @@ export const Guests: React.FC = () => {
             <button
               type="submit"
               disabled={isImporting || (!csvContent.trim() && !importRows?.length)}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isImporting ? 'Importing Guests...' : 'Import Guests'}
             </button>

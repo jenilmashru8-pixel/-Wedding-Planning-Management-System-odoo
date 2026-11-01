@@ -150,7 +150,7 @@ export const Agreements: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <FileCheck2 className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Agreements & Client Contracts
             </h1>
           </div>
@@ -162,7 +162,7 @@ export const Agreements: React.FC = () => {
         {['FOUNDER', 'PLANNER'].includes(user?.role || '') && (
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-burgundy-900 to-burgundy-800 text-gold-200 text-xs font-semibold hover:from-burgundy-800 hover:to-burgundy-700 shadow-md transition-all border border-gold-400/30"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-navy-900 to-navy-800 text-gold-200 text-xs font-semibold hover:from-navy-800 hover:to-navy-700 shadow-md transition-all border border-gold-400/30"
           >
             <Plus className="w-4 h-4 text-gold-400" />
             <span>Generate New Agreement</span>
@@ -191,7 +191,7 @@ export const Agreements: React.FC = () => {
           value={pendingCount}
           icon={Clock}
           description="Draft or awaiting client review"
-          variant="burgundy"
+          variant="navy"
         />
         <MetricCard
           title="Contracted Portfolio"
@@ -211,7 +211,7 @@ export const Agreements: React.FC = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by agreement #, client, or wedding..."
-            className="w-full pl-10 pr-4 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="w-full pl-10 pr-4 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           />
         </div>
 
@@ -222,7 +222,7 @@ export const Agreements: React.FC = () => {
               onClick={() => setStatusFilter(st)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 statusFilter === st
-                  ? 'bg-burgundy-900 text-gold-200 shadow-sm border border-gold-400/40'
+                  ? 'bg-navy-900 text-gold-200 shadow-sm border border-gold-400/40'
                   : 'bg-ivory-100 text-charcoal-600 hover:bg-ivory-200'
               }`}
             >
@@ -261,7 +261,7 @@ export const Agreements: React.FC = () => {
                 {filtered.map((agr) => (
                   <tr key={agr.id} className="hover:bg-ivory-50/80 transition-colors">
                     <td className="py-4 px-4">
-                      <div className="font-semibold text-burgundy-950 font-serif text-sm">{agr.title}</div>
+                      <div className="font-semibold text-navy-950 font-serif text-sm">{agr.title}</div>
                       <div className="text-[11px] font-mono text-gold-600 font-bold mt-0.5">{agr.agreementNumber}</div>
                       <div className="text-[10px] text-charcoal-400 mt-1">Created on {formatDate(agr.createdAt)}</div>
                     </td>
@@ -275,7 +275,7 @@ export const Agreements: React.FC = () => {
                     </td>
 
                     <td className="py-4 px-4">
-                      <div className="font-bold text-burgundy-900 text-sm">{formatCurrency(agr.totalAmount)}</div>
+                      <div className="font-bold text-navy-900 text-sm">{formatCurrency(agr.totalAmount)}</div>
                       <div className="text-[10px] text-emerald-600 font-medium">Staged Milestones</div>
                     </td>
 
@@ -307,7 +307,7 @@ export const Agreements: React.FC = () => {
                         <button
                           onClick={() => handleCopyLink(agr.id)}
                           title="Copy Digital Sign Link"
-                          className="p-1.5 rounded-lg text-charcoal-500 hover:text-burgundy-900 hover:bg-gold-500/10 transition-colors"
+                          className="p-1.5 rounded-lg text-charcoal-500 hover:text-navy-900 hover:bg-gold-500/10 transition-colors"
                         >
                           {copiedId === agr.id ? (
                             <CheckCircle2 className="w-4 h-4 text-emerald-600" />
@@ -321,7 +321,7 @@ export const Agreements: React.FC = () => {
                           <button
                             onClick={() => handleSendAgreement(agr.id)}
                             title="Dispatch Agreement to Client"
-                            className="p-1.5 rounded-lg text-gold-600 hover:text-burgundy-900 hover:bg-gold-500/10 transition-colors"
+                            className="p-1.5 rounded-lg text-gold-600 hover:text-navy-900 hover:bg-gold-500/10 transition-colors"
                           >
                             <Send className="w-4 h-4" />
                           </button>
@@ -333,7 +333,7 @@ export const Agreements: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           title="Open Signing Portal"
-                          className="p-1.5 rounded-lg text-burgundy-800 hover:text-gold-600 hover:bg-gold-500/10 transition-colors"
+                          className="p-1.5 rounded-lg text-navy-800 hover:text-gold-600 hover:bg-gold-500/10 transition-colors"
                         >
                           <FileSignature className="w-4 h-4" />
                         </a>
@@ -382,7 +382,7 @@ export const Agreements: React.FC = () => {
                 }
               }}
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             >
               <option value="">Select Wedding...</option>
               {weddings.map((w) => (
@@ -403,7 +403,7 @@ export const Agreements: React.FC = () => {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Royal Udaipur Destination Wedding Contract"
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -417,7 +417,7 @@ export const Agreements: React.FC = () => {
               onChange={(e) => setTotalAmount(e.target.value)}
               placeholder="e.g. 8500000"
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -429,7 +429,7 @@ export const Agreements: React.FC = () => {
               rows={3}
               value={scopeOfServices}
               onChange={(e) => setScopeOfServices(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -441,7 +441,7 @@ export const Agreements: React.FC = () => {
               rows={3}
               value={termsAndConditions}
               onChange={(e) => setTermsAndConditions(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -456,7 +456,7 @@ export const Agreements: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Creating...' : 'Create Draft Agreement'}
             </button>

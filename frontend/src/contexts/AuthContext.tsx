@@ -8,6 +8,13 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<User>;
+  register: (payload: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    phone?: string;
+  }) => Promise<User>;
   logout: () => void;
   hasRole: (allowedRoles: UserRole[]) => boolean;
   isFounder: boolean;
@@ -51,13 +58,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     verifyUser();
   }, [token]);
 
-  const login = async (email: string, password: string): Promise<User> => {
-    const res = await api.post('/auth/login', { email, password });
-    const { token: newToken, user: userData } = res.data.data;
+  const persistAuth = (newToken: string, userData: User) => {
     localStorage.setItem('royal_knot_token', newToken);
     localStorage.setItem('royal_knot_user', JSON.stringify(userData));
     setToken(newToken);
     setUser(userData);
+  };
+
+  const login = async (email: string, password: string): Promise<User> => {
+    const res = await api.post('/auth/login', { email, password });
+    const { token: newToken, user: userData } = res.data.data;
+    persistAuth(newToken, userData);
+    return userData;
+  };
+
+  const register = async (payload: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    phone?: string;
+  }): Promise<User> => {
+    const res = await api.post('/auth/register', payload);
+    const { token: newToken, user: userData } = res.data.data;
+    persistAuth(newToken, userData);
     return userData;
   };
 
@@ -79,6 +103,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     isAuthenticated: !!user && !!token,
     isLoading,
     login,
+    register,
     logout,
     hasRole,
     isFounder: user?.role === 'FOUNDER',

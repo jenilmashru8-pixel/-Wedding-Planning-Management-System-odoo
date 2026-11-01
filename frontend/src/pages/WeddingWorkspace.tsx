@@ -232,7 +232,7 @@ export const WeddingWorkspace: React.FC = () => {
   if (isLoading || !wedding) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-gold-300 border-t-burgundy-700 rounded-full animate-spin" />
+        <div className="w-12 h-12 border-4 border-gold-300 border-t-navy-700 rounded-full animate-spin" />
       </div>
     );
   }
@@ -262,7 +262,7 @@ export const WeddingWorkspace: React.FC = () => {
           alt={wedding.name}
           className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/85 to-burgundy-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/85 to-navy-950/50" />
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
           <div>
             <div className="flex items-center gap-2">
@@ -272,7 +272,7 @@ export const WeddingWorkspace: React.FC = () => {
               <span className="text-[10px] uppercase font-bold tracking-wider text-gold-200 bg-white/10 px-2 py-0.5 rounded backdrop-blur-sm border border-white/10">
                 {wedding.packageType?.replace('_', ' ')}
               </span>
-              <span className="text-[10px] uppercase font-semibold text-gold-300/90 bg-burgundy-900/60 px-2 py-0.5 rounded backdrop-blur-sm border border-gold-400/20">
+              <span className="text-[10px] uppercase font-semibold text-gold-300/90 bg-navy-900/60 px-2 py-0.5 rounded backdrop-blur-sm border border-gold-400/20">
                 Royal Palace Edition
               </span>
             </div>
@@ -293,9 +293,9 @@ export const WeddingWorkspace: React.FC = () => {
             <StatusBadge status={wedding.status} />
             <button
               onClick={() => setActiveTab('operations')}
-              className="px-3.5 py-2 bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 font-bold rounded-xl text-xs flex items-center gap-1.5 shadow-md hover:brightness-105"
+              className="px-3.5 py-2 bg-gradient-to-r from-gold-500 to-gold-400 text-navy-950 font-bold rounded-xl text-xs flex items-center gap-1.5 shadow-md hover:brightness-105"
             >
-              <Radio className="w-3.5 h-3.5 animate-pulse text-burgundy-900" />
+              <Radio className="w-3.5 h-3.5 animate-pulse text-navy-900" />
               <span>Day-Of Live Mode</span>
             </button>
           </div>
@@ -313,7 +313,7 @@ export const WeddingWorkspace: React.FC = () => {
               onClick={() => setActiveTab(tab.key as any)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 isActive
-                  ? 'bg-burgundy-700 text-gold-200 shadow-md border border-gold-400/40'
+                  ? 'bg-navy-700 text-gold-200 shadow-md border border-gold-400/40'
                   : 'text-charcoal-600 hover:text-charcoal-900 hover:bg-gold-50/50'
               }`}
             >
@@ -362,7 +362,7 @@ export const WeddingWorkspace: React.FC = () => {
             <div className="card-luxury p-6 rounded-2xl">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-serif text-lg font-bold text-charcoal-900">Upcoming Wedding Events</h3>
-                <button onClick={() => setActiveTab('operations')} className="text-xs font-bold text-burgundy-700 hover:underline">
+                <button onClick={() => setActiveTab('operations')} className="text-xs font-bold text-navy-700 hover:underline">
                   Full Schedule
                 </button>
               </div>
@@ -383,12 +383,12 @@ export const WeddingWorkspace: React.FC = () => {
             <div className="card-luxury p-6 rounded-2xl">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-serif text-lg font-bold text-charcoal-900 flex items-center gap-2">
-                  <ShieldAlert className="w-5 h-5 text-burgundy-700" />
+                  <ShieldAlert className="w-5 h-5 text-navy-700" />
                   <span>On-Day Incidents & Alerts</span>
                 </h3>
                 <button
                   onClick={() => setIsIncidentModalOpen(true)}
-                  className="px-2.5 py-1 bg-burgundy-50 text-burgundy-700 border border-burgundy-200 rounded-lg text-xs font-semibold"
+                  className="px-2.5 py-1 bg-navy-50 text-navy-700 border border-navy-200 rounded-lg text-xs font-semibold"
                 >
                   Report Incident
                 </button>
@@ -433,16 +433,16 @@ export const WeddingWorkspace: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent" />
-                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-gold-500/90 text-burgundy-950">
+                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-gold-500/90 text-navy-950">
                     Mandap Staging
                   </span>
                 </div>
                 <div className="p-4">
-                  <h4 className="font-serif font-bold text-sm text-charcoal-900 group-hover:text-burgundy-700 transition-colors">
+                  <h4 className="font-serif font-bold text-sm text-charcoal-900 group-hover:text-navy-700 transition-colors">
                     Heritage Carved Gold Mandap
                   </h4>
                   <p className="text-xs text-charcoal-500 mt-1 leading-relaxed">
-                    Opulent carved golden pillars, cascading blush & burgundy roses, vintage crystal chandeliers, and traditional brass oil diyas.
+                    Opulent carved golden pillars, cascading blush & navy roses, vintage crystal chandeliers, and traditional brass oil diyas.
                   </p>
                 </div>
               </div>
@@ -456,12 +456,12 @@ export const WeddingWorkspace: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent" />
-                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-gold-500/90 text-burgundy-950">
+                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-gold-500/90 text-navy-950">
                     Culinary Production
                   </span>
                 </div>
                 <div className="p-4">
-                  <h4 className="font-serif font-bold text-sm text-charcoal-900 group-hover:text-burgundy-700 transition-colors">
+                  <h4 className="font-serif font-bold text-sm text-charcoal-900 group-hover:text-navy-700 transition-colors">
                     Royal Rajasthani Banquet Feast
                   </h4>
                   <p className="text-xs text-charcoal-500 mt-1 leading-relaxed">
@@ -479,12 +479,12 @@ export const WeddingWorkspace: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent" />
-                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-gold-500/90 text-burgundy-950">
+                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-gold-500/90 text-navy-950">
                     Night Ambiance
                   </span>
                 </div>
                 <div className="p-4">
-                  <h4 className="font-serif font-bold text-sm text-charcoal-900 group-hover:text-burgundy-700 transition-colors">
+                  <h4 className="font-serif font-bold text-sm text-charcoal-900 group-hover:text-navy-700 transition-colors">
                     Twilight Lakefront Celebrations
                   </h4>
                   <p className="text-xs text-charcoal-500 mt-1 leading-relaxed">
@@ -509,15 +509,15 @@ export const WeddingWorkspace: React.FC = () => {
               {tasks.length === 0 && (
                 <button
                   onClick={handleGenerateTasks}
-                  className="px-4 py-2 bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 font-bold rounded-xl text-xs shadow-md flex items-center gap-1.5"
+                  className="px-4 py-2 bg-gradient-to-r from-gold-500 to-gold-400 text-navy-950 font-bold rounded-xl text-xs shadow-md flex items-center gap-1.5"
                 >
-                  <Sparkles className="w-4 h-4 text-burgundy-900" />
+                  <Sparkles className="w-4 h-4 text-navy-900" />
                   <span>Auto-Generate Complete Plan</span>
                 </button>
               )}
               <button
                 onClick={() => setIsTaskModalOpen(true)}
-                className="px-3.5 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md flex items-center gap-1"
+                className="px-3.5 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md flex items-center gap-1"
               >
                 <Plus className="w-4 h-4" />
                 <span>Custom Task</span>
@@ -589,7 +589,7 @@ export const WeddingWorkspace: React.FC = () => {
               </a>
               <button
                 onClick={() => setIsGuestModalOpen(true)}
-                className="px-3.5 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md flex items-center gap-1"
+                className="px-3.5 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md flex items-center gap-1"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Guest</span>
@@ -664,7 +664,7 @@ export const WeddingWorkspace: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <h3 className="font-serif text-xl font-bold text-charcoal-900 flex items-center gap-2">
-                <Radio className="w-5 h-5 text-burgundy-700 animate-pulse" />
+                <Radio className="w-5 h-5 text-navy-700 animate-pulse" />
                 <span>Wedding Day Live Operations</span>
               </h3>
               <p className="text-xs text-charcoal-500">Live vendor check-ins, automatic delay warnings, and incident resolution.</p>
@@ -743,7 +743,7 @@ export const WeddingWorkspace: React.FC = () => {
                             fetchWorkspaceData();
                           }
                         }}
-                        className="px-3 py-1 bg-burgundy-700 text-gold-200 rounded-lg text-xs font-semibold"
+                        className="px-3 py-1 bg-navy-700 text-gold-200 rounded-lg text-xs font-semibold"
                       >
                         Resolve Incident
                       </button>
@@ -766,7 +766,7 @@ export const WeddingWorkspace: React.FC = () => {
             </div>
             <button
               onClick={() => setIsPaymentModalOpen(true)}
-              className="px-4 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md flex items-center gap-1.5"
+              className="px-4 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md flex items-center gap-1.5"
             >
               <Plus className="w-4 h-4" />
               <span>Record Client Payment</span>
@@ -812,7 +812,7 @@ export const WeddingWorkspace: React.FC = () => {
                       });
                       setIsPaymentModalOpen(true);
                     }}
-                    className="mt-4 w-full py-2 bg-gold-50 text-burgundy-800 hover:bg-burgundy-700 hover:text-gold-200 border border-gold-300 rounded-xl text-xs font-semibold transition-all"
+                    className="mt-4 w-full py-2 bg-gold-50 text-navy-800 hover:bg-navy-700 hover:text-gold-200 border border-gold-300 rounded-xl text-xs font-semibold transition-all"
                   >
                     Record Payment
                   </button>
@@ -834,14 +834,14 @@ export const WeddingWorkspace: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleGenerateClientInvoice}
-                className="px-3.5 py-2 bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 font-bold rounded-xl text-xs shadow-md flex items-center gap-1.5"
+                className="px-3.5 py-2 bg-gradient-to-r from-gold-500 to-gold-400 text-navy-950 font-bold rounded-xl text-xs shadow-md flex items-center gap-1.5"
               >
-                <FileText className="w-4 h-4 text-burgundy-900" />
+                <FileText className="w-4 h-4 text-navy-900" />
                 <span>Generate Client Invoice</span>
               </button>
               <button
                 onClick={() => setIsExpenseModalOpen(true)}
-                className="px-3.5 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md flex items-center gap-1"
+                className="px-3.5 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md flex items-center gap-1"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Extra Expense</span>
@@ -873,7 +873,7 @@ export const WeddingWorkspace: React.FC = () => {
                     <td className="py-3 px-4">{formatCurrency(exp.unitPrice)}</td>
                     <td className="py-3 px-4">{formatCurrency(exp.amount)}</td>
                     <td className="py-3 px-4 text-charcoal-500">{formatCurrency(exp.taxAmount)}</td>
-                    <td className="py-3 px-4 font-bold text-burgundy-900">{formatCurrency(exp.totalAmount)}</td>
+                    <td className="py-3 px-4 font-bold text-navy-900">{formatCurrency(exp.totalAmount)}</td>
                     <td className="py-3 px-4"><StatusBadge status={exp.approvalStatus} /></td>
                     <td className="py-3 px-4 text-right">
                       {exp.approvalStatus === 'PENDING' && (
@@ -928,7 +928,7 @@ export const WeddingWorkspace: React.FC = () => {
 
                   <div className="mt-4 pt-3 border-t border-charcoal-100 flex items-center justify-between text-xs">
                     <span className="text-charcoal-500">Agreed Value:</span>
-                    <span className="font-bold text-burgundy-900">{formatLakhsCrores(b.agreedAmount)}</span>
+                    <span className="font-bold text-navy-900">{formatLakhsCrores(b.agreedAmount)}</span>
                   </div>
                 </div>
               </div>
@@ -964,7 +964,7 @@ export const WeddingWorkspace: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <a
                     href={`/api/agreements/${agr.id}/pdf`}
-                    className="px-4 py-2 bg-gold-50 text-burgundy-800 border border-gold-300 rounded-xl text-xs font-semibold hover:bg-burgundy-700 hover:text-gold-200 transition-all flex items-center gap-1.5 shadow-xs"
+                    className="px-4 py-2 bg-gold-50 text-navy-800 border border-gold-300 rounded-xl text-xs font-semibold hover:bg-navy-700 hover:text-gold-200 transition-all flex items-center gap-1.5 shadow-xs"
                   >
                     <Download className="w-4 h-4" />
                     <span>Download Signed PDF</span>
@@ -1076,7 +1076,7 @@ export const WeddingWorkspace: React.FC = () => {
             />
           </div>
           <div className="pt-4 border-t flex justify-end gap-2">
-            <button type="submit" className="px-4 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold">
+            <button type="submit" className="px-4 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold">
               Save Task
             </button>
           </div>
@@ -1139,7 +1139,7 @@ export const WeddingWorkspace: React.FC = () => {
             </div>
           </div>
           <div className="pt-4 border-t flex justify-end gap-2">
-            <button type="submit" className="px-4 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold">
+            <button type="submit" className="px-4 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold">
               Save Guest
             </button>
           </div>
@@ -1183,7 +1183,7 @@ export const WeddingWorkspace: React.FC = () => {
             />
           </div>
           <div className="pt-4 border-t flex justify-end gap-2">
-            <button type="submit" className="px-4 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold">
+            <button type="submit" className="px-4 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold">
               Record Payment
             </button>
           </div>
@@ -1226,7 +1226,7 @@ export const WeddingWorkspace: React.FC = () => {
             </div>
           </div>
           <div className="pt-4 border-t flex justify-end gap-2">
-            <button type="submit" className="px-4 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold">
+            <button type="submit" className="px-4 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold">
               Submit for Approval
             </button>
           </div>

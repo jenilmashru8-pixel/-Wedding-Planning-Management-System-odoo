@@ -84,7 +84,7 @@ export const PublicSignAgreement: React.FC = () => {
     const x = 'touches' in e ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
     const y = 'touches' in e ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
     ctx.lineTo(x, y);
-    ctx.strokeStyle = '#722F37'; // Royal Burgundy signature ink
+    ctx.strokeStyle = '#071B35';
     ctx.lineWidth = 2.5;
     ctx.lineCap = 'round';
     ctx.stroke();
@@ -139,7 +139,7 @@ export const PublicSignAgreement: React.FC = () => {
       <div className="min-h-screen bg-ivory-50 flex items-center justify-center p-4">
         <div className="text-center space-y-3">
           <Crown className="w-10 h-10 text-gold-500 animate-bounce mx-auto" />
-          <p className="text-sm font-serif text-burgundy-900 font-semibold tracking-wide">
+          <p className="text-sm font-serif text-navy-900 font-semibold tracking-wide">
             Retrieving Official Agreement...
           </p>
         </div>
@@ -171,7 +171,7 @@ export const PublicSignAgreement: React.FC = () => {
             alt="Udaipur Palace Twilight"
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-burgundy-950/95 via-burgundy-950/85 to-burgundy-950/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-950/95 via-navy-950/85 to-navy-950/90" />
           <div className="relative z-10 space-y-3 max-w-xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-400/20 border border-gold-400/30 text-gold-200 text-xs font-semibold backdrop-blur-sm">
               <Crown className="w-4 h-4 text-gold-400" />
@@ -220,7 +220,7 @@ export const PublicSignAgreement: React.FC = () => {
         {/* Contract Parchment Card */}
         <div className="bg-white rounded-3xl border border-gold-300 shadow-xl overflow-hidden">
           {/* Header Bar */}
-          <div className="bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 p-6 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gold-500/30">
+          <div className="bg-gradient-to-r from-navy-950 via-navy-900 to-navy-950 p-6 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gold-500/30">
             <div>
               <span className="text-[10px] uppercase font-bold tracking-widest text-gold-400">
                 OFFICIAL CONTRACT REF
@@ -272,7 +272,7 @@ export const PublicSignAgreement: React.FC = () => {
 
             {/* Scope of Services */}
             <div className="space-y-2">
-              <h3 className="font-serif text-base font-bold text-burgundy-950 flex items-center gap-2">
+              <h3 className="font-serif text-base font-bold text-navy-950 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-gold-600" />
                 <span>Scope of Luxury Planning & Execution</span>
               </h3>
@@ -283,7 +283,7 @@ export const PublicSignAgreement: React.FC = () => {
 
             {/* Terms and Conditions */}
             <div className="space-y-2">
-              <h3 className="font-serif text-base font-bold text-burgundy-950 flex items-center gap-2">
+              <h3 className="font-serif text-base font-bold text-navy-950 flex items-center gap-2">
                 <Lock className="w-4 h-4 text-gold-600" />
                 <span>Staged Milestones & Terms of Engagement</span>
               </h3>
@@ -296,7 +296,7 @@ export const PublicSignAgreement: React.FC = () => {
             {!isAlreadySigned && !isSuccess ? (
               <form onSubmit={handleSign} className="space-y-6 pt-6 border-t border-gold-200">
                 <div className="space-y-1">
-                  <h3 className="font-serif text-lg font-bold text-burgundy-950">
+                  <h3 className="font-serif text-lg font-bold text-navy-950">
                     Digital Signature Execution
                   </h3>
                   <p className="text-xs text-charcoal-500">
@@ -315,7 +315,7 @@ export const PublicSignAgreement: React.FC = () => {
                       onChange={(e) => setSignerName(e.target.value)}
                       required
                       placeholder="e.g. Aarav Kapoor & Meera Singhania"
-                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-charcoal-300 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-charcoal-300 focus:outline-none focus:ring-2 focus:ring-navy-800"
                     />
                   </div>
 
@@ -329,7 +329,7 @@ export const PublicSignAgreement: React.FC = () => {
                       onChange={(e) => setSignerEmail(e.target.value)}
                       required
                       placeholder="e.g. aarav.kapoor@example.com"
-                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-charcoal-300 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-charcoal-300 focus:outline-none focus:ring-2 focus:ring-navy-800"
                     />
                   </div>
                 </div>
@@ -338,13 +338,13 @@ export const PublicSignAgreement: React.FC = () => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-semibold text-charcoal-700 flex items-center gap-1.5">
-                      <PenTool className="w-3.5 h-3.5 text-burgundy-900" />
+                      <PenTool className="w-3.5 h-3.5 text-navy-900" />
                       <span>Draw Digital Signature (Mouse / Stylus / Touch)</span>
                     </label>
                     <button
                       type="button"
                       onClick={clearCanvas}
-                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-charcoal-500 hover:text-burgundy-900 transition-colors"
+                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-charcoal-500 hover:text-navy-900 transition-colors"
                     >
                       <RotateCcw className="w-3 h-3" />
                       <span>Clear Pad</span>
@@ -378,7 +378,7 @@ export const PublicSignAgreement: React.FC = () => {
                     id="consent"
                     checked={consentChecked}
                     onChange={(e) => setConsentChecked(e.target.checked)}
-                    className="mt-0.5 rounded text-burgundy-900 focus:ring-burgundy-800"
+                    className="mt-0.5 rounded text-navy-900 focus:ring-navy-800"
                   />
                   <label htmlFor="consent" className="text-xs text-charcoal-700 leading-normal cursor-pointer">
                     I confirm that I am legally authorized to execute this agreement. I have reviewed the scope of services, payment schedule, and terms, and agree to be bound by them digitally pursuant to the Information Technology Act.
@@ -389,7 +389,7 @@ export const PublicSignAgreement: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting || !consentChecked}
-                  className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 text-gold-200 font-bold text-sm tracking-wider uppercase shadow-xl hover:from-burgundy-900 hover:to-burgundy-800 transition-all border border-gold-400/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-navy-950 via-navy-900 to-navy-950 text-gold-200 font-bold text-sm tracking-wider uppercase shadow-xl hover:from-navy-900 hover:to-navy-800 transition-all border border-gold-400/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   <FileCheck2 className="w-5 h-5 text-gold-400" />
                   <span>{isSubmitting ? 'Authenticating & Signing...' : 'Digitally Execute Agreement'}</span>
@@ -400,7 +400,7 @@ export const PublicSignAgreement: React.FC = () => {
                 <div className="inline-block p-4 rounded-full bg-emerald-100 text-emerald-800 mb-2">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
-                <h4 className="font-serif text-lg font-bold text-burgundy-950">
+                <h4 className="font-serif text-lg font-bold text-navy-950">
                   Official Verification Complete
                 </h4>
                 <p className="text-xs text-charcoal-500 max-w-md mx-auto">
@@ -411,7 +411,7 @@ export const PublicSignAgreement: React.FC = () => {
                     href={`/api/agreements/${agreement.id}/pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold shadow-lg hover:bg-burgundy-800 transition-all border border-gold-400/30"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold shadow-lg hover:bg-navy-800 transition-all border border-gold-400/30"
                   >
                     <Download className="w-4 h-4 text-gold-400" />
                     <span>Download Signed Official Document</span>

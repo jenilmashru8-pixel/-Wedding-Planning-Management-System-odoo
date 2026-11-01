@@ -67,7 +67,7 @@ export const Notifications: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <Bell className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Notifications & Operational Alerts
             </h1>
             {unreadCount > 0 && (
@@ -84,7 +84,7 @@ export const Notifications: React.FC = () => {
         {unreadCount > 0 && (
           <button
             onClick={handleMarkAllRead}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-ivory-100 hover:bg-gold-500/10 text-burgundy-900 text-xs font-semibold border border-gold-300 transition-all shadow-sm"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-ivory-100 hover:bg-gold-500/10 text-navy-900 text-xs font-semibold border border-gold-300 transition-all shadow-sm"
           >
             <CheckCheck className="w-4 h-4 text-gold-600" />
             <span>Mark All as Read</span>
@@ -139,7 +139,7 @@ export const Notifications: React.FC = () => {
                   <div className="flex items-center justify-between gap-2">
                     <h3
                       className={`text-sm font-semibold truncate ${
-                        !item.isRead ? 'text-burgundy-950 font-bold' : 'text-charcoal-800'
+                        !item.isRead ? 'text-navy-950 font-bold' : 'text-charcoal-800'
                       }`}
                     >
                       {item.title}
@@ -155,7 +155,7 @@ export const Notifications: React.FC = () => {
                     {item.linkUrl && (
                       <a
                         href={item.linkUrl}
-                        className="font-semibold text-gold-700 hover:text-burgundy-900 inline-flex items-center gap-1"
+                        className="font-semibold text-gold-700 hover:text-navy-900 inline-flex items-center gap-1"
                       >
                         <span>View Details</span>
                         <ExternalLink className="w-3 h-3" />

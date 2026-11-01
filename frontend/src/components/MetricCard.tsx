@@ -11,7 +11,7 @@ interface MetricCardProps {
   trend?: string;
   trendType?: 'positive' | 'negative' | 'neutral';
   highlight?: boolean;
-  variant?: 'default' | 'gold' | 'burgundy' | 'charcoal' | string;
+  variant?: 'default' | 'gold' | 'navy' | 'charcoal' | string;
 }
 
 export const MetricCard: React.FC<MetricCardProps> = ({
@@ -29,17 +29,17 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 
   const variantStyles = {
     gold: 'border-gold-300 bg-gradient-to-br from-white via-gold-50/20 to-gold-100/30',
-    burgundy: 'border-burgundy-300 bg-gradient-to-br from-white via-rose-50/20 to-burgundy-50/30',
+    navy: 'border-navy-300 bg-gradient-to-br from-white via-blue-50/20 to-navy-50/30',
     charcoal: 'border-charcoal-200 bg-gradient-to-br from-white via-charcoal-50/20 to-ivory-100',
     default: 'border-gold-200/80 bg-white',
   }[variant] || 'border-gold-200/80 bg-white';
 
   const iconBgStyles = {
     gold: 'bg-gold-500/10 text-gold-700 border-gold-400/30',
-    burgundy: 'bg-burgundy-900 text-gold-300 border-gold-500/30 shadow-sm',
+    navy: 'bg-navy-900 text-gold-300 border-gold-500/30 shadow-sm',
     charcoal: 'bg-charcoal-900 text-gold-300 border-charcoal-700 shadow-sm',
-    default: 'bg-gold-50 text-burgundy-800 border-gold-200',
-  }[variant] || 'bg-gold-50 text-burgundy-800 border-gold-200';
+    default: 'bg-gold-50 text-navy-800 border-gold-200',
+  }[variant] || 'bg-gold-50 text-navy-800 border-gold-200';
 
   return (
     <div

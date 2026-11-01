@@ -187,7 +187,7 @@ export const Expenses: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <Receipt className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Expenses & Client Billing
             </h1>
           </div>
@@ -210,7 +210,7 @@ export const Expenses: React.FC = () => {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-burgundy-900 to-burgundy-800 text-gold-200 text-xs font-semibold hover:from-burgundy-800 hover:to-burgundy-700 shadow-md border border-gold-400/30 transition-all"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-navy-900 to-navy-800 text-gold-200 text-xs font-semibold hover:from-navy-800 hover:to-navy-700 shadow-md border border-gold-400/30 transition-all"
           >
             <Plus className="w-4 h-4 text-gold-400" />
             <span>Log Extra Expense</span>
@@ -239,7 +239,7 @@ export const Expenses: React.FC = () => {
           value={formatCurrency(pendingTotal)}
           icon={Clock}
           description="Awaiting client sign-off"
-          variant="burgundy"
+          variant="navy"
         />
         <MetricCard
           title="Invoices Issued"
@@ -257,7 +257,7 @@ export const Expenses: React.FC = () => {
           <select
             value={selectedWeddingId}
             onChange={(e) => setSelectedWeddingId(e.target.value)}
-            className="w-full md:w-80 px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="w-full md:w-80 px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           >
             {weddings.map((w) => (
               <option key={w.id} value={w.id}>
@@ -272,7 +272,7 @@ export const Expenses: React.FC = () => {
             onClick={() => setActiveTab('expenses')}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'expenses'
-                ? 'bg-burgundy-900 text-gold-200 shadow-sm'
+                ? 'bg-navy-900 text-gold-200 shadow-sm'
                 : 'text-charcoal-600 hover:text-charcoal-900'
             }`}
           >
@@ -282,7 +282,7 @@ export const Expenses: React.FC = () => {
             onClick={() => setActiveTab('invoices')}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'invoices'
-                ? 'bg-burgundy-900 text-gold-200 shadow-sm'
+                ? 'bg-navy-900 text-gold-200 shadow-sm'
                 : 'text-charcoal-600 hover:text-charcoal-900'
             }`}
           >
@@ -345,7 +345,7 @@ export const Expenses: React.FC = () => {
                         {formatCurrency(e.taxAmount)}
                       </td>
 
-                      <td className="py-3.5 px-4 font-bold text-burgundy-950 font-serif text-sm">
+                      <td className="py-3.5 px-4 font-bold text-navy-950 font-serif text-sm">
                         {formatCurrency(e.totalAmount)}
                       </td>
 
@@ -412,7 +412,7 @@ export const Expenses: React.FC = () => {
                 <tbody className="divide-y divide-charcoal-100 text-xs">
                   {invoices.map((inv) => (
                     <tr key={inv.id} className="hover:bg-ivory-50/80 transition-colors">
-                      <td className="py-3.5 px-4 font-mono font-bold text-burgundy-900">
+                      <td className="py-3.5 px-4 font-mono font-bold text-navy-900">
                         {inv.invoiceNumber}
                       </td>
 
@@ -428,7 +428,7 @@ export const Expenses: React.FC = () => {
                         {formatCurrency(inv.taxAmount)}
                       </td>
 
-                      <td className="py-3.5 px-4 font-bold text-burgundy-950 font-serif text-sm">
+                      <td className="py-3.5 px-4 font-bold text-navy-950 font-serif text-sm">
                         {formatCurrency(inv.totalAmount)}
                       </td>
 
@@ -450,7 +450,7 @@ export const Expenses: React.FC = () => {
                             href={inv.pdfUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-ivory-100 hover:bg-gold-500/10 text-burgundy-900 text-xs font-semibold border border-gold-300 transition-colors"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-ivory-100 hover:bg-gold-500/10 text-navy-900 text-xs font-semibold border border-gold-300 transition-colors"
                           >
                             <Download className="w-3.5 h-3.5 text-gold-600" />
                             <span>Download PDF</span>
@@ -487,7 +487,7 @@ export const Expenses: React.FC = () => {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g. 60 Extra Guest Plates for Sangeet Dinner"
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -497,7 +497,7 @@ export const Expenses: React.FC = () => {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="Extra Catering">Extra Catering (Plates)</option>
                 <option value="Extended Hours">Extended Hours (DJ / Artists)</option>
@@ -512,7 +512,7 @@ export const Expenses: React.FC = () => {
               <select
                 value={vendorId}
                 onChange={(e) => setVendorId(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="">None / Agency Coordination</option>
                 {vendors.map((v) => (
@@ -532,7 +532,7 @@ export const Expenses: React.FC = () => {
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -543,7 +543,7 @@ export const Expenses: React.FC = () => {
                 onChange={(e) => setUnitPrice(e.target.value)}
                 placeholder="1500"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -552,7 +552,7 @@ export const Expenses: React.FC = () => {
                 type="number"
                 value={taxRate}
                 onChange={(e) => setTaxRate(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -568,7 +568,7 @@ export const Expenses: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Recording...' : 'Log Extra Expense'}
             </button>

@@ -94,7 +94,7 @@ export const Settings: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <SettingsIcon className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               System Configuration & Preferences
             </h1>
           </div>
@@ -119,7 +119,7 @@ export const Settings: React.FC = () => {
           <div className="bg-white rounded-2xl p-6 border border-gold-200/90 shadow-sm space-y-4">
             <div className="flex items-center gap-2 pb-3 border-b border-charcoal-100">
               <Building className="w-4 h-4 text-gold-600" />
-              <h2 className="font-serif text-base font-bold text-burgundy-950">
+              <h2 className="font-serif text-base font-bold text-navy-950">
                 Agency Brand Identity & Offices
               </h2>
             </div>
@@ -134,7 +134,7 @@ export const Settings: React.FC = () => {
                   value={agencyName}
                   onChange={(e) => setAgencyName(e.target.value)}
                   disabled={!canEdit}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800 disabled:bg-ivory-100"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800 disabled:bg-ivory-100"
                 />
               </div>
 
@@ -147,7 +147,7 @@ export const Settings: React.FC = () => {
                   value={agencyTagline}
                   onChange={(e) => setAgencyTagline(e.target.value)}
                   disabled={!canEdit}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800 disabled:bg-ivory-100"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800 disabled:bg-ivory-100"
                 />
               </div>
 
@@ -160,7 +160,7 @@ export const Settings: React.FC = () => {
                   value={locations}
                   onChange={(e) => setLocations(e.target.value)}
                   disabled={!canEdit}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800 disabled:bg-ivory-100"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800 disabled:bg-ivory-100"
                 />
               </div>
             </div>
@@ -170,7 +170,7 @@ export const Settings: React.FC = () => {
           <div className="bg-white rounded-2xl p-6 border border-gold-200/90 shadow-sm space-y-4">
             <div className="flex items-center gap-2 pb-3 border-b border-charcoal-100">
               <Percent className="w-4 h-4 text-gold-600" />
-              <h2 className="font-serif text-base font-bold text-burgundy-950">
+              <h2 className="font-serif text-base font-bold text-navy-950">
                 Taxation & Staged Payment Defaults
               </h2>
             </div>
@@ -185,7 +185,7 @@ export const Settings: React.FC = () => {
                   value={defaultGstRate}
                   onChange={(e) => setDefaultGstRate(e.target.value)}
                   disabled={!canEdit}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800 disabled:bg-ivory-100"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800 disabled:bg-ivory-100"
                 />
               </div>
 
@@ -198,7 +198,7 @@ export const Settings: React.FC = () => {
                   value={bookingDepositPercentage}
                   onChange={(e) => setBookingDepositPercentage(e.target.value)}
                   disabled={!canEdit}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800 disabled:bg-ivory-100"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800 disabled:bg-ivory-100"
                 />
               </div>
 
@@ -211,7 +211,7 @@ export const Settings: React.FC = () => {
                   value={advancePaymentPercentage}
                   onChange={(e) => setAdvancePaymentPercentage(e.target.value)}
                   disabled={!canEdit}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800 disabled:bg-ivory-100"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800 disabled:bg-ivory-100"
                 />
               </div>
 
@@ -224,7 +224,7 @@ export const Settings: React.FC = () => {
                   value={finalPaymentPercentage}
                   onChange={(e) => setFinalPaymentPercentage(e.target.value)}
                   disabled={!canEdit}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800 disabled:bg-ivory-100"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800 disabled:bg-ivory-100"
                 />
               </div>
             </div>
@@ -234,7 +234,7 @@ export const Settings: React.FC = () => {
           <div className="bg-white rounded-2xl p-6 border border-gold-200/90 shadow-sm space-y-4">
             <div className="flex items-center gap-2 pb-3 border-b border-charcoal-100">
               <Database className="w-4 h-4 text-gold-600" />
-              <h2 className="font-serif text-base font-bold text-burgundy-950">
+              <h2 className="font-serif text-base font-bold text-navy-950">
                 System Infrastructure & Database
               </h2>
             </div>
@@ -266,7 +266,7 @@ export const Settings: React.FC = () => {
               <button
                 type="submit"
                 disabled={saving}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
               >
                 <Save className="w-4 h-4 text-gold-400" />
                 <span>{saving ? 'Saving Changes...' : 'Save Configuration'}</span>

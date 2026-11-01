@@ -61,14 +61,14 @@ export const Modal: React.FC<ModalProps> = ({
           )}
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-burgundy-900 via-burgundy-800 to-burgundy-900 px-6 py-4 text-white flex items-center justify-between border-b border-gold-500/30">
+          <div className="bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 px-6 py-4 text-white flex items-center justify-between border-b border-gold-500/30">
             <div>
               <h3 className="font-serif text-lg font-bold tracking-wide text-gold-200">{title}</h3>
               {subtitle && <p className="text-xs text-gold-300/80 mt-0.5">{subtitle}</p>}
             </div>
             <button
               onClick={onClose}
-              className="p-1 rounded-lg text-gold-300 hover:text-white hover:bg-burgundy-700/60 transition-colors"
+              className="p-1 rounded-lg text-gold-300 hover:text-white hover:bg-navy-700/60 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>

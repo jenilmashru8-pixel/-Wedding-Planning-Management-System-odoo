@@ -33,7 +33,7 @@ export const DEMO_PERSONAS: DemoPersona[] = [
     subtitle: 'Palace Portfolio & Accrual Profitability',
     icon: Crown,
     accentColor: 'border-gold-400 bg-gold-50/70 text-gold-900',
-    badgeBg: 'bg-burgundy-900 text-gold-200',
+    badgeBg: 'bg-navy-900 text-gold-200',
     badgeText: 'Patron',
   },
   {
@@ -76,8 +76,8 @@ export const DEMO_PERSONAS: DemoPersona[] = [
     title: 'The Royal Couple',
     subtitle: 'Countdown, Agreements, Itinerary & RSVPs',
     icon: HeartHandshake,
-    accentColor: 'border-rose-400 bg-rose-50/70 text-rose-900',
-    badgeBg: 'bg-rose-800 text-rose-100',
+    accentColor: 'border-gold-400 bg-gold-50/70 text-gold-900',
+    badgeBg: 'bg-navy-900 text-gold-100',
     badgeText: 'Couple',
   },
   {
@@ -115,7 +115,7 @@ export const RolePreviewSelector: React.FC<RolePreviewSelectorProps> = ({
     <div className="card-luxury p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-white via-gold-50/20 to-white border border-gold-300/80 shadow-md">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-3 pb-3 border-b border-gold-200/60">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-burgundy-900 text-gold-300 flex items-center justify-center font-bold text-xs shadow-xs">
+          <div className="w-8 h-8 rounded-xl bg-navy-900 text-gold-300 flex items-center justify-center font-bold text-xs shadow-xs">
             <ArrowRightLeft className="w-4 h-4 text-gold-400" />
           </div>
           <div>
@@ -128,7 +128,7 @@ export const RolePreviewSelector: React.FC<RolePreviewSelectorProps> = ({
               </span>
             </div>
             <p className="text-[11px] text-charcoal-500">
-              Logged in as <span className="font-semibold text-burgundy-800">{loggedInPersona?.name || currentRole}</span>. Click any persona below to preview their specialized luxury dashboard.
+              Logged in as <span className="font-semibold text-navy-800">{loggedInPersona?.name || currentRole}</span>. Click any persona below to preview their specialized luxury dashboard.
             </p>
           </div>
         </div>
@@ -142,7 +142,7 @@ export const RolePreviewSelector: React.FC<RolePreviewSelectorProps> = ({
             <button
               onClick={() => onSwitchLogin(activePersona.email)}
               disabled={isSwitching}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-burgundy-800 hover:bg-burgundy-900 text-gold-200 text-xs font-semibold shadow-xs transition-all hover:scale-102 disabled:opacity-50"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-navy-800 hover:bg-navy-900 text-gold-200 text-xs font-semibold shadow-xs transition-all hover:scale-102 disabled:opacity-50"
             >
               <UserCheck className="w-3.5 h-3.5 text-gold-400" />
               <span>{isSwitching ? 'Switching...' : `Log In As ${activePersona.title}`}</span>
@@ -172,18 +172,18 @@ export const RolePreviewSelector: React.FC<RolePreviewSelectorProps> = ({
                 <div className="flex items-center justify-between mb-1.5">
                   <div
                     className={`w-7 h-7 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110 ${
-                      isSelected ? 'bg-burgundy-900 text-gold-300' : 'bg-gold-100/70 text-burgundy-800'
+                      isSelected ? 'bg-navy-900 text-gold-300' : 'bg-gold-100/70 text-navy-800'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
                   </div>
                   {isCurrentSession && (
-                    <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-burgundy-700 text-gold-200">
+                    <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-navy-700 text-gold-200">
                       <CheckCircle2 className="w-2.5 h-2.5 text-gold-300" /> Active
                     </span>
                   )}
                 </div>
-                <div className="font-serif font-bold text-xs text-charcoal-900 group-hover:text-burgundy-800 leading-tight">
+                <div className="font-serif font-bold text-xs text-charcoal-900 group-hover:text-navy-800 leading-tight">
                   {persona.title}
                 </div>
                 <div className="text-[10px] text-charcoal-500 font-medium truncate mt-0.5">
@@ -194,7 +194,7 @@ export const RolePreviewSelector: React.FC<RolePreviewSelectorProps> = ({
                 <span className="uppercase tracking-wide font-mono font-bold text-gold-800">
                   {persona.badgeText}
                 </span>
-                <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-burgundy-700' : 'bg-charcoal-300'}`} />
+                <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-navy-700' : 'bg-charcoal-300'}`} />
               </div>
             </button>
           );

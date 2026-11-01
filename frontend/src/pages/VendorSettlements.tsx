@@ -190,7 +190,7 @@ export const VendorSettlements: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <Scale className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Vendor Settlements & Invoice Matching
             </h1>
           </div>
@@ -211,7 +211,7 @@ export const VendorSettlements: React.FC = () => {
 
             <button
               onClick={() => setIsPaymentModalOpen(true)}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-burgundy-900 to-burgundy-800 text-gold-200 text-xs font-bold shadow-md hover:from-burgundy-800 hover:to-burgundy-700 border border-gold-400/30 transition-all"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-navy-900 to-navy-800 text-gold-200 text-xs font-bold shadow-md hover:from-navy-800 hover:to-navy-700 border border-gold-400/30 transition-all"
             >
               <CreditCard className="w-4 h-4 text-gold-400" />
               <span>Disburse Payment</span>
@@ -241,7 +241,7 @@ export const VendorSettlements: React.FC = () => {
           value={formatCurrency(totalBalanceDue)}
           icon={Clock}
           description="Pending final disbursement"
-          variant="burgundy"
+          variant="navy"
         />
         <MetricCard
           title="Settlement Progress"
@@ -259,7 +259,7 @@ export const VendorSettlements: React.FC = () => {
           <select
             value={selectedWeddingId}
             onChange={(e) => setSelectedWeddingId(e.target.value)}
-            className="w-full sm:w-80 px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="w-full sm:w-80 px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           >
             {weddings.map((w) => (
               <option key={w.id} value={w.id}>
@@ -308,7 +308,7 @@ export const VendorSettlements: React.FC = () => {
 
                   return (
                     <tr key={inv.id} className="hover:bg-ivory-50/80 transition-colors">
-                      <td className="py-3.5 px-4 font-mono font-bold text-burgundy-900">
+                      <td className="py-3.5 px-4 font-mono font-bold text-navy-900">
                         {inv.invoiceNumber}
                       </td>
 
@@ -360,7 +360,7 @@ export const VendorSettlements: React.FC = () => {
                               setIsAdvance(false);
                               setIsPaymentModalOpen(true);
                             }}
-                            className="px-3 py-1 rounded-lg bg-burgundy-900 text-gold-200 text-[11px] font-bold hover:bg-burgundy-800 transition-colors shadow-sm"
+                            className="px-3 py-1 rounded-lg bg-navy-900 text-gold-200 text-[11px] font-bold hover:bg-navy-800 transition-colors shadow-sm"
                           >
                             Disburse Balance
                           </button>
@@ -396,7 +396,7 @@ export const VendorSettlements: React.FC = () => {
                 value={modalVendorId}
                 onChange={(e) => setModalVendorId(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="">Select Vendor...</option>
                 {vendors.map((v) => (
@@ -415,7 +415,7 @@ export const VendorSettlements: React.FC = () => {
                 onChange={(e) => setInvoiceNumber(e.target.value)}
                 placeholder="e.g. RRC-2026-INV-101"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -428,7 +428,7 @@ export const VendorSettlements: React.FC = () => {
                 value={quotedAmount}
                 onChange={(e) => setQuotedAmount(e.target.value)}
                 placeholder="e.g. 2124000"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
 
@@ -440,7 +440,7 @@ export const VendorSettlements: React.FC = () => {
                 onChange={(e) => setFinalAmount(e.target.value)}
                 placeholder="e.g. 2230200"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -452,7 +452,7 @@ export const VendorSettlements: React.FC = () => {
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -467,7 +467,7 @@ export const VendorSettlements: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Recording...' : 'Record Invoice'}
             </button>
@@ -491,7 +491,7 @@ export const VendorSettlements: React.FC = () => {
                 value={payVendorId}
                 onChange={(e) => setPayVendorId(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="">Select Vendor...</option>
                 {vendors.map((v) => (
@@ -510,7 +510,7 @@ export const VendorSettlements: React.FC = () => {
                 onChange={(e) => setPayAmount(e.target.value)}
                 placeholder="e.g. 500000"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -524,7 +524,7 @@ export const VendorSettlements: React.FC = () => {
                 onChange={(e) => setTransactionRef(e.target.value)}
                 placeholder="e.g. UTR-HDFC-99881122"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
 
@@ -533,7 +533,7 @@ export const VendorSettlements: React.FC = () => {
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="BANK_TRANSFER">Bank Wire / RTGS / NEFT</option>
                 <option value="UPI">UPI Transfer</option>
@@ -548,7 +548,7 @@ export const VendorSettlements: React.FC = () => {
               id="isAdvance"
               checked={isAdvance}
               onChange={(e) => setIsAdvance(e.target.checked)}
-              className="rounded text-burgundy-900 focus:ring-burgundy-800"
+              className="rounded text-navy-900 focus:ring-navy-800"
             />
             <label htmlFor="isAdvance" className="text-xs font-semibold text-charcoal-700 cursor-pointer">
               Mark as Pre-Event Advance Retainer (Unsettled until final invoice)
@@ -566,7 +566,7 @@ export const VendorSettlements: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Processing...' : 'Disburse Payment'}
             </button>

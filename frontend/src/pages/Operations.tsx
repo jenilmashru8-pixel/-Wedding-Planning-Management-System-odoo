@@ -258,7 +258,7 @@ export const Operations: React.FC = () => {
             <span className="p-2 rounded-xl bg-rose-500/10 text-rose-600 border border-rose-500/20 animate-pulse">
               <Radio className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Live Day-of Operations
             </h1>
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1">
@@ -311,14 +311,14 @@ export const Operations: React.FC = () => {
           value={delayedVendors.length}
           icon={Clock}
           description="Vendors late >15 mins"
-          variant={delayedVendors.length > 0 ? 'burgundy' : 'default'}
+          variant={delayedVendors.length > 0 ? 'navy' : 'default'}
         />
         <MetricCard
           title="Active Incidents"
           value={openIncidents.length}
           icon={Flame}
           description="Triage in progress"
-          variant={openIncidents.length > 0 ? 'burgundy' : 'default'}
+          variant={openIncidents.length > 0 ? 'navy' : 'default'}
         />
       </div>
 
@@ -354,7 +354,7 @@ export const Operations: React.FC = () => {
           <select
             value={selectedWeddingId}
             onChange={(e) => setSelectedWeddingId(e.target.value)}
-            className="w-full px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="w-full px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           >
             {weddings.map((w) => (
               <option key={w.id} value={w.id}>
@@ -370,7 +370,7 @@ export const Operations: React.FC = () => {
             onClick={() => setActiveTab('timeline')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'timeline'
-                ? 'bg-burgundy-900 text-gold-200 shadow-sm'
+                ? 'bg-navy-900 text-gold-200 shadow-sm'
                 : 'text-charcoal-600 hover:text-charcoal-900'
             }`}
           >
@@ -382,7 +382,7 @@ export const Operations: React.FC = () => {
             onClick={() => setActiveTab('checkins')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'checkins'
-                ? 'bg-burgundy-900 text-gold-200 shadow-sm'
+                ? 'bg-navy-900 text-gold-200 shadow-sm'
                 : 'text-charcoal-600 hover:text-charcoal-900'
             }`}
           >
@@ -394,7 +394,7 @@ export const Operations: React.FC = () => {
             onClick={() => setActiveTab('incidents')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'incidents'
-                ? 'bg-burgundy-900 text-gold-200 shadow-sm'
+                ? 'bg-navy-900 text-gold-200 shadow-sm'
                 : 'text-charcoal-600 hover:text-charcoal-900'
             }`}
           >
@@ -425,13 +425,13 @@ export const Operations: React.FC = () => {
                 className="bg-white rounded-2xl border border-gold-200/80 p-5 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-burgundy-950 text-gold-300 flex flex-col items-center justify-center shrink-0 border border-gold-500/30">
+                  <div className="w-16 h-16 rounded-2xl bg-navy-950 text-gold-300 flex flex-col items-center justify-center shrink-0 border border-gold-500/30">
                     <span className="text-[10px] uppercase font-bold tracking-widest text-gold-400">TIME</span>
                     <span className="text-xs font-mono font-bold">{evt.startTime}</span>
                   </div>
 
                   <div>
-                    <h3 className="font-serif text-base font-bold text-burgundy-950">{evt.eventName}</h3>
+                    <h3 className="font-serif text-base font-bold text-navy-950">{evt.eventName}</h3>
                     <div className="flex flex-wrap items-center gap-3 text-xs text-charcoal-600 mt-1">
                       <span className="flex items-center gap-1">
                         <MapPin className="w-3.5 h-3.5 text-gold-600" />
@@ -525,7 +525,7 @@ export const Operations: React.FC = () => {
                         {chk.status !== 'ARRIVED' && chk.status !== 'DELAYED' && (
                           <button
                             onClick={() => handleCheckInVendor(chk.vendorId, chk.eventId)}
-                            className="px-3 py-1 rounded-lg bg-burgundy-900 text-gold-200 text-[11px] font-bold hover:bg-burgundy-800 shadow-sm"
+                            className="px-3 py-1 rounded-lg bg-navy-900 text-gold-200 text-[11px] font-bold hover:bg-navy-800 shadow-sm"
                           >
                             Record Arrival
                           </button>
@@ -567,7 +567,7 @@ export const Operations: React.FC = () => {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-charcoal-100">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-burgundy-900">{inc.incidentNumber}</span>
+                      <span className="font-mono text-xs font-bold text-navy-900">{inc.incidentNumber}</span>
                       <span
                         className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
                           inc.severity === 'CRITICAL'
@@ -590,7 +590,7 @@ export const Operations: React.FC = () => {
                   </div>
 
                   <div className="pt-3 space-y-2">
-                    <h3 className="font-serif text-base font-bold text-burgundy-950">{inc.title}</h3>
+                    <h3 className="font-serif text-base font-bold text-navy-950">{inc.title}</h3>
                     <p className="text-xs text-charcoal-700 leading-relaxed">{inc.description}</p>
 
                     {inc.vendor && (
@@ -648,7 +648,7 @@ export const Operations: React.FC = () => {
               onChange={(e) => setEventName(e.target.value)}
               placeholder="e.g. Royal Baraat Procession with Vintage Cars & Brass Band"
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -661,7 +661,7 @@ export const Operations: React.FC = () => {
                 onChange={(e) => setStartTime(e.target.value)}
                 placeholder="17:30"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -672,7 +672,7 @@ export const Operations: React.FC = () => {
                 onChange={(e) => setEndTime(e.target.value)}
                 placeholder="19:30"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -684,7 +684,7 @@ export const Operations: React.FC = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -695,7 +695,7 @@ export const Operations: React.FC = () => {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Escort routes, dhol artists, floral shower cannons..."
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -710,7 +710,7 @@ export const Operations: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Scheduling...' : 'Schedule Event'}
             </button>
@@ -735,7 +735,7 @@ export const Operations: React.FC = () => {
               onChange={(e) => setIncidentTitle(e.target.value)}
               placeholder="e.g. Sound System Power Tripped at Main Courtyard"
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -745,7 +745,7 @@ export const Operations: React.FC = () => {
               <select
                 value={severity}
                 onChange={(e) => setSeverity(e.target.value as any)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="LOW">Low</option>
                 <option value="MEDIUM">Medium</option>
@@ -759,7 +759,7 @@ export const Operations: React.FC = () => {
               <select
                 value={incidentVendorId}
                 onChange={(e) => setIncidentVendorId(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="">None / Internal Coordination</option>
                 {vendors.map((v) => (
@@ -779,7 +779,7 @@ export const Operations: React.FC = () => {
               onChange={(e) => setIncidentDesc(e.target.value)}
               placeholder="What occurred, affected areas, and immediate risks..."
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -819,7 +819,7 @@ export const Operations: React.FC = () => {
               onChange={(e) => setResolutionNotes(e.target.value)}
               placeholder="e.g. Switched to backup 125kVA sound generator. Audio restored within 4 minutes."
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 

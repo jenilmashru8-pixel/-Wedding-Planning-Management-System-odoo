@@ -140,7 +140,7 @@ export const Enquiries: React.FC = () => {
         </div>
         <button
           onClick={() => setIsAddOpen(true)}
-          className="px-4 py-2.5 bg-burgundy-700 hover:bg-burgundy-800 text-gold-200 hover:text-white rounded-xl text-xs font-semibold shadow-md transition-all flex items-center gap-2"
+          className="px-4 py-2.5 bg-navy-700 hover:bg-navy-800 text-gold-200 hover:text-white rounded-xl text-xs font-semibold shadow-md transition-all flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
           <span>New Enquiry</span>
@@ -279,7 +279,7 @@ export const Enquiries: React.FC = () => {
 
                 <div className="mt-4 pt-3 border-t border-charcoal-100 flex items-center justify-between text-xs">
                   <span className="text-charcoal-500">{enq.guestCount} Guests</span>
-                  <span className="font-bold text-burgundy-900">{formatLakhsCrores(enq.maxBudget)}</span>
+                  <span className="font-bold text-navy-900">{formatLakhsCrores(enq.maxBudget)}</span>
                 </div>
               </div>
 
@@ -305,7 +305,7 @@ export const Enquiries: React.FC = () => {
                         });
                         setIsConvertOpen(true);
                       }}
-                      className="px-3 py-1.5 rounded-lg bg-burgundy-700 hover:bg-burgundy-800 text-gold-200 text-xs font-semibold flex items-center gap-1 shadow-xs"
+                      className="px-3 py-1.5 rounded-lg bg-navy-700 hover:bg-navy-800 text-gold-200 text-xs font-semibold flex items-center gap-1 shadow-xs"
                     >
                       <span>Convert</span>
                       <ArrowRight className="w-3 h-3" />
@@ -461,7 +461,7 @@ export const Enquiries: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-burgundy-700 text-gold-200 hover:text-white rounded-xl text-xs font-semibold shadow-md"
+              className="px-4 py-2 bg-navy-700 text-gold-200 hover:text-white rounded-xl text-xs font-semibold shadow-md"
             >
               Save Enquiry
             </button>
@@ -515,7 +515,7 @@ export const Enquiries: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md"
+              className="px-4 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md"
             >
               Schedule Consultation
             </button>
@@ -569,7 +569,7 @@ export const Enquiries: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-gradient-to-r from-burgundy-900 to-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md"
+              className="px-4 py-2 bg-gradient-to-r from-navy-900 to-navy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md"
             >
               Confirm & Launch Wedding Workspace
             </button>

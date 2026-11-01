@@ -46,8 +46,8 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
   // Calculate unbilled additions & GST
   const approvedExtras = extraExpenses.filter((e) => e.approvalStatus === 'APPROVED');
   const totalExtraAmount = approvedExtras.reduce((sum, e) => sum + Number(e.amount || 0), 0);
-  const gstAmount = totalExtraAmount * 0.18;
-  const totalWithGst = totalExtraAmount + gstAmount;
+  const gstAmount = approvedExtras.reduce((sum, expense) => sum + Number(expense.taxAmount || 0), 0);
+  const totalWithGst = approvedExtras.reduce((sum, expense) => sum + Number(expense.totalAmount || 0), 0);
 
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-300">
@@ -58,7 +58,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
           alt="Palace Banquet Feast"
           className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/85 to-burgundy-950/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/85 to-navy-950/45" />
         <div className="relative z-10 max-w-2xl">
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest bg-emerald-500/25 text-emerald-300 border border-emerald-400/30 backdrop-blur-sm">
@@ -77,7 +77,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
           <div className="mt-4 flex flex-wrap gap-2.5">
             <button
               onClick={() => navigate('/payments')}
-              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 text-xs font-bold shadow-xs hover:scale-102 transition-all flex items-center gap-1.5"
+              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-navy-950 text-xs font-bold shadow-xs hover:scale-102 transition-all flex items-center gap-1.5"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Record Client Receipt</span>
@@ -107,8 +107,6 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
           value={formatLakhsCrores(kpis.totalClientCollections)}
           subtitle={`Outstanding: ${formatLakhsCrores(kpis.totalClientReceivables)}`}
           icon={CreditCard}
-          trend="+14.2% Flow"
-          trendType="positive"
           highlight
         />
         <MetricCard
@@ -147,7 +145,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
             <button
               onClick={() => setFilterType('ALL')}
               className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
-                filterType === 'ALL' ? 'bg-burgundy-800 text-gold-200' : 'bg-charcoal-100 text-charcoal-600 hover:bg-charcoal-200'
+                filterType === 'ALL' ? 'bg-navy-800 text-gold-200' : 'bg-charcoal-100 text-charcoal-600 hover:bg-charcoal-200'
               }`}
             >
               All Milestones
@@ -193,7 +191,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
                     <span className="text-[10px] text-charcoal-400 font-mono uppercase">{m.milestoneType}</span>
                   </td>
                   <td className="py-2.5 px-3">{m.wedding?.name || 'Udaipur Palace Wedding'}</td>
-                  <td className="py-2.5 px-3 font-bold text-burgundy-900">{m.percentage}%</td>
+                  <td className="py-2.5 px-3 font-bold text-navy-900">{m.percentage}%</td>
                   <td className="py-2.5 px-3 font-semibold">{formatCurrency(m.amountDue)}</td>
                   <td className="py-2.5 px-3 text-emerald-700 font-semibold">{formatCurrency(m.amountPaid || 0)}</td>
                   <td className="py-2.5 px-3">{formatDate(m.dueDate)}</td>
@@ -203,7 +201,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
                   <td className="py-2.5 px-3 text-right">
                     <button
                       onClick={() => navigate('/payments')}
-                      className="px-2.5 py-1 rounded bg-burgundy-100 text-burgundy-900 hover:bg-burgundy-200 text-xs font-semibold"
+                      className="px-2.5 py-1 rounded bg-navy-100 text-navy-900 hover:bg-navy-200 text-xs font-semibold"
                     >
                       Process Receipt
                     </button>
@@ -222,14 +220,14 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
           <div className="flex items-center justify-between mb-3 pb-2 border-b border-charcoal-100">
             <div>
               <h3 className="font-serif text-base font-bold text-charcoal-900 flex items-center gap-2">
-                <Scale className="w-4 h-4 text-burgundy-800" />
+                <Scale className="w-4 h-4 text-navy-800" />
                 Vendor Invoice Matching & Settlements
               </h3>
               <p className="text-xs text-charcoal-500">Agreed Quotation vs Invoiced Amount vs Net Disbursed</p>
             </div>
             <button
               onClick={() => navigate('/vendor-settlements')}
-              className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1"
+              className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1"
             >
               <span>Settlement Hub</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -287,7 +285,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
               </div>
               <button
                 onClick={() => navigate('/expenses')}
-                className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1"
+                className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1"
               >
                 <span>Tax Invoices</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -297,15 +295,15 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
             <div className="p-4 rounded-xl bg-ivory border border-gold-200/80 mb-3 space-y-2">
               <div className="flex items-center justify-between text-xs text-charcoal-700">
                 <span>Approved Extra Additions:</span>
-                <strong className="text-charcoal-900 font-mono">{formatCurrency(totalExtraAmount || 450000)}</strong>
+                <strong className="text-charcoal-900 font-mono">{formatCurrency(totalExtraAmount)}</strong>
               </div>
               <div className="flex items-center justify-between text-xs text-charcoal-700">
                 <span>Consolidated 18% GST (9% CGST + 9% SGST):</span>
-                <strong className="text-charcoal-900 font-mono">{formatCurrency(gstAmount || 81000)}</strong>
+                <strong className="text-charcoal-900 font-mono">{formatCurrency(gstAmount)}</strong>
               </div>
-              <div className="pt-2 border-t border-gold-300 flex items-center justify-between text-sm font-bold text-burgundy-950">
+              <div className="pt-2 border-t border-gold-300 flex items-center justify-between text-sm font-bold text-navy-950">
                 <span>Total Tax Invoice Billed:</span>
-                <span className="font-serif font-bold text-base text-burgundy-900">{formatCurrency(totalWithGst || 531000)}</span>
+                <span className="font-serif font-bold text-base text-navy-900">{formatCurrency(totalWithGst)}</span>
               </div>
             </div>
           </div>
@@ -316,7 +314,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
             </span>
             <button
               onClick={() => navigate('/expenses')}
-              className="text-xs font-bold text-burgundy-800 hover:text-burgundy-950 underline"
+              className="text-xs font-bold text-navy-800 hover:text-navy-950 underline"
             >
               Generate Tax Invoice PDF
             </button>

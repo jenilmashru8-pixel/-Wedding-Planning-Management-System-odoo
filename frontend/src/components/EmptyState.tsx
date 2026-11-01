@@ -22,7 +22,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 
   return (
     <div className="flex flex-col items-center justify-center p-12 text-center bg-white rounded-2xl border border-gold-200/60 shadow-sm my-6">
-      <div className="w-16 h-16 rounded-2xl bg-gold-50 border border-gold-300 flex items-center justify-center text-burgundy-700 mb-4 shadow-sm">
+      <div className="w-16 h-16 rounded-2xl bg-gold-50 border border-gold-300 flex items-center justify-center text-navy-700 mb-4 shadow-sm">
         <Icon className="w-8 h-8 text-gold-600" />
       </div>
       <h3 className="font-serif text-lg font-bold text-charcoal-900 mb-1">{title}</h3>
@@ -30,7 +30,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       {displayAction && onAction && (
         <button
           onClick={onAction}
-          className="px-4 py-2 bg-burgundy-700 hover:bg-burgundy-800 text-gold-200 hover:text-white rounded-xl text-sm font-semibold shadow-md transition-all flex items-center gap-2"
+          className="px-4 py-2 bg-navy-700 hover:bg-navy-800 text-gold-200 hover:text-white rounded-xl text-sm font-semibold shadow-md transition-all flex items-center gap-2"
         >
           {displayAction}
         </button>

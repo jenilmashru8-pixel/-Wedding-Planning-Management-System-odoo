@@ -108,7 +108,7 @@ export const Team: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <UserCog className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Team & Internal Labour Costing
             </h1>
           </div>
@@ -123,7 +123,7 @@ export const Team: React.FC = () => {
               setSelectedEmployeeId(user?.id || '');
               setIsModalOpen(true);
             }}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-burgundy-900 to-burgundy-800 text-gold-200 text-xs font-semibold hover:from-burgundy-800 hover:to-burgundy-700 shadow-md border border-gold-400/30 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-navy-900 to-navy-800 text-gold-200 text-xs font-semibold hover:from-navy-800 hover:to-navy-700 shadow-md border border-gold-400/30 transition-all"
           >
             <Plus className="w-4 h-4 text-gold-400" />
             <span>Log Time Sheet</span>
@@ -152,7 +152,7 @@ export const Team: React.FC = () => {
           value={formatCurrency(totalLabourCost)}
           icon={Briefcase}
           description="Cost of internal staff"
-          variant="burgundy"
+          variant="navy"
         />
         <MetricCard
           title="Average Hourly Rate"
@@ -170,7 +170,7 @@ export const Team: React.FC = () => {
             onClick={() => setActiveTab('roster')}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'roster'
-                ? 'bg-burgundy-900 text-gold-200 shadow-sm'
+                ? 'bg-navy-900 text-gold-200 shadow-sm'
                 : 'text-charcoal-600 hover:text-charcoal-900'
             }`}
           >
@@ -180,7 +180,7 @@ export const Team: React.FC = () => {
             onClick={() => setActiveTab('timelogs')}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'timelogs'
-                ? 'bg-burgundy-900 text-gold-200 shadow-sm'
+                ? 'bg-navy-900 text-gold-200 shadow-sm'
                 : 'text-charcoal-600 hover:text-charcoal-900'
             }`}
           >
@@ -203,12 +203,12 @@ export const Team: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-burgundy-900 text-gold-200 flex items-center justify-center font-bold text-xs uppercase shadow-sm">
+                    <div className="w-10 h-10 rounded-full bg-navy-900 text-gold-200 flex items-center justify-center font-bold text-xs uppercase shadow-sm">
                       {emp.firstName?.[0]}
                       {emp.lastName?.[0]}
                     </div>
                     <div>
-                      <h3 className="font-serif text-base font-bold text-burgundy-950">
+                      <h3 className="font-serif text-base font-bold text-navy-950">
                         {emp.firstName} {emp.lastName}
                       </h3>
                       <span className="text-[10px] uppercase font-bold tracking-wider text-gold-700 bg-gold-500/10 px-2 py-0.5 rounded border border-gold-400/20">
@@ -233,7 +233,7 @@ export const Team: React.FC = () => {
 
                 <div className="p-3 rounded-xl bg-ivory-50 border border-charcoal-100 flex items-center justify-between text-xs">
                   <span className="text-charcoal-500">Hourly Rate Card:</span>
-                  <span className="font-mono font-bold text-burgundy-900">
+                  <span className="font-mono font-bold text-navy-900">
                     {emp.employee?.hourlyRate ? formatCurrency(emp.employee.hourlyRate) : '₹800'}/hr
                   </span>
                 </div>
@@ -291,7 +291,7 @@ export const Team: React.FC = () => {
                       {formatCurrency(log.hourlyRate)}/hr
                     </td>
 
-                    <td className="py-3.5 px-4 font-bold text-burgundy-950 font-serif text-sm">
+                    <td className="py-3.5 px-4 font-bold text-navy-950 font-serif text-sm">
                       {formatCurrency(log.calculatedLabourCost)}
                     </td>
 
@@ -329,7 +329,7 @@ export const Team: React.FC = () => {
                 value={selectedWeddingId}
                 onChange={(e) => setSelectedWeddingId(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 {weddings.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -345,7 +345,7 @@ export const Team: React.FC = () => {
                 value={selectedEmployeeId}
                 onChange={(e) => setSelectedEmployeeId(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 {employees.map((e) => (
                   <option key={e.id} value={e.id}>
@@ -364,7 +364,7 @@ export const Team: React.FC = () => {
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
 
@@ -375,7 +375,7 @@ export const Team: React.FC = () => {
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -388,7 +388,7 @@ export const Team: React.FC = () => {
               onChange={(e) => setHourlyRate(e.target.value)}
               placeholder="800"
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -399,7 +399,7 @@ export const Team: React.FC = () => {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Summary of operational tasks supervised..."
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -414,7 +414,7 @@ export const Team: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Recording...' : 'Log Time Sheet'}
             </button>

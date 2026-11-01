@@ -178,7 +178,7 @@ export const Tasks: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <CalendarCheck className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Wedding Planning Tasks
             </h1>
           </div>
@@ -201,7 +201,7 @@ export const Tasks: React.FC = () => {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-burgundy-900 to-burgundy-800 text-gold-200 text-xs font-semibold hover:from-burgundy-800 hover:to-burgundy-700 shadow-md border border-gold-400/30 transition-all"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-navy-900 to-navy-800 text-gold-200 text-xs font-semibold hover:from-navy-800 hover:to-navy-700 shadow-md border border-gold-400/30 transition-all"
           >
             <Plus className="w-4 h-4 text-gold-400" />
             <span>Create Task</span>
@@ -213,7 +213,7 @@ export const Tasks: React.FC = () => {
       <div className="bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <h3 className="text-sm font-bold text-burgundy-950 font-serif">
+            <h3 className="text-sm font-bold text-navy-950 font-serif">
               Overall Project Milestone Execution
             </h3>
             <p className="text-xs text-charcoal-500">
@@ -251,7 +251,7 @@ export const Tasks: React.FC = () => {
             <select
               value={selectedWeddingId}
               onChange={(e) => setSelectedWeddingId(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             >
               {weddings.map((w) => (
                 <option key={w.id} value={w.id}>
@@ -265,7 +265,7 @@ export const Tasks: React.FC = () => {
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           >
             <option value="ALL">All Categories</option>
             <option value="PRE_WEDDING">Pre-Wedding Prep</option>
@@ -277,7 +277,7 @@ export const Tasks: React.FC = () => {
           <select
             value={selectedPriority}
             onChange={(e) => setSelectedPriority(e.target.value)}
-            className="px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           >
             <option value="ALL">All Priorities</option>
             <option value="URGENT">Urgent</option>
@@ -296,7 +296,7 @@ export const Tasks: React.FC = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search tasks..."
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -304,7 +304,7 @@ export const Tasks: React.FC = () => {
             <button
               onClick={() => setViewMode('kanban')}
               className={`p-1.5 rounded-lg text-xs transition-all ${
-                viewMode === 'kanban' ? 'bg-burgundy-900 text-gold-200 shadow-sm' : 'text-charcoal-600'
+                viewMode === 'kanban' ? 'bg-navy-900 text-gold-200 shadow-sm' : 'text-charcoal-600'
               }`}
               title="Kanban Board"
             >
@@ -313,7 +313,7 @@ export const Tasks: React.FC = () => {
             <button
               onClick={() => setViewMode('list')}
               className={`p-1.5 rounded-lg text-xs transition-all ${
-                viewMode === 'list' ? 'bg-burgundy-900 text-gold-200 shadow-sm' : 'text-charcoal-600'
+                viewMode === 'list' ? 'bg-navy-900 text-gold-200 shadow-sm' : 'text-charcoal-600'
               }`}
               title="List View"
             >
@@ -347,7 +347,7 @@ export const Tasks: React.FC = () => {
               >
                 {/* Column Header */}
                 <div className="flex items-center justify-between pb-2 mb-2 border-b border-charcoal-200/50">
-                  <h4 className="text-xs font-bold text-burgundy-950 uppercase tracking-wider">
+                  <h4 className="text-xs font-bold text-navy-950 uppercase tracking-wider">
                     {col.label}
                   </h4>
                   <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white text-charcoal-700 shadow-sm">
@@ -462,7 +462,7 @@ export const Tasks: React.FC = () => {
                       <select
                         value={task.status}
                         onChange={(e) => handleStatusChange(task.id, e.target.value as TaskStatus)}
-                        className="text-xs bg-ivory-50 border border-charcoal-200 rounded-lg px-2 py-1 font-medium text-charcoal-700 focus:outline-none focus:ring-1 focus:ring-burgundy-800"
+                        className="text-xs bg-ivory-50 border border-charcoal-200 rounded-lg px-2 py-1 font-medium text-charcoal-700 focus:outline-none focus:ring-1 focus:ring-navy-800"
                       >
                         <option value="TO_PLAN">To Plan</option>
                         <option value="IN_PROGRESS">In Progress</option>
@@ -496,7 +496,7 @@ export const Tasks: React.FC = () => {
               onChange={(e) => setTaskName(e.target.value)}
               placeholder="e.g. Confirm Vintage Car Arrival for Baraat"
               required
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -507,7 +507,7 @@ export const Tasks: React.FC = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Special instructions or vendor checkpoints..."
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -517,7 +517,7 @@ export const Tasks: React.FC = () => {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as TaskCategory)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="PRE_WEDDING">Pre-Wedding</option>
                 <option value="EVENT_DAY">Event Day</option>
@@ -530,7 +530,7 @@ export const Tasks: React.FC = () => {
               <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value as TaskPriority)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="LOW">Low</option>
                 <option value="MEDIUM">Medium</option>
@@ -546,7 +546,7 @@ export const Tasks: React.FC = () => {
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -562,7 +562,7 @@ export const Tasks: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Saving...' : 'Add Task'}
             </button>

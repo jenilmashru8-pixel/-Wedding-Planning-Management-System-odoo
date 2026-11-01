@@ -80,7 +80,7 @@ export const Vendors: React.FC = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await api.get('/vendors/categories/list');
+      const res = await api.get('/vendors/categories');
       if (res.data.success) {
         setCategories(res.data.data.categories);
       }
@@ -162,7 +162,7 @@ export const Vendors: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <Store className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Luxury Vendor Directory
             </h1>
           </div>
@@ -174,7 +174,7 @@ export const Vendors: React.FC = () => {
         {canManageVendors && (
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-burgundy-900 to-burgundy-800 text-gold-200 text-xs font-semibold hover:from-burgundy-800 hover:to-burgundy-700 shadow-md transition-all border border-gold-400/30"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-navy-900 to-navy-800 text-gold-200 text-xs font-semibold hover:from-navy-800 hover:to-navy-700 shadow-md transition-all border border-gold-400/30"
           >
             <Plus className="w-4 h-4 text-gold-400" />
             <span>Onboard New Vendor</span>
@@ -203,7 +203,7 @@ export const Vendors: React.FC = () => {
           value="4.9 ★"
           icon={Star}
           description="Excellence rating"
-          variant="burgundy"
+          variant="navy"
         />
         <MetricCard
           title="Key Destinations"
@@ -224,7 +224,7 @@ export const Vendors: React.FC = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search vendor name, contact person, or category..."
-              className="w-full pl-10 pr-4 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full pl-10 pr-4 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -236,7 +236,7 @@ export const Vendors: React.FC = () => {
                 onClick={() => setSelectedCity(city)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                   selectedCity === city
-                    ? 'bg-burgundy-900 text-gold-200 shadow-sm border border-gold-400/30'
+                    ? 'bg-navy-900 text-gold-200 shadow-sm border border-gold-400/30'
                     : 'bg-ivory-100 text-charcoal-600 hover:bg-ivory-200'
                 }`}
               >
@@ -381,7 +381,7 @@ export const Vendors: React.FC = () => {
                 onChange={(e) => setCompanyName(e.target.value)}
                 placeholder="e.g. Royal Rajputana Caterers"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
 
@@ -393,7 +393,7 @@ export const Vendors: React.FC = () => {
                 onChange={(e) => setContactPerson(e.target.value)}
                 placeholder="e.g. Chef Mahendra Singh"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -405,7 +405,7 @@ export const Vendors: React.FC = () => {
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="">Select Category...</option>
                 {categories.map((c) => (
@@ -422,7 +422,7 @@ export const Vendors: React.FC = () => {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="Udaipur">Udaipur</option>
                 <option value="Jaipur">Jaipur</option>
@@ -441,7 +441,7 @@ export const Vendors: React.FC = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+91 98290 12345"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
 
@@ -453,7 +453,7 @@ export const Vendors: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="contact@royalcaterers.com"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -466,7 +466,7 @@ export const Vendors: React.FC = () => {
                 value={bankName}
                 onChange={(e) => setBankName(e.target.value)}
                 placeholder="HDFC Bank"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -476,7 +476,7 @@ export const Vendors: React.FC = () => {
                 value={bankAccount}
                 onChange={(e) => setBankAccount(e.target.value)}
                 placeholder="50200012345678"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
             <div>
@@ -486,7 +486,7 @@ export const Vendors: React.FC = () => {
                 value={bankIfsc}
                 onChange={(e) => setBankIfsc(e.target.value)}
                 placeholder="HDFC0001234"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -502,7 +502,7 @@ export const Vendors: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Onboarding...' : 'Onboard Vendor'}
             </button>

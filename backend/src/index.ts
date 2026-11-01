@@ -7,6 +7,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { initSocket } from './socket.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { getJwtSecret } from './utils/jwtSecret.js';
 
 // Route imports
 import authRoutes from './routes/auth.routes.js';
@@ -27,10 +28,12 @@ import teamRoutes from './routes/team.routes.js';
 import notificationsRoutes from './routes/notifications.routes.js';
 import settingsRoutes from './routes/settings.routes.js';
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+getJwtSecret();
 
 const app = express();
 const server = http.createServer(app);
+const frontendOrigin = process.env.FRONTEND_URL?.trim() || '*';
 
 // Initialize Socket.IO
 initSocket(server);
@@ -41,7 +44,7 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: '*',
+  origin: frontendOrigin,
   credentials: true,
 }));
 

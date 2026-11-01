@@ -5,6 +5,35 @@ export const loginSchema = z.object({
   password: z.string().min(6),
 });
 
+export const forgotPasswordSchema = z.object({
+  email: z.string().trim().email().transform((email) => email.toLowerCase()),
+});
+
+export const resetPasswordSchema = z.object({
+  token: z.string().min(32).max(256),
+  password: z.string()
+    .min(12)
+    .max(128)
+    .regex(/[a-z]/, 'Password must include a lowercase letter')
+    .regex(/[A-Z]/, 'Password must include an uppercase letter')
+    .regex(/[0-9]/, 'Password must include a number')
+    .regex(/[^A-Za-z0-9]/, 'Password must include a special character'),
+});
+
+export const registerSchema = z.object({
+  firstName: z.string().trim().min(2).max(60),
+  lastName: z.string().trim().min(2).max(60),
+  email: z.string().trim().email().transform((email) => email.toLowerCase()),
+  phone: z.string().trim().max(30).optional().or(z.literal('')),
+  password: z.string()
+    .min(8)
+    .max(128)
+    .regex(/[a-z]/, 'Password must include a lowercase letter')
+    .regex(/[A-Z]/, 'Password must include an uppercase letter')
+    .regex(/[0-9]/, 'Password must include a number')
+    .regex(/[^A-Za-z0-9]/, 'Password must include a special character'),
+});
+
 export const enquirySchema = z.object({
   coupleName: z.string().min(2),
   partner1Name: z.string().min(1),

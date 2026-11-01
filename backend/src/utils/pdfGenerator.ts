@@ -41,7 +41,7 @@ export const generateAgreementPDF = async (data: {
     doc.pipe(writeStream);
 
     // Header styling
-    doc.fillColor('#722F37')
+    doc.fillColor('#1E3A8A')
        .fontSize(22)
        .text('THE ROYAL KNOT', { align: 'center', characterSpacing: 2 });
     doc.fillColor('#C5A46D')
@@ -72,13 +72,13 @@ export const generateAgreementPDF = async (data: {
     doc.moveDown(1.5);
 
     // Scope of Services
-    doc.fillColor('#722F37').fontSize(12).text('1. SCOPE OF SERVICES');
+    doc.fillColor('#1E3A8A').fontSize(12).text('1. SCOPE OF SERVICES');
     doc.moveDown(0.5);
     doc.fillColor('#333333').fontSize(9).text(data.scopeOfServices || 'Comprehensive wedding planning and coordination services.');
     doc.moveDown(1.5);
 
     // Terms
-    doc.fillColor('#722F37').fontSize(12).text('2. TERMS & PAYMENT MILESTONES');
+    doc.fillColor('#1E3A8A').fontSize(12).text('2. TERMS & PAYMENT MILESTONES');
     doc.moveDown(0.5);
     doc.fillColor('#333333').fontSize(9).text(data.termsAndConditions || 'Standard payment milestones: Booking, Advance 30 days prior, Final post-wedding.');
     doc.moveDown(2);
@@ -97,7 +97,7 @@ export const generateAgreementPDF = async (data: {
       doc.text(`Signer IP Address: ${data.signerIp || 'Verified Web Portal Session'}`);
       doc.text('Verification: Document integrity verified via cryptographic audit trail.');
     } else {
-      doc.fillColor('#722F37').fontSize(11).text('SIGNATURE PENDING');
+      doc.fillColor('#1E3A8A').fontSize(11).text('SIGNATURE PENDING');
       doc.fontSize(9).fillColor('#666666').text('Awaiting client digital execution via secure agreement link.');
     }
 
@@ -139,7 +139,7 @@ export const generateInvoicePDF = async (data: {
     doc.pipe(writeStream);
 
     // Header
-    doc.fillColor('#722F37').fontSize(22).text('THE ROYAL KNOT', { align: 'center', characterSpacing: 2 });
+    doc.fillColor('#1E3A8A').fontSize(22).text('THE ROYAL KNOT', { align: 'center', characterSpacing: 2 });
     doc.fillColor('#C5A46D').fontSize(10).text('TAX INVOICE', { align: 'center', characterSpacing: 1 });
     doc.moveDown();
 
@@ -154,7 +154,7 @@ export const generateInvoicePDF = async (data: {
     doc.moveDown(0.5);
 
     // Bill To
-    doc.fillColor('#722F37').fontSize(11).text('Billed To:');
+    doc.fillColor('#1E3A8A').fontSize(11).text('Billed To:');
     doc.fontSize(9).fillColor('#333333');
     doc.text(data.clientNames);
     doc.text(data.clientEmail);
@@ -164,7 +164,7 @@ export const generateInvoicePDF = async (data: {
 
     // Table Header
     const tableTop = doc.y;
-    doc.fillColor('#722F37').fontSize(10);
+    doc.fillColor('#1E3A8A').fontSize(10);
     doc.text('Description', 50, tableTop);
     doc.text('Qty', 320, tableTop, { width: 40, align: 'right' });
     doc.text('Unit Price (INR)', 370, tableTop, { width: 80, align: 'right' });
@@ -201,7 +201,7 @@ export const generateInvoicePDF = async (data: {
     doc.text(`INR ${Number(data.taxAmount).toLocaleString('en-IN')}`, 460, currentY, { width: 85, align: 'right' });
     currentY += 16;
 
-    doc.fillColor('#722F37').fontSize(11);
+    doc.fillColor('#1E3A8A').fontSize(11);
     doc.text('Total Invoice Value:', 340, currentY, { width: 110, align: 'right' });
     doc.text(`INR ${Number(data.totalAmount).toLocaleString('en-IN')}`, 460, currentY, { width: 85, align: 'right' });
     currentY += 18;
@@ -248,7 +248,7 @@ export const generatePaymentReceiptPDF = async (data: {
 
     doc.pipe(writeStream);
 
-    doc.fillColor('#722F37').fontSize(20).text('THE ROYAL KNOT', { align: 'center' });
+    doc.fillColor('#1E3A8A').fontSize(20).text('THE ROYAL KNOT', { align: 'center' });
     doc.fillColor('#C5A46D').fontSize(9).text('OFFICIAL PAYMENT RECEIPT', { align: 'center' });
     doc.moveDown();
 
@@ -265,7 +265,7 @@ export const generatePaymentReceiptPDF = async (data: {
     doc.text(`Transaction Reference: ${data.transactionRef}`);
     doc.moveDown(1.5);
 
-    doc.fillColor('#722F37').fontSize(14).text(`AMOUNT RECEIVED: INR ${Number(data.amount).toLocaleString('en-IN')}`);
+    doc.fillColor('#1E3A8A').fontSize(14).text(`AMOUNT RECEIVED: INR ${Number(data.amount).toLocaleString('en-IN')}`);
     doc.moveDown(1.5);
 
     doc.fillColor('#2e7d32').fontSize(9).text('STATUS: COMPLETED & CONFIRMED');

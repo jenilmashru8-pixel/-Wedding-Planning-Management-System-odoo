@@ -4,21 +4,21 @@
 
 @layer base {
   :root {
-    --color-burgundy: #722F37;
-    --color-gold: #C5A46D;
-    --color-ivory: #FAF8F3;
-    --color-charcoal: #292929;
-    --color-surface: #F1F1EF;
+    --color-navy: #071B35;
+    --color-gold: #D6A65D;
+    --color-ivory: #FFF8EF;
+    --color-charcoal: #17243A;
+    --color-surface: #F7EBDD;
   }
 
   body {
     background-color: var(--color-ivory);
     color: var(--color-charcoal);
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
   }
 
   h1, h2, h3, .font-serif-luxury {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
     letter-spacing: -0.015em;
   }
 }
@@ -29,44 +29,79 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF8F3;
+  background: #FFF8EF;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C5A46D;
+  background: #D6A65D;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #722F37;
+  background: #071B35;
 }
 
 /* Luxury Glassmorphism & Gold Highlights */
 .glass-panel {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(197, 164, 109, 0.2);
+  border: 1px solid rgba(214, 166, 93, 0.24);
 }
 
 .gold-gradient {
-  background: linear-gradient(135deg, #dfc290 0%, #C5A46D 50%, #9b7445 100%);
+  background: linear-gradient(135deg, #EBD9C1 0%, #D6A65D 50%, #B88A48 100%);
 }
 
 .gold-text-gradient {
-  background: linear-gradient(135deg, #C5A46D 0%, #dfc290 50%, #9b7445 100%);
+  background: linear-gradient(135deg, #D6A65D 0%, #EBD9C1 50%, #B88A48 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.burgundy-gradient {
-  background: linear-gradient(135deg, #722F37 0%, #53252a 100%);
+.navy-gradient {
+  background: linear-gradient(135deg, #0A2342 0%, #071B35 100%);
 }
 
 .card-luxury {
   background: #ffffff;
-  border: 1px solid rgba(197, 164, 109, 0.22);
-  box-shadow: 0 4px 20px -2px rgba(114, 47, 55, 0.04), 0 2px 6px -1px rgba(197, 164, 109, 0.06);
+  border: 1px solid rgba(184, 138, 72, 0.28);
+  box-shadow: 0 4px 20px -2px rgba(7, 27, 53, 0.05), 0 2px 6px -1px rgba(214, 166, 93, 0.08);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-luxury:hover {
-  border-color: rgba(197, 164, 109, 0.45);
-  box-shadow: 0 12px 30px -4px rgba(114, 47, 55, 0.08), 0 4px 12px -2px rgba(197, 164, 109, 0.12);
+  border-color: rgba(184, 138, 72, 0.5);
+  box-shadow: 0 12px 30px -4px rgba(7, 27, 53, 0.08), 0 4px 12px -2px rgba(214, 166, 93, 0.14);
+}
+
+.workspace-main {
+  background:
+    radial-gradient(ellipse at top right, rgba(214, 166, 93, 0.07), transparent 34rem),
+    #FFF8EF;
+}
+
+.workspace-main :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  border-color: #EBD9C1;
+  border-radius: 0.75rem;
+  background-color: #FFFCF8;
+}
+
+.workspace-main :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea):focus {
+  border-color: #B88A48;
+  outline: 2px solid rgba(214, 166, 93, 0.2);
+  outline-offset: 1px;
+}
+
+.workspace-main :where(table) {
+  border-color: #EBD9C1;
+}
+
+.workspace-main :where(thead) {
+  background-color: #F7EBDD;
+  color: #77716A;
+}
+
+.workspace-main :where(tbody tr) {
+  border-color: rgba(184, 138, 72, 0.18);
+}
+
+.workspace-main :where(tbody tr:hover) {
+  background-color: rgba(247, 235, 221, 0.45);
 }

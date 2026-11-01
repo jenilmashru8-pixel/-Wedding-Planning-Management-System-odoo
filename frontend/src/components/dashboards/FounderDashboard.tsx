@@ -57,28 +57,28 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
   const incidents = data?.incidents || [];
 
   const locationPieData = [
-    { name: 'Udaipur', value: loc.udaipur?.weddingsCount || 1, color: '#722F37' },
-    { name: 'Jaipur', value: loc.jaipur?.weddingsCount || 1, color: '#C5A46D' },
-    { name: 'Jodhpur', value: loc.jodhpur?.weddingsCount || 1, color: '#8B5CF6' },
-    { name: 'Pushkar', value: loc.pushkar?.weddingsCount || 1, color: '#F59E0B' },
-    { name: 'Ranthambore', value: loc.ranthambore?.weddingsCount || 1, color: '#10B981' },
-    { name: 'Delhi NCR', value: loc.delhi?.weddingsCount || 1, color: '#3B82F6' },
-    { name: 'Mount Abu', value: loc.mountAbu?.weddingsCount || 1, color: '#EC4899' },
-  ];
+    { name: 'Udaipur', value: loc.udaipur?.weddingsCount || 0, color: '#071B35' },
+    { name: 'Jaipur', value: loc.jaipur?.weddingsCount || 0, color: '#D6A65D' },
+    { name: 'Jodhpur', value: loc.jodhpur?.weddingsCount || 0, color: '#4C6689' },
+    { name: 'Pushkar', value: loc.pushkar?.weddingsCount || 0, color: '#B88A48' },
+    { name: 'Ranthambore', value: loc.ranthambore?.weddingsCount || 0, color: '#8098B7' },
+    { name: 'Delhi NCR', value: loc.delhi?.weddingsCount || 0, color: '#0A2342' },
+    { name: 'Mount Abu', value: loc.mountAbu?.weddingsCount || 0, color: '#DEC291' },
+  ].filter((location) => location.value > 0);
 
   const circuitStats = [
-    { label: 'Udaipur', color: 'bg-burgundy-700', profit: loc.udaipur?.profit || 17500000, revenue: loc.udaipur?.revenue || 45000000 },
-    { label: 'Jaipur', color: 'bg-gold-500', profit: loc.jaipur?.profit || 14000000, revenue: loc.jaipur?.revenue || 35000000 },
-    { label: 'Jodhpur', color: 'bg-violet-600', profit: loc.jodhpur?.profit || 22000000, revenue: loc.jodhpur?.revenue || 55000000 },
-    { label: 'Pushkar', color: 'bg-amber-500', profit: loc.pushkar?.profit || 8800000, revenue: loc.pushkar?.revenue || 22000000 },
-    { label: 'Ranthambore', color: 'bg-emerald-600', profit: loc.ranthambore?.profit || 7200000, revenue: loc.ranthambore?.revenue || 18000000 },
-    { label: 'Delhi NCR', color: 'bg-blue-600', profit: loc.delhi?.profit || 30000000, revenue: loc.delhi?.revenue || 75000000 },
-    { label: 'Mount Abu', color: 'bg-pink-500', profit: loc.mountAbu?.profit || 11200000, revenue: loc.mountAbu?.revenue || 28000000 },
-  ];
+    { label: 'Udaipur', color: 'bg-navy-700', profit: loc.udaipur?.profit || 0, revenue: loc.udaipur?.revenue || 0 },
+    { label: 'Jaipur', color: 'bg-gold-500', profit: loc.jaipur?.profit || 0, revenue: loc.jaipur?.revenue || 0 },
+    { label: 'Jodhpur', color: 'bg-navy-500', profit: loc.jodhpur?.profit || 0, revenue: loc.jodhpur?.revenue || 0 },
+    { label: 'Pushkar', color: 'bg-gold-600', profit: loc.pushkar?.profit || 0, revenue: loc.pushkar?.revenue || 0 },
+    { label: 'Ranthambore', color: 'bg-navy-400', profit: loc.ranthambore?.profit || 0, revenue: loc.ranthambore?.revenue || 0 },
+    { label: 'Delhi NCR', color: 'bg-navy-600', profit: loc.delhi?.profit || 0, revenue: loc.delhi?.revenue || 0 },
+    { label: 'Mount Abu', color: 'bg-gold-300', profit: loc.mountAbu?.profit || 0, revenue: loc.mountAbu?.revenue || 0 },
+  ].filter((location) => location.profit || location.revenue);
 
-  const totalEnquiries = enquiries.length || 12;
-  const convertedEnquiries = enquiries.filter((e: any) => e.status === 'CONVERTED').length || 5;
-  const conversionRate = totalEnquiries > 0 ? Math.round((convertedEnquiries / totalEnquiries) * 100) : 42;
+  const totalEnquiries = enquiries.length;
+  const convertedEnquiries = enquiries.filter((e: any) => e.status === 'CONVERTED').length;
+  const conversionRate = totalEnquiries > 0 ? Math.round((convertedEnquiries / totalEnquiries) * 100) : 0;
 
   const openIncidents = incidents.filter((i: any) => i.status === 'OPEN');
 
@@ -91,17 +91,11 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
           alt="Udaipur Palace Night"
           className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/85 to-burgundy-950/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/85 to-navy-950/45" />
         <div className="relative z-10 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest bg-gold-400/25 text-gold-300 border border-gold-400/40 backdrop-blur-sm">
               👑 Executive Founder Command
-            </span>
-            <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-gold-200 border border-white/20 backdrop-blur-sm">
-              7 Royal Palace Destinations Across India
-            </span>
-            <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 backdrop-blur-sm">
-              Season 2026 • ₹27.8 Cr Portfolio
             </span>
           </div>
           <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-gold-100">
@@ -113,7 +107,7 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
           <div className="mt-5 flex flex-wrap gap-2.5">
             <button
               onClick={() => navigate('/weddings')}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-burgundy-950 text-xs font-bold shadow-md transition-all hover:scale-102 flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-navy-950 text-xs font-bold shadow-md transition-all hover:scale-102 flex items-center gap-1.5"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>All Wedding Workspaces</span>
@@ -143,8 +137,6 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
           value={formatLakhsCrores(kpis.totalRecognizedRevenue)}
           subtitle="Signed Contracts + Additions"
           icon={TrendingUp}
-          trend="+18.4% YoY"
-          trendType="positive"
           highlight
         />
         <MetricCard
@@ -210,7 +202,7 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
         <div className="card-luxury p-4 sm:p-5 rounded-2xl flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold text-charcoal-500 uppercase">Active Palace Projects</p>
-            <h4 className="text-lg sm:text-xl font-bold font-serif text-charcoal-900 mt-1">{kpis.totalWeddings || weddingBreakdowns.length} Palaces</h4>
+            <h4 className="text-lg sm:text-xl font-bold font-serif text-charcoal-900 mt-1">{kpis.totalWeddings ?? weddingBreakdowns.length} Weddings</h4>
             <p className="text-[11px] text-gold-700 mt-0.5">Udaipur · Jaipur · Jodhpur · Delhi & More</p>
           </div>
           <div className="p-3 bg-gold-50 text-gold-700 rounded-xl border border-gold-200">
@@ -277,20 +269,20 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
               <h3 className="font-serif text-lg font-bold text-charcoal-900">Accrual Revenue & Net Profit by Wedding</h3>
               <p className="text-xs text-charcoal-500">Recognized revenue vs calculated net margin per palace project</p>
             </div>
-            <span className="text-xs font-bold text-burgundy-800 bg-burgundy-50 px-2.5 py-1 rounded-lg border border-burgundy-200">
+            <span className="text-xs font-bold text-navy-800 bg-navy-50 px-2.5 py-1 rounded-lg border border-navy-200">
               ₹ Crores
             </span>
           </div>
           <div className="h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={weddingBreakdowns}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f1ef" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#EBD9C1" />
                 <XAxis dataKey="name" tick={{ fontSize: 11 }} />
                 <YAxis tickFormatter={(val) => `₹${(val / 10000000).toFixed(1)}Cr`} tick={{ fontSize: 11 }} />
                 <Tooltip formatter={(value: any) => [formatCurrency(value), '']} />
                 <Legend />
-                <Bar dataKey="recognizedRevenue" name="Recognized Revenue" fill="#722F37" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="netProfit" name="Net Profit" fill="#C5A46D" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="recognizedRevenue" name="Recognized Revenue" fill="#071B35" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="netProfit" name="Net Profit" fill="#D6A65D" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -348,7 +340,7 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
           </div>
           <button
             onClick={() => navigate('/weddings')}
-            className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1"
+            className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1"
           >
             <span>All Wedding Workspaces</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -371,7 +363,7 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
                 <th className="py-3 px-4">Vendor Costs</th>
                 <th className="py-3 px-4 text-emerald-700">Vendor Paid</th>
                 <th className="py-3 px-4 text-amber-700">Vendor Due</th>
-                <th className="py-3 px-4 font-bold text-burgundy-800">Net Profit</th>
+                <th className="py-3 px-4 font-bold text-navy-800">Net Profit</th>
                 <th className="py-3 px-4">Margin</th>
                 <th className="py-3 px-4 text-right">Action</th>
               </tr>
@@ -387,7 +379,7 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
                         className="w-10 h-10 rounded-xl object-cover border border-gold-300/60 shadow-sm shrink-0"
                       />
                       <div>
-                        <div className="font-serif font-bold text-charcoal-900 hover:text-burgundy-700 transition-colors">
+                        <div className="font-serif font-bold text-charcoal-900 hover:text-navy-700 transition-colors">
                           {w.name}
                         </div>
                         <div className="text-[10px] text-charcoal-500 mt-0.5 max-w-[200px] truncate">{w.venueName || w.location}</div>
@@ -396,7 +388,7 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
                     </div>
                   </td>
                   <td className="py-3 px-4">
-                    <span className="px-2 py-0.5 rounded-full bg-burgundy-50 text-burgundy-800 border border-burgundy-200 text-[10px] font-semibold">
+                    <span className="px-2 py-0.5 rounded-full bg-navy-50 text-navy-800 border border-navy-200 text-[10px] font-semibold">
                       {w.circuit || w.location}
                     </span>
                   </td>
@@ -440,7 +432,7 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
                       {formatLakhsCrores(w.vendorBalance || 0)}
                     </span>
                   </td>
-                  <td className="py-3 px-4 font-bold text-burgundy-900">{formatLakhsCrores(w.netProfit)}</td>
+                  <td className="py-3 px-4 font-bold text-navy-900">{formatLakhsCrores(w.netProfit)}</td>
                   <td className="py-3 px-4">
                     <span className="px-2 py-0.5 rounded bg-gold-100 text-gold-900 font-bold text-[11px]">
                       {w.profitMargin}%
@@ -449,7 +441,7 @@ export const FounderDashboard: React.FC<FounderDashboardProps> = ({ data }) => {
                   <td className="py-3 px-4 text-right">
                     <button
                       onClick={() => navigate(`/weddings/${w.weddingId}`)}
-                      className="px-3 py-1.5 rounded-lg bg-burgundy-700 text-gold-200 hover:bg-burgundy-800 hover:text-white text-xs font-semibold shadow-xs transition-colors"
+                      className="px-3 py-1.5 rounded-lg bg-navy-700 text-gold-200 hover:bg-navy-800 hover:text-white text-xs font-semibold shadow-xs transition-colors"
                     >
                       Workspace →
                     </button>

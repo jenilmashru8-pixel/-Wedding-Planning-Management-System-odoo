@@ -88,6 +88,9 @@ export const checkInVendor = async (req: AuthRequest, res: Response): Promise<vo
 
   let checkIn = await prisma.vendorCheckIn.findFirst({
     where: { weddingId, vendorId, eventId: eventId || null },
+    include: {
+      vendor: { select: { id: true, companyName: true, contactPerson: true, phone: true } },
+    },
   });
 
   if (checkIn) {

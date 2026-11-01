@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { MetricCard } from '../MetricCard';
 import { StatusBadge } from '../StatusBadge';
-import { formatCurrency, formatLakhsCrores } from '../../utils/formatters';
+import { formatCurrency, formatDateTime, formatLakhsCrores } from '../../utils/formatters';
 
 interface VendorDashboardProps {
   weddings: any[];
@@ -52,7 +52,7 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
           alt="Palace Feast"
           className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/80 to-burgundy-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/80 to-navy-950/40" />
         <div className="relative z-10 max-w-2xl">
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest bg-blue-500/25 text-blue-300 border border-blue-400/30 backdrop-blur-sm flex items-center gap-1.5">
@@ -77,7 +77,7 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
           <div className="mt-4 flex flex-wrap gap-2.5">
             <button
               onClick={() => navigate('/quotations')}
-              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 text-xs font-bold shadow-xs hover:scale-102 transition-all flex items-center gap-1.5"
+              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-navy-950 text-xs font-bold shadow-xs hover:scale-102 transition-all flex items-center gap-1.5"
             >
               <FileText className="w-3.5 h-3.5" />
               <span>Submit New Quotation</span>
@@ -104,28 +104,28 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         <MetricCard
           title="Awarded Palace Contracts"
-          value={acceptedQuotes.length || weddings.length || 2}
+          value={acceptedQuotes.length}
           subtitle="Confirmed Wedding Projects"
           icon={Store}
           highlight
         />
         <MetricCard
           title="Total Contracted Value"
-          value={formatLakhsCrores(totalAgreedValue || 3500000)}
+          value={formatLakhsCrores(totalAgreedValue)}
           subtitle="Accepted Quotation Total"
           icon={CreditCard}
           trendType="positive"
         />
         <MetricCard
           title="Advances & Disbursements"
-          value={formatLakhsCrores(totalPaid || 2100000)}
+          value={formatLakhsCrores(totalPaid)}
           subtitle="Received via Bank RTGS"
           icon={CheckCircle2}
           trendType="positive"
         />
         <MetricCard
           title="Pending Settlement Due"
-          value={formatLakhsCrores(balanceDue || 1400000)}
+          value={formatLakhsCrores(balanceDue)}
           subtitle="Upon final invoice audit"
           icon={Scale}
           trendType="neutral"
@@ -141,7 +141,7 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
           </div>
           <button
             onClick={() => navigate('/operations')}
-            className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1 self-start sm:self-center"
+            className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1 self-start sm:self-center"
           >
             <span>Live Schedule</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -149,40 +149,36 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {(upcomingArrivals.length > 0 ? upcomingArrivals : [
-            { id: '1', title: 'Royal High Tea & Shehnai Setup', date: 'Tomorrow • 14:00 Call Time', venue: 'The Oberoi Udaivilas, Udaipur', coordinator: 'Vikram Singh (+91 98290 55005)', status: 'EXPECTED' },
-            { id: '2', title: 'Royal Sangeet Feast & Live Counters', date: 'Tomorrow • 17:30 Call Time', venue: 'Zenana Mahal Courtyard', coordinator: 'Vikram Singh (+91 98290 55005)', status: 'EXPECTED' },
-            { id: '3', title: 'Main Mandap Imperial Gala Dinner', date: 'Day After • 18:00 Call Time', venue: 'Jagmandir Island Palace', coordinator: 'Priya Sharma (+91 98290 22002)', status: 'EXPECTED' },
-          ]).map((item: any, idx: number) => (
+          {upcomingArrivals.length ? upcomingArrivals.map((item: any) => (
             <div
-              key={item.id || idx}
+              key={item.id}
               className="p-4 rounded-xl border border-charcoal-100 hover:border-gold-300 bg-white hover:bg-gold-50/20 transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono font-bold uppercase text-burgundy-900 bg-gold-100 px-2 py-0.5 rounded">
-                    {item.date || '15:00 Call Time'}
+                  <span className="text-[10px] font-mono font-bold uppercase text-navy-900 bg-gold-100 px-2 py-0.5 rounded">
+                    {formatDateTime(item.expectedArrivalTime)}
                   </span>
                   <StatusBadge status={item.status || 'EXPECTED'} />
                 </div>
-                <h4 className="font-serif font-bold text-sm text-charcoal-900 mb-1">{item.title || item.event?.eventName || 'Palace Banquet'}</h4>
+                <h4 className="font-serif font-bold text-sm text-charcoal-900 mb-1">{item.event?.eventName || 'Scheduled vendor arrival'}</h4>
                 <div className="text-xs text-charcoal-500 flex items-center gap-1 mb-2">
                   <MapPin className="w-3 h-3 text-gold-600 shrink-0" />
-                  <span className="truncate">{item.venue || item.wedding?.location || 'Udaipur Palace'}</span>
+                  <span className="truncate">{item.event?.location || item.wedding?.location || 'Venue not specified'}</span>
                 </div>
                 <div className="text-[11px] text-charcoal-600 pt-2 border-t border-charcoal-100">
-                  Coordinator: <strong className="text-charcoal-800">{item.coordinator || 'Vikram Singh (+91 98290 55005)'}</strong>
+                  Coordinator: <strong className="text-charcoal-800">{item.checkedInBy ? `${item.checkedInBy.firstName} ${item.checkedInBy.lastName}` : 'Not assigned'}</strong>
                 </div>
               </div>
 
               <button
                 onClick={() => navigate('/operations')}
-                className="mt-3 w-full py-1.5 rounded-lg bg-burgundy-700 hover:bg-burgundy-800 text-gold-200 text-xs font-semibold transition-colors"
+                className="mt-3 w-full py-1.5 rounded-lg bg-navy-700 hover:bg-navy-800 text-gold-200 text-xs font-semibold transition-colors"
               >
                 Confirm Arrival & Call Time
               </button>
             </div>
-          ))}
+          )) : <p className="col-span-full rounded-xl bg-ivory-100 p-6 text-center text-xs text-charcoal-500">No arrival schedules are available.</p>}
         </div>
       </div>
 
@@ -193,14 +189,14 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
           <div className="flex items-center justify-between mb-3 pb-2 border-b border-charcoal-100">
             <div>
               <h3 className="font-serif text-base font-bold text-charcoal-900 flex items-center gap-2">
-                <FileText className="w-4 h-4 text-burgundy-800" />
+                <FileText className="w-4 h-4 text-navy-800" />
                 Submitted Quotations & Bids
               </h3>
               <p className="text-xs text-charcoal-500">Per-plate rates and awarded royal bids</p>
             </div>
             <button
               onClick={() => navigate('/quotations')}
-              className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1"
+              className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1"
             >
               <span>All Bids</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -215,12 +211,12 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
               >
                 <div>
                   <div className="font-semibold text-charcoal-900 text-xs flex items-center gap-2">
-                    <span className="font-mono font-bold text-burgundy-900">{q.quoteNumber}</span>
+                    <span className="font-mono font-bold text-navy-900">{q.quoteNumber}</span>
                     <span>• {q.wedding?.name}</span>
                     <StatusBadge status={q.status} />
                   </div>
                   <div className="text-[11px] text-charcoal-500 mt-1">
-                    Plate: <strong>{q.pricePerPlate ? `₹${q.pricePerPlate}` : '₹2,500'}</strong> ({q.guestCount || 400} guests) • Total:{' '}
+                    Plate: <strong>{formatCurrency(q.pricePerPlate ?? 0)}</strong> ({q.guestCount ?? '—'} guests) • Total:{' '}
                     <strong className="text-charcoal-800">{formatLakhsCrores(q.totalAmount)}</strong>
                   </div>
                 </div>
@@ -248,7 +244,7 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
               </div>
               <button
                 onClick={() => navigate('/vendor-settlements')}
-                className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1"
+                className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1"
               >
                 <span>Upload Invoice</span>
                 <Upload className="w-3.5 h-3.5" />
@@ -275,7 +271,7 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
                       {inv.utrNumber && <span className="font-mono text-[10px] text-charcoal-400">UTR: {inv.utrNumber}</span>}
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-burgundy-900 self-start sm:self-center">
+                  <span className="text-xs font-bold text-navy-900 self-start sm:self-center">
                     Due: {formatCurrency(Number(inv.finalAmount) - Number(inv.paidAmount || 0))}
                   </span>
                 </div>
@@ -287,7 +283,7 @@ export const VendorDashboard: React.FC<VendorDashboardProps> = ({
             <span>Direct Treasury Query: amit.verma@royalknot.com</span>
             <button
               onClick={() => navigate('/vendor-settlements')}
-              className="font-bold text-burgundy-800 hover:text-burgundy-950 underline"
+              className="font-bold text-navy-800 hover:text-navy-950 underline"
             >
               Reconciliation Statement
             </button>

@@ -167,7 +167,8 @@ export const importGuests = async (req: AuthRequest, res: Response): Promise<voi
     const parsed = guestSchema.safeParse({ ...guestRecord, weddingId });
     if (!parsed.success) {
       const issue = parsed.error.issues[0];
-      const field = issue.path.length ? `.${issue.path.join('.')}` : '';
+      const fieldName = issue.path.map(String).join('.');
+      const field = fieldName ? ` (${fieldName.replace(/([A-Z])/g, ' $1').replace(/^./, (letter) => letter.toUpperCase())})` : '';
       res.status(400).json({
         success: false,
         message: `Invalid guest at row ${index + 2}${field}: ${issue.message}`,

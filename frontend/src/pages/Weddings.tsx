@@ -98,7 +98,7 @@ export const Weddings: React.FC = () => {
           alt="Royal Mandap Decor"
           className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/80 to-burgundy-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/80 to-navy-950/40" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="max-w-2xl">
             <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-gold-400/20 text-gold-300 border border-gold-400/30 backdrop-blur-sm">
@@ -113,9 +113,9 @@ export const Weddings: React.FC = () => {
           </div>
           <button
             onClick={() => setIsAddOpen(true)}
-            className="px-5 py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 hover:brightness-105 font-bold rounded-xl text-xs shadow-lg transition-all flex items-center gap-2 self-start md:self-auto shrink-0"
+            className="px-5 py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-navy-950 hover:brightness-105 font-bold rounded-xl text-xs shadow-lg transition-all flex items-center gap-2 self-start md:self-auto shrink-0"
           >
-            <Plus className="w-4 h-4 text-burgundy-950" />
+            <Plus className="w-4 h-4 text-navy-950" />
             <span>New Wedding Project</span>
           </button>
         </div>
@@ -219,7 +219,7 @@ export const Weddings: React.FC = () => {
 
                 {/* Content */}
                 <div className="p-5">
-                  <h3 className="font-serif font-bold text-lg text-charcoal-900 group-hover:text-burgundy-700 transition-colors line-clamp-1">
+                  <h3 className="font-serif font-bold text-lg text-charcoal-900 group-hover:text-navy-700 transition-colors line-clamp-1">
                     {w.name}
                   </h3>
 
@@ -238,11 +238,11 @@ export const Weddings: React.FC = () => {
                   <div className="mt-4 pt-3 border-t border-charcoal-100">
                     <div className="flex items-center justify-between text-xs mb-1">
                       <span className="text-charcoal-500 font-medium">Planning Progress</span>
-                      <span className="font-bold text-burgundy-900">{w.completionPercentage || 0}%</span>
+                      <span className="font-bold text-navy-900">{w.completionPercentage || 0}%</span>
                     </div>
                     <div className="w-full h-2 rounded-full bg-ivory-200 overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-gold-500 to-burgundy-700 rounded-full transition-all duration-500"
+                        className="h-full bg-gradient-to-r from-gold-500 to-navy-700 rounded-full transition-all duration-500"
                         style={{ width: `${w.completionPercentage || 0}%` }}
                       />
                     </div>
@@ -255,7 +255,7 @@ export const Weddings: React.FC = () => {
                   <span className="text-[10px] text-charcoal-400 block uppercase font-medium">Contract Value</span>
                   <span className="font-serif font-bold text-base text-charcoal-900">{formatLakhsCrores(w.contractAmount)}</span>
                 </div>
-                <button className="px-3.5 py-1.5 rounded-xl bg-gold-50 text-burgundy-800 border border-gold-300 group-hover:bg-burgundy-700 group-hover:text-gold-200 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-xs">
+                <button className="px-3.5 py-1.5 rounded-xl bg-gold-50 text-navy-800 border border-gold-300 group-hover:bg-navy-700 group-hover:text-gold-200 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-xs">
                   <span>Open Workspace</span>
                   <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </button>
@@ -392,7 +392,7 @@ export const Weddings: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-burgundy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md"
+              className="px-4 py-2 bg-navy-700 text-gold-200 rounded-xl text-xs font-semibold shadow-md"
             >
               Initialize Workspace
             </button>

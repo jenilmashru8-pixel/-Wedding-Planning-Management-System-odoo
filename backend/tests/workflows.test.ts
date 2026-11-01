@@ -157,6 +157,16 @@ describe('TEST 3: Vendor Quotations & Competitor Auto-Closing', () => {
     cateringCatId = cat!.id;
   });
 
+  it('should return vendor categories from the shared categories endpoint', async () => {
+    const res = await request(app)
+      .get('/api/vendors/categories')
+      .set('Authorization', 'Bearer ' + founderToken);
+
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body.data.categories)).toBe(true);
+    expect(res.body.data.categories.some((category: { id: string }) => category.id === cateringCatId)).toBe(true);
+  });
+
   it('should create quotation requests with line-item and per-plate pricing', async () => {
     const vendors = await prisma.vendor.findMany({ where: { categoryId: cateringCatId }, take: 2 });
 

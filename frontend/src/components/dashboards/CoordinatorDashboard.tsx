@@ -71,7 +71,7 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
           alt="Palace Horizon"
           className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950/95 via-burgundy-950/80 to-burgundy-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/80 to-navy-950/40" />
         <div className="relative z-10 max-w-2xl">
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest bg-amber-400/25 text-amber-300 border border-amber-400/30 backdrop-blur-sm flex items-center gap-1.5">
@@ -108,7 +108,7 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
 
             <button
               onClick={() => navigate('/operations')}
-              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-burgundy-950 text-xs font-bold shadow-xs hover:scale-102 transition-all flex items-center gap-1.5"
+              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-navy-950 text-xs font-bold shadow-xs hover:scale-102 transition-all flex items-center gap-1.5"
             >
               <Radio className="w-3.5 h-3.5" />
               <span>Full Ops Cockpit</span>
@@ -121,14 +121,14 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         <MetricCard
           title="Scheduled Ceremonies"
-          value={filteredEvents.length || 6}
+          value={filteredEvents.length}
           subtitle="Minute-by-minute rundown"
           icon={Clock}
           highlight
         />
         <MetricCard
           title="Vendor Check-In Rate"
-          value={`${arrivedCount} / ${filteredCheckIns.length || 10}`}
+          value={`${arrivedCount} / ${filteredCheckIns.length}`}
           subtitle="On-site partners verified"
           icon={CheckCircle2}
           trendType="positive"
@@ -162,9 +162,9 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
                 CRITICAL OPERATIONAL DELAY ALERT ({delayedCheckIns.length} VENDOR)
               </h4>
               <p className="text-xs text-rose-800 mt-0.5">
-                <strong>{delayedCheckIns[0]?.vendor?.companyName || 'Royal Mewar Caterers'}</strong> is delayed by{' '}
-                <strong className="underline">{delayedCheckIns[0]?.delayMinutes || 25} minutes</strong>. Reason:{' '}
-                {delayedCheckIns[0]?.delayReason || 'Traffic congestion on Lake Palace Road'}.
+                <strong>{delayedCheckIns[0]?.vendor?.companyName || 'Vendor'}</strong> is delayed by{' '}
+                <strong className="underline">{delayedCheckIns[0]?.delayMinutes ?? 0} minutes</strong>. Reason:{' '}
+                {delayedCheckIns[0]?.delayReason || 'No reason provided'}.
               </p>
             </div>
           </div>
@@ -186,7 +186,7 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
           </div>
           <button
             onClick={() => navigate('/operations')}
-            className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1 self-start sm:self-center"
+            className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1 self-start sm:self-center"
           >
             <span>Open Timeline Editor</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -217,7 +217,7 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="flex items-center gap-1 text-xs font-mono font-bold text-burgundy-900 bg-gold-100/70 px-2 py-0.5 rounded">
+                  <span className="flex items-center gap-1 text-xs font-mono font-bold text-navy-900 bg-gold-100/70 px-2 py-0.5 rounded">
                     <Clock className="w-3 h-3 text-gold-700" />
                     {ev.startTime} - {ev.endTime}
                   </span>
@@ -241,14 +241,14 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
           <div className="flex items-center justify-between mb-3 pb-2 border-b border-charcoal-100">
             <div>
               <h3 className="font-serif text-base font-bold text-charcoal-900 flex items-center gap-2">
-                <Users className="w-4 h-4 text-burgundy-800" />
+                <Users className="w-4 h-4 text-navy-800" />
                 Vendor Arrival & Check-In Radar
               </h3>
               <p className="text-xs text-charcoal-500">Auto late detection (&gt;15 min delay triggers socket broadcast)</p>
             </div>
             <button
               onClick={() => navigate('/operations')}
-              className="text-xs font-semibold text-burgundy-700 hover:text-burgundy-900 flex items-center gap-1"
+              className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center gap-1"
             >
               <span>View All</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -282,7 +282,7 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
                   </div>
                   <button
                     onClick={() => navigate('/operations')}
-                    className="px-2.5 py-1 rounded bg-burgundy-700 text-gold-200 text-xs font-semibold hover:text-white"
+                    className="px-2.5 py-1 rounded bg-navy-700 text-gold-200 text-xs font-semibold hover:text-white"
                   >
                     Check In
                   </button>
@@ -323,7 +323,7 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
                 >
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-bold text-[10px] text-burgundy-900">{inc.incidentNumber}</span>
+                      <span className="font-mono font-bold text-[10px] text-navy-900">{inc.incidentNumber}</span>
                       <span className="font-semibold text-xs text-charcoal-900">{inc.title}</span>
                       <StatusBadge status={inc.status} />
                     </div>

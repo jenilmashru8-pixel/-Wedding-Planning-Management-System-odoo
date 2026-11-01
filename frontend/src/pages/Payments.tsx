@@ -137,7 +137,7 @@ export const Payments: React.FC = () => {
             <span className="p-2 rounded-xl bg-gold-500/10 text-gold-600 border border-gold-500/20">
               <CreditCard className="w-5 h-5" />
             </span>
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-burgundy-900">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-navy-900">
               Client Payments & Staged Milestones
             </h1>
           </div>
@@ -149,7 +149,7 @@ export const Payments: React.FC = () => {
         {canRecordPayment && (
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-burgundy-900 to-burgundy-800 text-gold-200 text-xs font-semibold hover:from-burgundy-800 hover:to-burgundy-700 shadow-md border border-gold-400/30 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-navy-900 to-navy-800 text-gold-200 text-xs font-semibold hover:from-navy-800 hover:to-navy-700 shadow-md border border-gold-400/30 transition-all"
           >
             <Plus className="w-4 h-4 text-gold-400" />
             <span>Record Client Payment</span>
@@ -178,7 +178,7 @@ export const Payments: React.FC = () => {
           value={formatCurrency(balanceDue)}
           icon={Clock}
           description="Outstanding milestones"
-          variant="burgundy"
+          variant="navy"
         />
         <MetricCard
           title="Collection Rate"
@@ -196,7 +196,7 @@ export const Payments: React.FC = () => {
           <select
             value={selectedWeddingId}
             onChange={(e) => setSelectedWeddingId(e.target.value)}
-            className="w-full sm:w-80 px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+            className="w-full sm:w-80 px-3 py-2 text-xs font-semibold rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
           >
             {weddings.map((w) => (
               <option key={w.id} value={w.id}>
@@ -213,7 +213,7 @@ export const Payments: React.FC = () => {
 
       {/* Staged Payment Milestones Cards */}
       <div className="space-y-3">
-        <h2 className="font-serif text-lg font-bold text-burgundy-950 flex items-center gap-2">
+        <h2 className="font-serif text-lg font-bold text-navy-950 flex items-center gap-2">
           <CreditCard className="w-4 h-4 text-gold-600" />
           <span>Staged Milestone Schedule</span>
         </h2>
@@ -243,7 +243,7 @@ export const Payments: React.FC = () => {
                         <span className="text-[10px] uppercase font-bold tracking-wider text-gold-600 bg-gold-500/10 px-2 py-0.5 rounded border border-gold-400/20">
                           {m.percentage}% STAGE
                         </span>
-                        <h3 className="font-serif text-base font-bold text-burgundy-950 mt-1">
+                        <h3 className="font-serif text-base font-bold text-navy-950 mt-1">
                           {m.title}
                         </h3>
                       </div>
@@ -253,7 +253,7 @@ export const Payments: React.FC = () => {
                     <div className="p-3 rounded-xl bg-ivory-50 border border-charcoal-100 space-y-1 text-xs">
                       <div className="flex justify-between items-center text-charcoal-600">
                         <span>Milestone Due:</span>
-                        <span className="font-bold text-burgundy-900 font-mono">
+                        <span className="font-bold text-navy-900 font-mono">
                           {formatCurrency(m.amountDue)}
                         </span>
                       </div>
@@ -288,7 +288,7 @@ export const Payments: React.FC = () => {
                           setAmount(String(due - paid));
                           setIsModalOpen(true);
                         }}
-                        className="w-full py-2 rounded-xl bg-burgundy-900 hover:bg-burgundy-800 text-gold-200 text-xs font-bold transition-all shadow-sm"
+                        className="w-full py-2 rounded-xl bg-navy-900 hover:bg-navy-800 text-gold-200 text-xs font-bold transition-all shadow-sm"
                       >
                         Record Stage Payment
                       </button>
@@ -303,7 +303,7 @@ export const Payments: React.FC = () => {
 
       {/* Payments History Table */}
       <div className="space-y-3 pt-4">
-        <h2 className="font-serif text-lg font-bold text-burgundy-950 flex items-center gap-2">
+        <h2 className="font-serif text-lg font-bold text-navy-950 flex items-center gap-2">
           <Receipt className="w-4 h-4 text-gold-600" />
           <span>Payment Transactions & Receipts</span>
         </h2>
@@ -336,7 +336,7 @@ export const Payments: React.FC = () => {
                 <tbody className="divide-y divide-charcoal-100 text-xs">
                   {payments.map((p) => (
                     <tr key={p.id} className="hover:bg-ivory-50/80 transition-colors">
-                      <td className="py-3.5 px-4 font-mono font-bold text-burgundy-900">
+                      <td className="py-3.5 px-4 font-mono font-bold text-navy-900">
                         {p.paymentNumber}
                       </td>
 
@@ -368,7 +368,7 @@ export const Payments: React.FC = () => {
                             href={p.receiptUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-ivory-100 hover:bg-gold-500/10 text-burgundy-900 text-xs font-semibold border border-gold-300 transition-colors"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-ivory-100 hover:bg-gold-500/10 text-navy-900 text-xs font-semibold border border-gold-300 transition-colors"
                           >
                             <Download className="w-3.5 h-3.5 text-gold-600" />
                             <span>PDF Receipt</span>
@@ -402,7 +402,7 @@ export const Payments: React.FC = () => {
             <select
               value={modalMilestoneId}
               onChange={(e) => setModalMilestoneId(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             >
               <option value="">General Project Payment</option>
               {milestones.map((m) => (
@@ -424,7 +424,7 @@ export const Payments: React.FC = () => {
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="e.g. 2125000"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
 
@@ -435,7 +435,7 @@ export const Payments: React.FC = () => {
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               >
                 <option value="BANK_TRANSFER">Bank Wire / RTGS / NEFT</option>
                 <option value="UPI">UPI Payment</option>
@@ -457,7 +457,7 @@ export const Payments: React.FC = () => {
                 onChange={(e) => setTransactionRef(e.target.value)}
                 placeholder="e.g. HDFC-RTGS-99882211"
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
 
@@ -470,7 +470,7 @@ export const Payments: React.FC = () => {
                 value={paymentDate}
                 onChange={(e) => setPaymentDate(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
               />
             </div>
           </div>
@@ -482,7 +482,7 @@ export const Payments: React.FC = () => {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Bank account credited, receipt notes..."
-              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-burgundy-800"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-charcoal-200 focus:outline-none focus:ring-2 focus:ring-navy-800"
             />
           </div>
 
@@ -497,7 +497,7 @@ export const Payments: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 rounded-xl bg-burgundy-900 text-gold-200 text-xs font-bold hover:bg-burgundy-800 transition-all shadow-md disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-navy-900 text-gold-200 text-xs font-bold hover:bg-navy-800 transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? 'Recording...' : 'Generate Receipt & Record'}
             </button>
